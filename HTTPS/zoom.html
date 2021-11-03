@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* border: 1px solid black; */
+        }
+        .class-room {
+            min-height: 100vh;
+            background: blue;
+        }
+        .main-video {
+            background: green;
+            display: flex;
+            justify-content: center;
+            max-height: 100vh;
+        }
+        .video {
+            height: 480px;
+            width: 640px;
+            background: black;
+        }
+        .video-murid {
+            background: red;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-m1 {
+            margin: 5px;
+        }
+        video {
+            width: 100%;
+            max-height: 100vh;
+            /* border: 1px solid white; */
+            background: black;
+        }
+        .video-m2 {
+            height: 112px;
+            width: 200px;
+            background: black;
+        }
+        .peserta3 .video-m2 {
+            height: 200px;
+            width: 112px;
+        }
+        .resize {
+            /* border: 1px solid black; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+        }
+        .resize span {
+            display: inline-block;
+            opacity: .3;
+            border-right: 3px solid white;
+            border-bottom: 3px solid white;
+            height: 20px;
+            width: 20px;
+            position: absolute;
+            bottom: 4px;
+            right: 1px;
+            cursor: se-resize;
+        }
+        .resize span:hover {
+            opacity: .7;
+        }
+        
+    </style>
+    <script type="module" defer>
+        async function getUserVideo() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: {
+                            max: 200
+                        }
+                    }
+                });
+                const videoTag = document.createElement("video");
+                videoTag.srcObject = stream;
+                videoTag.addEventListener("loadedmetadata", function(){
+                    videoTag.play();
+                });
+                const containerVideo = document.querySelector(".main-video");
+                containerVideo.appendChild(videoTag);
+                const resizeElement = document.getElementsByClassName("resize");
+                for (const el of resizeElement) {
+                    el.style.position = "relative"
+                    const span = document.createElement("span");
+                    span.addEventListener("mousedown", function (e) {
+                        const xAwal = e.clientX;
+                        const yAwal = e.clientY;
+                        const rect = e.target.parentElement.getBoundingClientRect();
+                        const tinggiAwal = rect.height;
+                        const lebarAwal = rect.width;
+                        let perpindahanX;
+                        let perpindahanY;
+                        function mousemove(ev) {
+                            perpindahanX = ev.clientX - xAwal;
+                            perpindahanY = ev.clientY - yAwal;
+                            console.log((tinggiAwal + perpindahanY) + " " + (lebarAwal + perpindahanX));
+                            e.target.parentElement.style.height = `${tinggiAwal + perpindahanY}px`;
+                            e.target.parentElement.style.width = `${lebarAwal + perpindahanX}px`;
+                        }
+                        document.addEventListener("mousemove", mousemove);
+                        document.addEventListener("mouseup", function() {
+                            document.removeEventListener("mousemove", mousemove);
+                        })
+                    });
+                    el.appendChild(span);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getUserVideo()
+    </script>
+</head>
+<body>
+    <div class="class-room">
+        <div class="main-video">
+            <!-- <div class="video"></div> -->
+        </div>
+        <div class="video-murid">
+            <div class="video-m1 peserta1 resize">
+                <div class="video-m2"></div>
+            </div>
+            <!-- TODO: Buat peer koneksi, lalu append setiap element -->
+            <!-- <div class="video-m1 peserta2">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta3 resize">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta4">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta5 resize">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta6">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta7">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta8">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta9">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta10 resize">
+                <div class="video-m2"></div>
+            </div>
+            <div class="video-m1 peserta11">
+                <div class="video-m2"></div>
+            </div> -->
+        </div>
+    </div>
+</body>
+</html>

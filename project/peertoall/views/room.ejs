@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer To All Class</title>
+</head>
+<style>
+    .video-tes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+    }
+    .video-tes div {
+        width: 1024px;
+        height: 720px;
+        background-color: red;
+        border: 1px solid black;
+        margin: 5px;
+        max-width: 300px;
+        max-height: 300px;
+    }
+    div.video3 {
+        width: 720px;
+        height: 1024px;
+    }
+    video {
+        max-width: 100%;
+    }
+</style>
+<script>
+    const userName = prompt("Masukan Username");
+</script>
+<body>
+    <button class="button1">Hidup</button>
+    <div class="video-tes">
+        <div class="video1"></div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script>
+        var roomID = "<%= roomID%>";
+    </script>
+    <script>
+        
+        const socket = io();
+        const peer = new Peer();
+        let myPeer;
+        let remotePeers = {};
+        const buttonSwitch = document.querySelector(".button1");
+        let stream;
+
+        function createContainer(id, content, parent) {
+            const div = document.createElement("div");
+            div.append(content);
+            div.setAttribute("id", id);
+            parent.appendChild(div);
+        }
+        
+        peer.on("open", myPeerID => {
+            document.querySelector(".video1").append(userName);
+            socket.emit("share-ID", {roomID, peerID: myPeerID, userName});
+            myPeer = myPeerID;
+        });
+
+        socket.on("new-user-joined", ({peerID, userName: remoteUserName}) => {
+            const conn = peer.connect(peerID);
+            remotePeers[peerID] = { 
+                userName: remoteUserName,
+                dataConnection: conn
+            };
+            const container = document.getElementById(peerID);
+            if (container) {
+                container.append(remoteUserName);
+            } else {
+                createContainer(peerID, remoteUserName, document.querySelector(".video-tes"));
+            }
+            conn.on("open", () => {
+                if (myPeer) conn.send({myPeer, userName});
+            });
+            if (stream) {
+                if (stream.active) {
+                    const call = peer.call(peerID, stream);
+                    remotePeers[peerID].mediaConnection = call;
+                }
+            }
+        });
+
+        socket.on("user-disconnected", peerID => {
+            remotePeers[peerID].dataConnection.close();
+            delete remotePeers[peerID];
+            document.getElementById(peerID).remove();
+        });
+
+        peer.on("connection", conn => {
+            conn.on("data", ({myPeer: peerID, userName: remoteUserName}) => {
+                remotePeers[peerID] = {
+                    userName: remoteUserName,
+                    dataConnection: conn
+                };
+                const container = document.getElementById(peerID);
+                if (container) {
+                    container.append(remoteUserName);
+                } else {
+                    createContainer(peerID, remoteUserName, document.querySelector(".video-tes"));
+                }
+            });
+        });
+
+        // video on/off logaritm
+
+        async function createStreamAndCalling() {
+            stream = await navigator.mediaDevices.getUserMedia({video: true});
+            document.querySelector(".video1").appendChild(createVideo(stream));
+            for (const peerID in remotePeers) {
+                const call = peer.call(peerID, stream);
+                remotePeers[peerID].mediaConnection = call;
+            }
+        }
+
+        async function switchCamera() {
+            if (stream) {
+                if (stream.active) {
+                    const tracks = stream.getTracks();
+                    tracks.forEach(track => track.stop());
+                    for (const peerID in remotePeers) {
+                        remotePeers[peerID].mediaConnection.close();
+                    }
+                    socket.emit("remote-close-stream", myPeer);
+                    document.querySelector(".video1 video").remove();
+                } else {
+                    await createStreamAndCalling();
+                }
+            } else {
+                await createStreamAndCalling();
+            }
+        }
+
+        function createVideo(stream, parent) {
+            const video = document.createElement("video");
+            video.srcObject = stream;
+            video.muted = true;
+            video.addEventListener("loadedmetadata", video.play());
+            return video;
+        }
+
+        peer.on("call", call => {
+            console.log("ada yg nelpon: ", call.peer);
+            console.log("Panggilan dijawab: " + call.peer);
+            call.answer();
+            const container = document.getElementById(call.peer);
+            call.on("stream", stream => {
+                if (container) {
+                    container.appendChild(createVideo(stream));
+                } else {
+                    createContainer(call.peer, createVideo(stream), document.querySelector(".video-tes"));
+                }
+            });
+        });
+
+        socket.on("peer-close-stream", peerID => {
+            document.getElementById(peerID).innerHTML = remotePeers[peerID].userName;
+        });
+
+        buttonSwitch.addEventListener("click", switchCamera);
+
+    </script>
+</body>
+</html>

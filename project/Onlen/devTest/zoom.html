@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .application {
+            min-height: 100vh;
+            position: relative;
+            background: green;
+        }
+        .user-video {
+            background: black;
+            position: absolute;
+        }
+        .user-video video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script type="module" defer>
+        import { resizeAble } from "../module-saya/resize-able/resize.js";
+        const userVideo = document.getElementsByClassName("user-video")[0];
+        async function getUserStream() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: true
+                });
+                const videoTag = document.createElement("video");
+                videoTag.srcObject = stream;
+                videoTag.addEventListener("loadedmetadata", function(){
+                    videoTag.play();
+                });
+                userVideo.appendChild(videoTag);
+            } catch (err) {
+                console.error("Cannot get User Stream");
+                console.log(err);
+            }
+        }
+        getUserStream();
+        resizeAble(userVideo);
+
+    </script>
+</head>
+<body>
+    <div class="application">
+        <div class="user-video"></div>
+        <div class="peserta1">1</div>
+        <div class="peserta2">2</div>
+        <div class="peserta3">3</div>
+        <div class="peserta4">4</div>
+        <div class="peserta5">5</div>
+    </div>
+</body>
+</html>

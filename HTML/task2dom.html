@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Shooter</title>
+	<link rel="stylesheet" href="../CSS/task2dom/reset.css">
+	<link rel="stylesheet" href="../CSS/task2dom/task2dom.css">
+</head>
+<body>
+	<div class="containerSettings">
+		<h1>Settings</h1>
+		<h3>Background Color</h3>
+		<ul>
+			<li>
+				<label for="bgMerah">Merah</label>
+				<input type="range" min="0" max="255" value="255" id="bgMerah">
+			</li>
+			<li>
+				<label for="bgHijau">Hijau</label>
+				<input type="range" min="0" max="255" value="255" id="bgHijau">
+			</li>
+			<li>
+				<label for="bgBiru">Biru</label>
+				<input type="range" min="0" max="255" value="255" id="bgBiru">
+			</li>
+			<li>
+				<button type="button">Mulai Game</button>
+			</li>
+		</ul>
+	</div>
+	<div class="mainGame">
+		<div class="target"></div>
+		<div class="score">
+			<h1></h1>
+		</div>
+	</div>
+	<script src="../JavaScript/task2dom.js"></script>
+</body>
+</html>

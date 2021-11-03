@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-video {
+            border: 1px solid red;
+            max-height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* padding: 1em; */
+            margin: 5px 8px;
+        }
+
+        video {
+            border: 1px solid black;
+        }
+
+        /* .video {
+            height: 100px;
+            margin: 1em;
+            width: 200px;
+            border: 1px solid black;
+            max-height: 100%;
+            background: rgba(0, 0, 0, .5);
+        } */
+
+        .remote-video {
+            margin: 5px 8px;
+            /* padding: 1em; */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-video">
+        <!-- <div class="video"></div> -->
+    </div>
+    <button id="camera" class="open">Open Camera</button>
+    <div class="remote-video">
+        <!-- <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div>
+        <div class="video"></div> -->
+    </div>
+    <button id="debug">DEBUG</button>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="bundle.js"></script>
+</body>
+
+</html>

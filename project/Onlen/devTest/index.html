@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer to All Class</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        
+        :root {
+            --blue: #006cb6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        h6 {
+            color: grey;
+        }
+        .container {
+            background: blue;
+            padding: 10vh 10vw;
+            height: 100vh;
+            max-height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+            font-family: "poppins", sans-serif;
+        }
+        .content {
+            background: white;
+            border-radius: 10px;
+            height: 80vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .content > span {
+            position: absolute;
+            font-size: 32px;
+            top: 0;
+            right: 10px;
+            cursor: pointer;
+        }
+        .content > span:hover {
+            color: red;
+        }
+        .daftar-kelas {
+            border: 1px solid blue;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin: 10px 0;
+        }
+        .daftar-kelas div {
+            display: flex;
+            cursor: pointer;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 0, 225, 0);
+            transition: .3s;
+        }
+        .daftar-kelas div span {
+            color: red;
+        }
+        .daftar-kelas div span:hover {
+            font-weight: bolder;
+        }
+        .daftar-kelas div:hover {
+            border-bottom: 1px solid rgba(0, 0, 225, 1);
+        }
+        input {
+            border: none;
+            outline: none;
+            border-radius: unset;
+            border-bottom: 1px solid var(--blue);
+            padding: 0px 5px;
+            width: 100%;
+            transition: .3s;
+        }
+        input:focus {
+            padding: 10px 5px;
+        }
+        .next {
+        margin-top: 20px;
+        border: none;
+        color: white;
+        padding: 15px 20px;
+        background-color: var(--blue);
+        cursor: pointer;
+        transition: .3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <span>&times;</span>
+            <div class="form">
+                <h6>Langkah 1 dari 3 ...</h6>
+                <div class="buat-kelas">
+                    <div class="pilih-kelas">
+                        <h1>Silahkan pilih kelas yang pernah anda buat sebelumnya</h1>
+                        <div class="daftar-kelas">
+                            <div>
+                                Bahasa <span>| &times;</span>
+                            </div>
+                            <div>
+                                Matematika <span>| &times;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h1>Atau buat kelas baru disini 👇</h1>
+                    <input type="text" id="nama-kelas" name="nama-kelas" placeholder="Nama Kelas Anda...">
+                </div>
+                <button class="next">Selanjutnya</button>
+            </div>
+            <div class="image">
+                <img src="./public/img/intro.png" alt="" width="400">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

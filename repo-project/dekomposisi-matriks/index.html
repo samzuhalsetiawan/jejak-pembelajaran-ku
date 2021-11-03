@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content="Sam Zuhal Setiawan" />
+        <meta
+            name="description"
+            content="Tugas Ujian Akhir Aljabar dan Linier"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" href="favicon.ico" />
+        <title>Dekomposisi Matriks</title>
+    </head>
+    <body id="semua">
+        <!-- awal navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <div class="container container-fluid">
+                <a class="navbar-brand">Dekomposisi Matriks</a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div
+                    class="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                >
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                data-bs-toggle="modal"
+                                data-bs-target="#capeng"
+                                href="#"
+                                >Cara Penggunaan</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                data-bs-toggle="modal"
+                                data-bs-target="#informasi"
+                                href="#"
+                                >Informasi</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                data-bs-toggle="modal"
+                                data-bs-target="#bug"
+                                href="#"
+                                >Pelaporan bug</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- akhir navbar -->
+        <!-- background -->
+        <div id="latar">
+            <!-- awal pembuka -->
+            <div id="pembuka">
+                <div class="container">
+                    <div class="opening">
+                        <img src="img/matriks.png" alt="matriks" />
+                        <h1>SPL Dekomposisi Matriks</h1>
+                        <p>
+                            Silahkan masukan nilai-nilai persamaan anda.<br />
+                        </p>
+                    </div>
+                    <!-- awal input -->
+                    <div class="input">
+                        <div id="first">
+                            <button
+                                class="buttonAwal btn btn-primary"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#inputUser"
+                                aria-expanded="false"
+                                aria-controls="inputUser"
+                            >
+                                Mulai memasukan data
+                            </button>
+                        </div>
+                        <!-- input colapse -->
+                        <div class="inputUser">
+                            <div class="collapse" id="inputUser">
+                                <div class="card card-body bg-transparent">
+                                    <div class="jmlPersamaan">
+                                        <label
+                                            for="jmlPersamaan"
+                                            class="
+                                                col-2 col-form-label
+                                                labelJmlPersamaan
+                                            "
+                                            >Banyak SPL:
+                                        </label>
+                                        <input
+                                            class="form-control form-control-sm"
+                                            type="number"
+                                            placeholder="Banyak SPL"
+                                            value="3"
+                                            id="jmlPersamaan"
+                                        />
+                                    </div>
+                                    <form
+                                        onSubmit="return false"
+                                        class="formInput"
+                                    ></form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- akhir input colapse -->
+                    </div>
+                    <!-- akhir dari input -->
+                </div>
+            </div>
+            <!-- akhir pembuka -->
+            <div class="langkah">
+                <div class="card border-primary inisialisasi">
+                    <div class="card-header">
+                        Bentuk kedalam Matriks A, X, dan C
+                    </div>
+                    <div class="card-body text-primary langkahAwal">
+                        <div class="matriksAwal">
+                            <h5 class="card-title">A</h5>
+                        </div>
+                        <div class="matriksXAwal">
+                            <h5 class="card-title">X</h5>
+                        </div>
+                        <div class="samaDengan">=</div>
+                        <div class="matriksCAwal">
+                            <h5 class="card-title">C</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-warning dekomposisi">
+                    <div class="card-header">Dekomposisi L U</div>
+                    <div class="card-body text-primary">
+                        <h5 class="card-title">Mencari Matriks U</h5>
+                        <div class="allTabelLangkah"></div>
+                        <!-- alert 1 -->
+                        <div
+                            class="card text-white bg-warning mb-3"
+                            id="alert1"
+                        >
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                    >
+                                        <path
+                                            d="M13 17.5a1 1 0 11-2 0 1 1 0 012 0zm-.25-8.25a.75.75 0 00-1.5 0v4.5a.75.75 0 001.5 0v-4.5z"
+                                        ></path>
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M9.836 3.244c.963-1.665 3.365-1.665 4.328 0l8.967 15.504c.963 1.667-.24 3.752-2.165 3.752H3.034c-1.926 0-3.128-2.085-2.165-3.752L9.836 3.244zm3.03.751a1 1 0 00-1.732 0L2.168 19.499A1 1 0 003.034 21h17.932a1 1 0 00.866-1.5L12.866 3.994z"
+                                        ></path>
+                                    </svg>
+                                    Terdapat sebuah baris yang semua nilainya
+                                    bernilai 0
+                                </p>
+                            </div>
+                        </div>
+                        <!-- akhir alert 1 -->
+                        <hr />
+                        <h5 class="card-title">
+                            Matriks A
+                            <span style="color: red">=</span> Matriks U
+                            <span style="color: red">x</span> Matriks L
+                        </h5>
+                        <div class="dekomposisiLU">
+                            <div class="dekompA">
+                                <h5 class="card-title">A</h5>
+                            </div>
+                            <div class="dekompSD">=</div>
+                            <div class="dekompU">
+                                <h5 class="card-title">U</h5>
+                            </div>
+                            <div class="dekompL">
+                                <h5 class="card-title">L</h5>
+                            </div>
+                        </div>
+                        <hr />
+                        <p class="card-text">
+                            Bentuk dari mariks <strong>L</strong> mempunyai
+                            <strong>diagonal utama</strong> bernilai
+                            <strong>1</strong>, sedangkan angka
+                            <strong>diatas diagonal utama</strong> bernilai
+                            <strong>0</strong>, dan angka
+                            <strong>dibawah diagonal utama</strong>
+                            berdasarkan rumus yang kita gunakan saat mencari
+                            matriks U (<strong
+                                >Saya tandai dengan warna merah</strong
+                            >). Bila terjadi penukaran baris di Matriks U,maka
+                            Matriks A, C, dan L juga terjadi penukaran baris
+                        </p>
+                    </div>
+                </div>
+                <div class="card border-danger inisialisasiY">
+                    <div class="card-header">
+                        Bagaimana Cara Mencari nilai matriks X ?
+                    </div>
+                    <div class="card-body text-primary">
+                        <h5 class="card-title">Jika</h5>
+                        <p class="card-text">
+                            Matriks A
+                            <span style="color: red">x</span> Matriks X
+                            <span style="color: red">=</span> Matriks C
+                        </p>
+                        <h5 class="card-title">Maka</h5>
+                        <p class="card-text">
+                            Matriks L
+                            <span style="color: red">x</span> Matriks U
+                            <span style="color: red">x</span> Matriks X
+                            <span style="color: red">=</span> Matriks C
+                        </p>
+                        <h5 class="card-title">Misalkan</h5>
+                        <p class="card-text">
+                            Matriks U
+                            <span style="color: red">x</span> Matriks X
+                            <span style="color: red">=</span> Matriks Y
+                        </p>
+                        <h5 class="card-title">Maka</h5>
+                        <p class="card-text">
+                            Matriks L
+                            <span style="color: red">x</span> Matriks Y
+                            <span style="color: red">=</span> Matriks C
+                        </p>
+                        <h5 class="card-title">
+                            Sehingga dapat diketahui nilai matriks X jika
+                            diketahui nilai matriks Y
+                        </h5>
+                    </div>
+                </div>
+                <div class="card border-info cariMatriksY">
+                    <div class="card-header">Mencari Nilai Matriks Y</div>
+                    <div class="card-body text-primary">
+                        <h5 class="card-title">
+                            Matriks L
+                            <span style="color: red">x</span> Matriks Y
+                            <span style="color: red">=</span> Matriks C
+                        </h5>
+                        <div class="cariMY">
+                            <div class="cariMYML">
+                                <h5 class="card-title">L</h5>
+                            </div>
+                            <div class="cariMYMY">
+                                <h5 class="card-title">Y</h5>
+                            </div>
+                            <div class="cariMYSD">=</div>
+                            <div class="cariMYMC">
+                                <h5 class="card-title">C</h5>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="rumusMY">
+                            <h5 class="card-title">
+                                y1 = <span class="y0"></span>
+                            </h5>
+                        </div>
+                        <hr />
+                        <p class="card-text">
+                            Setelah didapat nilai dari Matriks Y, maka nilai
+                            dari matriks X dapat ditemukan
+                        </p>
+                    </div>
+                </div>
+                <div class="card border-info cariMatriksX">
+                    <div class="card-header">Mencari Nilai Matriks X</div>
+                    <div class="card-body text-primary">
+                        <h5 class="card-title">
+                            Matriks U
+                            <span style="color: red">x</span> Matriks X
+                            <span style="color: red">=</span> Matriks Y
+                        </h5>
+                        <div class="cariMX">
+                            <div class="cariMXMU">
+                                <h5 class="card-title">U</h5>
+                            </div>
+                            <div class="cariMXMX">
+                                <h5 class="card-title">X</h5>
+                            </div>
+                            <div class="cariMXSD">=</div>
+                            <div class="cariMXMY">
+                                <h5 class="card-title">Y</h5>
+                            </div>
+                        </div>
+                        <!-- alert 2 -->
+                        <div
+                            class="card text-white bg-warning mb-3"
+                            id="alert2"
+                        >
+                            <div class="card-header">
+                                <p class="card-text">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                    >
+                                        <path
+                                            d="M13 17.5a1 1 0 11-2 0 1 1 0 012 0zm-.25-8.25a.75.75 0 00-1.5 0v4.5a.75.75 0 001.5 0v-4.5z"
+                                        ></path>
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M9.836 3.244c.963-1.665 3.365-1.665 4.328 0l8.967 15.504c.963 1.667-.24 3.752-2.165 3.752H3.034c-1.926 0-3.128-2.085-2.165-3.752L9.836 3.244zm3.03.751a1 1 0 00-1.732 0L2.168 19.499A1 1 0 003.034 21h17.932a1 1 0 00.866-1.5L12.866 3.994z"
+                                        ></path>
+                                    </svg>
+                                    <span id="headerAlert2"></span>
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Pada matriks U terdapat sebuah baris yang
+                                    semua nilainya bernilai 0 dan di baris yang
+                                    sama pada matriks Y nilainya
+                                    <span id="sd">= 0</span
+                                    ><span id="tsd">&#8800; 0</span>
+                                </p>
+                                <div
+                                    class="form-check form-switch"
+                                    id="hiddenSwitch1"
+                                >
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="switch1"
+                                        onclick="cekCheckbox()"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="switch1"
+                                        >Paksa tampilkan langkah
+                                        berikutnya</label
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!-- akhir alert 2 -->
+                        <hr class="hiddenStep" />
+                        <p class="card-text hiddenStep">
+                            Agar lebih mudah, lakukan perhitungan mulai dari
+                            <span class="khususX"></span>
+                        </p>
+                        <hr class="hiddenStep" />
+                        <div class="rumusMX hiddenStep"></div>
+                    </div>
+                </div>
+                <div class="card border-success hasil hiddenStep">
+                    <div class="card-header">Hasilnya</div>
+                    <div class="card-body text-primary">
+                        <h5 class="card-title text-success">
+                            Berdasarkan Nilai Matriks X yang telah didapat
+                        </h5>
+                        <p class="card-text text-success">
+                            maka dapat dikatahui penyelesaian dari SPL ini
+                            adalah sebagai berikut:
+                        </p>
+                        <div class="hasilnya"></div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="button">
+                    <a href="#pembuka">Kembali ke atas</a>
+                </button>
+            </div>
+        </div>
+        <!-- akhir background -->
+        <!-- Modal info -->
+        <div
+            class="modal fade"
+            id="informasi"
+            tabindex="-1"
+            aria-labelledby="informasiLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="informasiLabel">
+                            Informasi
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        Informasi Pembuat: <br />Nama : Sam Zuhal Setiawan
+                        <br />NIM : 2005176043 <br />Prodi : Pendidikan Komputer
+                        2020<br />Email: samzuhal095@gmail.com<br /><br />Tujuan
+                        Pembuatan: <br />Sebagai bagian dari tugas Ujian Akhir
+                        Semester, mata kuliah Aljabar dan Sistem Persamaan
+                        Linier. <br />Serta sebagai bahan pembelajaran
+                        <br /><br />Informasi Web ini: <br />1. Bahasa Markup :
+                        HTML5, dan CSS <br />2. Bahasa Pemograman : Javascript
+                        <br />3. Framework CSS : Bootstrap v5.0 <br />4. Code
+                        Editor : Visual Studio Code <br />5. Selesai Pada : 13
+                        Mei 2021 <br />6. Encoding : UTF-8 <br /><br />
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Ok Mengerti
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- akhir modal info -->
+        <!-- Modal capeng -->
+        <div
+            class="modal fade"
+            id="capeng"
+            tabindex="-1"
+            aria-labelledby="capengLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="capengLabel">
+                            Cara Penggunaan
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        1. Tekan tombol mulai memasukan data<br />
+                        2. Masukan banyaknya jumlah SPL yg ingin anda masukan,
+                        default: 3<br />
+                        3. masukan angka sesuai dengan posisi kofisien dan
+                        konstantanya<br />
+                        <hr />
+                        contoh:<br />
+                        banyaknya SPL yg anda masukan: 3<br />
+                        SPL 1: 3x + 4y + 5z = 10<br />
+                        SPL 2: 3x + 2y + z = 5<br />
+                        SPL 3: 2x - 3z = 20<br />
+                        (note: sistem akan merepresentasikan x,y,z sebagai
+                        x1,x2,x3 dst)<br />
+                        Maka nilai yang dimasukan adalah:<br />
+                        pada Persamaan 1<br />
+                        kolom x1: 3<br />
+                        kolom x2: 4<br />
+                        kolom x3: 5<br />
+                        kolom C: 10<br />
+                        pada Persamaan 2<br />
+                        kolom x1: 3<br />
+                        kolom x2: 2<br />
+                        kolom x3: 1<br />
+                        kolom C: 5<br />
+                        pada Persamaan 3<br />
+                        kolom x1: 2<br />
+                        kolom x2: 0<br />
+                        kolom x3: -3<br />
+                        kolom C: 20<br />
+                        <hr />
+                        4. Tekan tombol "Mulai Hitung" untuk mulai mencari
+                        penyelesaiannya<br />
+                        5. Penyelesaian akan ditampilkan menurun ke bawah<br /><br />Semoga
+                        bermanfaat &#128077;
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Ok Mengerti
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- akhir modal capeng -->
+        <!-- Modal info -->
+        <div
+            class="modal fade"
+            id="bug"
+            tabindex="-1"
+            aria-labelledby="bugLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bugLabel">Laporkan Bug</h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <span style="color: deepskyblue"
+                            >Belum tersedia saat ini...</span
+                        >
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Ok Gpp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- akhir modal info -->
+
+        <!-- script -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+            crossorigin="anonymous"
+        ></script>
+        <script src="js/gui.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>

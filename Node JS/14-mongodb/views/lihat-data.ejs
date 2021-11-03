@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lihat Data</title>
+</head>
+<body>
+    <div class="container">
+        <a href="/">Home</a>
+        <h1>Seluruh data yang ada</h1>
+        <br>
+        <% data.forEach(dat => { %>
+            <h3><%= dat.nama %> </h3>
+            <ul>
+                <li>
+                    NoHP : <%= dat.nohp %> 
+                </li>
+                <li>
+                    E-Mail : <%= dat.email %> 
+                </li>
+                <li>
+                    <a href="detail-personal">Detail personal</a>
+                    <% if (edit) { %>
+                     <a href="tambah-data/edit/<%= dat._id %>">Edit</a>
+                     <a href="tambah-data/hapus/<%= dat._id %>">Hapus</a>
+                    <% } %>
+                </li>
+            </ul>
+        <% }) %>
+    </div>
+</body>
+</html>

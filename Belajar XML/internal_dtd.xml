@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Sam [
+    <!ELEMENT Sam (nama, usia, kota)>
+    <!ELEMENT nama (#PCDATA)>
+    <!ELEMENT usia (#PCDATA)>
+    <!ELEMENT kota (#PCDATA)>
+]>
+
+<!-- XML harus memenuhi internal DTD di atas -->
+
+<Sam>
+    <nama>Sam</nama>
+    <usia>21</usia>
+    <kota>Tarakan</kota>
+</Sam>

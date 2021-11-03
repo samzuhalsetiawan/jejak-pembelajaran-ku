@@ -1,0 +1,81 @@
+:root {
+    /* blue */
+    --blue1: #7C83FD;
+    --blue2: #96BAFF;
+    --blue3: #7DEDFF;
+    --blue4: #88FFF7;
+    --blue5: #006cb6;
+    /* green */
+    --green1: #50CB93;
+    --green2: #71EFA3;
+    --green3: #ACFFAD;
+    /* red */
+    --red1: #FF4646;
+    --red2: #FF8585;
+    --red3: #FFB396;
+    --red4: #FFF5C0;
+    /* white */
+    --white1: #fcfdfd;
+}
+
+.modal-bg {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    opacity: 0;
+    transition: .3s;
+    visibility: hidden;
+}
+.active {
+    visibility: visible;
+    opacity: 1;
+}
+.modal {
+    padding: 50px 10px;
+    height: 250px;
+    width: 250px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+.modal::before {
+    content: "";
+    border-radius: 10px;
+    position: absolute;
+    z-index: -99;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(252, 253, 253, .7);
+    filter: blur(10px);
+}
+.modal button {
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    background-color: var(--blue3);
+    cursor: pointer;
+    transition: .3s;
+}
+.modal .modal-close-btn {
+    cursor: pointer;
+    color: red;
+    /* border: 1px solid red; */
+    font-size: 32px;
+    position: absolute;
+    top: 0;
+    right: 7px;
+}
+.modal button:hover {
+    background: transparent;
+    border: 2px solid var(--blue3);
+}

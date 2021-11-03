@@ -1,0 +1,24 @@
+komponen dataset:
+	1. Label (nama data)
+	2. Attribut (data data terkait data tersebut)
+
+dataset:
+	1. regresi
+	2. klasifikasi
+
+Jenis Metode Machine Learning:
+	1. Supervised ()
+	2. Unsupervised (Tidak memerlukan label)
+
+Beberapa Model Machine Learning:
+	1. Clustering
+	2. Regresi
+
+Beberapa teknik pengurangan dimensi:
+	1. Principal Component Analysis (PCA)
+	2. Linear Discriminant Analysis (LDA)
+	3. t-Distributed Stochastic Neighbor Embedding
+
+Support Vector Machine (SVM)
+sebuah algoritma training yang bertujuan untuk memaksimalkan margin antara pola pelatihan dan batas keputusan (decision boundary)
+SVM Klasifikasi non Linier

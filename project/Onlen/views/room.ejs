@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/room/room1.css">
+    <title>Peer to All Class</title>
+    <script>
+        const role = JSON.parse(`<%- roleRaw %>`);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <span onclick="tutup()">&times;</span>
+            <div class="form">
+                <h6>Langkah 1 dari 3 ...</h6>
+                <div class="buat-kelas">
+                    <div class="pilih-kelas">
+                        <h1>Beri nama untuk kelas ini</h1>
+                    </div>
+                    <input type="text" id="nama-kelas" name="nama-kelas" placeholder="Nama Kelas ...">
+                </div>
+                <button class="next" onclick="nextPage1()">Selanjutnya</button>
+            </div>
+            <div class="image">
+                <img src="/img/intro.png" alt="" width="400">
+            </div>
+        </div>
+    </div>
+    <script src="/room/room1.js"></script>
+</body>
+</html>

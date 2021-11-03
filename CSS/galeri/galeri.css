@@ -1,0 +1,301 @@
+body {
+	font-family: dungeon;
+	font-size: 16px;
+	background-image: url(full/mlbb.jpg);
+	background-size: 100% 250%;
+}
+
+/*container list hero*/
+.container {
+	margin-top: 50px;
+	border-radius: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 665px;
+	height: 200px;
+	border: 3px solid #1A5276;
+	padding: 12px;
+	background-color: rgba(26, 35, 126, 50%);
+	box-sizing: border-box;
+	box-shadow: 0px 0px 20px 5px #17202A;
+}
+
+/*judul container*/
+h1 {
+	font-size: 30px;
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 1px 1px 5px white;
+}
+
+/*float li*/
+li {
+	float: left;
+}
+
+/*mengatur celah antar li*/
+.container ul li {
+	margin-top: 4%;
+	margin-left: 3%;
+}
+
+/*border icon hero*/
+.gusion,
+.hayabusa,
+.ling,
+.lancelot,
+.benedetta {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	border: 2px solid blue;
+	overflow: hidden;
+}
+
+/*border khusus haya*/
+.hayabusa {
+	border: 2px solid #FF7043;
+}
+
+/*border khusus ling*/
+.ling {
+	border: 2px solid #9C27B0;
+}
+
+/*border khusus lance*/
+.lancelot {
+	border: 2px solid #EF5350;
+}
+
+/*border khusus benet*/
+.benedetta {
+	border: 2px solid #388E3C;
+}
+
+/*icon hero*/
+.gusion a img,
+.hayabusa a img,
+.ling a img,
+.lancelot a img,
+.benedetta a img {
+	border-radius: 50%;
+}
+
+/*selection icon overlay*/
+.gusion a .ovGusion,
+.hayabusa a .ovGusion,
+.ling a .ovGusion,
+.lancelot a .ovGusion,
+.benedetta a .ovGusion {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(174, 214, 241, 0);
+	transition: .3s;
+}
+
+/*selection icon overlay*/
+.gusion a:hover .ovGusion,
+.hayabusa a:hover .ovGusion,
+.ling a:hover .ovGusion,
+.lancelot a:hover .ovGusion,
+.benedetta a:hover .ovGusion {
+	background-color: rgba(174, 214, 241, 55%);
+}
+
+/*overlay*/
+.overlayGS,
+.overlayHY,
+.overlayLG,
+.overlayLC,
+.overlayBN {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(33, 150, 243, 0);
+	transition: .5s;
+	text-align: center;
+	z-index: 999;
+}
+
+/*overlay*/
+.overlayGS:target,
+.overlayHY:target,
+.overlayLG:target,
+.overlayLC:target,
+.overlayBN:target {
+	width: auto;
+	height: auto;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(33, 150, 243, 70%);
+}
+
+/*overlay khusus haya*/
+.overlayHY:target {
+	background-color: rgba(255, 183, 77, 70%);
+}
+
+/*overlay khusus ling*/
+.overlayLG:target {
+	background-color: rgba(123, 31, 162, 70%);
+}
+
+/*overlay khusus lance*/
+.overlayLC:target {
+	background-color: rgba(244, 67, 54, 70%);
+}
+
+/*overlay khusus benet*/
+.overlayBN:target {
+	background-color: rgba(0, 204, 102, 70%);
+}
+
+/*animasi pop up*/
+@keyframes fotoFull {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+/*gambar hero*/
+.overlayGS img,
+.overlayHY img,
+.overlayLG img,
+.overlayLC img,
+.overlayBN img {
+	max-height: 100%;
+	width: 45%;
+	margin: 100px auto;
+	box-shadow: 0px 0px 30px 3px #F0F3F4;
+}
+
+/*gambar hero*/
+.overlayGS:target img,
+.overlayHY:target img,
+.overlayLG:target img,
+.overlayLC:target img,
+.overlayBN:target img {
+	animation: fotoFull .5s forwards;
+}
+
+/*icon exit*/
+.overlayGS .exit1,
+.overlayHY .exit1,
+.overlayLG .exit1,
+.overlayLC .exit1,
+.overlayBN .exit1 {
+	width: 40px;
+	height: 40px;
+	color: #E74C3C;
+	border-radius: 7px;
+	background-color: rgba(253, 237, 236, 70%);
+	text-shadow: 1px 1px 5px #F5B7B1;
+	box-shadow: 0px 0px 15px 2px #F0F3F4;
+	font-size: 20px;
+	text-align: center;
+	line-height: 40px;
+	position: absolute;
+	top: 12%;
+	left: 71%;
+	transform: scale(0);
+	animation: fotoFull 1s forwards;
+	animation-delay: .8s;
+}
+
+/*nama hero*/
+.overlayGS h2,
+.overlayHY h2,
+.overlayLG h2,
+.overlayLC h2,
+.overlayBN h2 {
+	display: inline-block;
+	width: 100%;
+	height: 1;
+	font-size: 40px;
+	margin-top: -4%;
+	color: blue;
+	text-shadow: 1px 1px 3px black/*#546E7A*/;
+	border-bottom: 2px solid blue;
+	transition: 1s;
+}
+
+/*nama hero khusus haya*/
+.overlayHY h2 {
+	color: #FF7043;
+	border-bottom: 2px solid #FF7043;
+}
+
+/*nama hero khusus ling*/
+.overlayLG h2 {
+	color: #4A148C;
+	border-bottom: 2px solid purple/*#4A148C*/;
+}
+
+/*nama hero khusus lance*/
+.overlayLC h2 {
+	color: #FF0033;
+	border-bottom: 2px solid #FF0033;
+}
+
+/*nama hero khusus benet*/
+.overlayBN h2 {
+	color: #388E3C;
+	border-bottom: 2px solid darkgreen/*#388E3C*/;
+}
+
+/*animasi garis nama hero khusus gusion*/
+.overlayGS:target h2 {
+	width: 170px;
+}
+
+/*animasi garis nama hero khusus haya*/
+.overlayHY:target h2 {
+	width: 235px;
+}
+
+/*animasi garis nama hero khusus ling*/
+.overlayLG:target h2 {
+	width: 120px;
+}
+
+/*animasi garis nama hero khusus lance*/
+.overlayLC:target h2 {
+	width: 235px;
+}
+
+/*animasi garis nama hero khusus benedetta*/
+.overlayBN:target h2 {
+	width: 260px;
+}
+
+/*tombol next*/
+.tombol a .next {
+	box-shadow: unset;
+	width: 100px;
+	position: absolute;
+	top: 20%;
+	left: 90%;
+	filter: drop-shadow(0 0 7px white);
+}
+
+/*tombol previous*/
+.tombol a .prev {
+	box-shadow: unset;
+	width: 100px;
+	position: absolute;
+	top: 20%;
+	left: 3%;
+	filter: drop-shadow(0 0 7px white);
+}
+
+

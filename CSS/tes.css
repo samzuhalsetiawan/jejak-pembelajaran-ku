@@ -1,0 +1,217 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*my code*/
+
+body {
+	font: 16px/20px arial, sans-serif;
+	background-color: grey;
+	background-image: url(../CSS/p16.jpg);
+}
+
+.navi {
+	position: fixed;
+	top: 0px;
+	z-index: 99;
+	width: 100%;
+	height: 50px;
+	background-color: #424242;
+	border-bottom: 3px solid gold;
+	opacity: 85%;
+}
+
+.navi ul li {
+	display: inline-block;
+	padding-left: 75px;
+	line-height: 50px;
+	color: white;
+}
+
+.container {
+	width: 800px;
+	box-sizing: border-box;
+	margin: 80px auto 0;
+	position: relative;
+}
+
+.link {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	right: -14px;
+	top: -10px
+}
+
+.header {
+	padding-top: 10px;
+	border-bottom: 3px solid #F44336;
+	border-top: 3px solid #F44336;
+	background-color: #FFCDD2;
+	border-radius: 0 20px 0 30px;
+}
+
+h1 {
+	font-size: 40px;
+	font-weight: bold;
+	padding: 20px 15px;
+}
+
+.menu ul {
+	padding-left: 10px;
+}
+
+.menu ul li {
+	display: inline-block;
+}
+
+.menu ul li a {
+	display: inline-block;
+	text-decoration: none;
+	color: #F44336;
+	padding: 0 8px 8px;
+}
+
+.menu a:hover {
+	background-color: blue;
+	color: white;
+}
+
+.banner {
+	height: 250px;
+	background-image: url(../CSS/banner.jpg);
+	border-bottom: 5px solid blue;
+	background-size: cover;
+	background-position: 0 -100px;
+	margin-top: -30px;
+	position: relative;
+	z-index: -1;
+}
+
+.judul {
+	background-color: #FFF176;
+}
+
+h2 {
+	font-size: 21px;
+	font-weight: bold;
+	padding: 20px 10px 0px;
+	color: #0288D1;
+}
+
+.judul p {
+	font-size: 12px;
+	padding-left: 13px;
+	padding-bottom: 20px;
+}
+
+.judul p .sam {
+	color: #29B6F6;
+}
+
+.isi {
+	padding: 0 25px;
+	background-color: #FFF176;
+}
+
+.isi .isi1 {
+	width: 350px;
+	display: inline-block;
+}
+
+.isi .isi2 {
+	width: 350px;
+	float: right;
+	text-align: justify;
+}
+.isi .isi2 .judulProfil h3 {
+	font: 20px/16px arial;
+	margin-bottom: 20px;
+	font-weight: bold;
+	color: #F44336;
+}
+
+.isi .isi2 .isiProfil img {
+	float: left;
+	margin-right: 10px; 
+}
+
+.isi .isi1 p {
+	text-align: justify;
+}
+
+.footer {
+	border-top:3px solid gold;
+	border-bottom:3px solid gold;
+	color: #FFF176;
+	height: 70px;
+	background-color: #212121;
+	text-align: center;
+	line-height: 70px;
+}
+
+/*clear fix*/
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}

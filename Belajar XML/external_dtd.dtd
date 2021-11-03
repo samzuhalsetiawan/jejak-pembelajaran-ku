@@ -1,0 +1,4 @@
+<!ELEMENT Sam (nama, usia, kota)>
+<!ELEMENT nama (#PCDATA)>
+<!ELEMENT usia (#PCDATA)>
+<!ELEMENT kota (#PCDATA)>

@@ -1,0 +1,30 @@
+<h1>Selamat Datang di Halaman Contact</h1>
+
+<form action="" method="GET">
+    <input type="text" name="nama" id="cari" placeholder="Cari Nama Mahasiswa" autofocus>
+    <button type="submit">Cari data</button>
+</form>
+
+<a href="/tambah-data">Atau tambahkan data baru!</a>
+<br><br>
+<a href="/tambah-data">Atau tambahkan data baru!</a>
+<br><br>
+
+<div class="mhs">
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Option</th>
+        </tr>
+        <% data.forEach((dat,i) => { %>
+        <tr>
+            <td><%= ++i %></td>
+            <td><%= dat.nama %></td>
+            <td><%= dat.nim %></td>
+            <td><button>Hapus</button></td>
+        </tr>
+        <% }) %> 
+    </table>
+</div>

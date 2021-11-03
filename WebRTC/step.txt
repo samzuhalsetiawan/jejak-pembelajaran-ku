@@ -1,0 +1,63 @@
+1. buat worker
+2. buat router
+3. buat webrtctransport (server)
+4. buat sendTransport (client)
+5. listen to "connect" event (client) => ({dtlsParameters}, callback, errback)
+6. emit event to server for connect (client)
+7. listen to event. then call await transport.connect({dtlsParameters from client}) (server)
+8. emit to client for run callback (server)
+9. listen to event and run callback() (client)
+10. listen to "produce" event (client) => ({kind, rtpParameters}, callback, errback)
+11. emit to server and send transportId kind and rtpParameters (client)
+12. listen to that event and call transport.produce() @return Producer (server)
+13. emit to client producer.id and broadcast to all bahwa new producer has created (server)
+14. listen to the event and run callback(producer.id) (client)
+15. send stream track by calling transport.producer({track}) (client)
+//////////// consume
+16. emit event to server for create consumer transport
+17. create webtrcTransport (server)
+18.create receive transport (client)
+19. listen to "connect" event (client)
+20. consumerTransport.connect({client dtlsParameters})
+21. run callback() (client)
+//////////////////////////////
+22. listen to connectionstatechange, if connected show remote video and emit to server for resume video
+23. emit event to consume, sending client rtpCapabilities to server
+24. check: canConsume (server)
+25. create consumer by calling consumerTransport.consume()
+26. emit to client and send some property of producer and consumer
+27. consumeTransport.consume() @return consumer (client)
+28. create empty media stream
+29. add track to empty stream from consumer.track
+30. add that stream to remoteStream
+
+
+General:
+1. create Worker (server)
+2. create Router (server)
+//produce
+3. create webRtcTransport (server)
+4. create sendTransport (server)
+5. listen to "connect" event (client)
+6. transport.connect() (server)
+7. run callback (client)
+8. create producer transport.produce({track}) (client)
+9. listen to "produce" event (client)
+10. create producer transport.produce() (server)
+11. run callback() (client)
+//consume
+12. create webRtcTransport (server)
+13. create recvTransport (client)
+14. listen to "connect" event (client)
+15. transport.connect() (server)
+16. run callback() (client)
+17. create consumer transport.consume() paused (server)
+18. create consumer transport.consume() (client)
+19. create emptyMediaStream, add track from consumer.track (client)
+20. listen to "connectionstatechange" event (client)
+21. if "connected" show remoteStream (client)
+22. consumer.resume() (server)
+
+
+
+

@@ -1,0 +1,463 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* variables */
+:root {
+    --color1: #FCECDD;
+    --color2: #FFC288;
+    --color3: #FEA82F;
+    --color4: #FF6701;
+}
+.card:nth-child(1) {
+    --i: -1;
+}
+.card:nth-child(2) {
+    --i: 0;
+}
+.card:nth-child(3) {
+    --i: 1;
+}
+.card:nth-child(1),
+.content:nth-child(3) {
+    --j: 3;
+    --k: 0;
+}
+.card:nth-child(2),
+.content:nth-child(2) {
+    --j: 2;
+    --k: 1;
+}
+.card:nth-child(3),
+.content:nth-child(1) {
+    --j: 1;
+    --k: 2;
+}
+
+.layer {
+    min-height: 100vh;
+}
+
+.head {
+    min-height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+}
+
+.head h1 {
+    font-size: 72px;
+    font-family: 'Lobster', cursive;
+    color: var(--color3);
+    text-shadow: -4px 4px var(--color4);
+    transition: .5s;
+}
+
+.head h1 {
+    text-shadow: 4px 4px var(--color4);
+}
+
+.head h1.shadow {
+    text-shadow: -4px 4px var(--color4);
+}
+
+h2 {
+    display: none;
+}
+
+.menu {
+    position: relative;
+    display: flex;
+    min-height: 75vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.menu h1,
+.menu h2 {
+    font-family: 'Acme', sans-serif;
+    font-size: 42px;
+    color: var(--color3);
+    text-shadow:4px 4px var(--color4);
+}
+
+body {
+    min-height: 100vh;
+    background: var(--color1);
+}
+
+.container {
+    position: relative;
+    width: 500px;
+    min-height: 400px;
+}
+
+.container .card {
+    position: absolute;
+    top: calc(50% - 200px);
+    left: 50%;
+    width: 300px;
+    min-height: 400px;
+    background: var(--color2);
+    transform: translateX(-50%) translateY(0) rotate(40deg) skew(-20deg, -10deg) scale(.6);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .2);
+    z-index: calc(var(--j));
+    transition: .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* svg singleplayer */
+#Layer_1 {
+    width: 150px;
+    transform: scale(1);
+    transform-origin: center;
+    transition: .5s;
+}
+
+#Layer_1 path {
+    fill: var(--color4);
+}
+
+.card:hover #Layer_1 {
+    transform: scale(1.2);
+}
+
+/* svg settings */
+#Capa_1,
+#About_1,
+#MP_1 {
+    width: 100px;
+    transform: scale(1);
+    transform-origin: center;
+    transition: .5s;
+}
+
+#Capa_1 path,
+#About_1 path,
+#MP_1 path {
+    fill: var(--color4);
+}
+
+.card:hover #Capa_1,
+.card:hover #About_1,
+.card:hover #MP_1 {
+    transform: scale(1.2);
+}
+
+/* svg about */
+#Lock_1 {
+    width: 100px;
+    transform: scale(1);
+    transform-origin: center;
+    transition: .5s;
+}
+
+#Lock_1 path {
+    fill: var(--color4);
+}
+
+.card:hover #Lock_1 {
+    transform: scale(1.2);
+}
+
+/* efek hover tidak dijalankan pada mobile */
+@media(min-width: 991px) {
+    .container:hover .card {
+        opacity: .5;
+        transform: translateX(-50%) translateY(calc(50px * var(--i))) rotate(40deg) skew(-20deg, -10deg) scale(.6);
+    }
+    .container:hover .card .content,
+    .container .hilang {
+        display: none;
+    }
+    .container .lebarkan {
+        width: 80vw;
+    }
+    .container:hover .show {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        opacity: 1;
+        transform: translateX(calc(-50% + calc(350px * var(--i)))) translateY(-50%) rotate(0) skew(0, 0) scale(1);
+    }
+    .container .card:hover {
+        opacity: 1;
+    }
+    
+    .container .card:hover .content {
+        display: initial;
+    }
+
+    /* animasi les */
+    
+    .container .card span {
+        position: absolute;
+        display: block;
+        background: var(--color4);
+    }
+    
+    .card span:nth-child(1) {
+        left: 0;
+        bottom: 0;
+        width: 2px;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform .25s ease-in;
+    }
+    
+    .card:hover span:nth-child(1) {
+        transform: scaleY(1);
+        transform-origin: bottom;
+        transition: transform .25s ease-in;
+    }
+    
+    .card span:nth-child(2) {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 2px;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform .25s linear;
+        transition-delay: .25s;
+    }
+    
+    .card:hover span:nth-child(2) {
+        transform: scaleX(1);
+        transform-origin: left;
+        transition: transform .25s linear;
+        transition-delay: .25s;
+    }
+    
+    .card span:nth-child(3) {
+        right: 0;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform .25s linear;
+        transition-delay: .5s;
+    }
+    
+    .card:hover span:nth-child(3) {
+        transform: scaleY(1);
+        transform-origin: top;
+        transition: transform .25s linear;
+        transition-delay: .5s;
+    }
+    
+    .card span:nth-child(4) {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .25s ease-out;
+        transition-delay: .75s;
+    }
+    
+    .card:hover span:nth-child(4) {
+        transform: scaleX(1);
+        transform-origin: right;
+        transition: transform .25s ease-out;
+        transition-delay: .75s;
+    }
+    /* akhir animasi les */
+}
+
+@media(max-width: 990px) {
+    .container .card {
+        width: 250px;
+        min-height: 350px;
+    }
+    .container .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .content h4 {
+        font-family: 'Acme', sans-serif;
+        font-size: 18px;
+        margin-top: 20px;
+        color: var(--color4);
+    }
+    .container .hilang {
+        display: none;
+    }
+    .container .lebarkan {
+        width: 80vw;
+    }
+    .container .renggang {
+        transform: translateX(-50%) translateY(calc(50px * var(--i))) rotate(40deg) skew(-20deg, -10deg) scale(.6);
+    }
+
+    .container .renggang:active {
+        border: 2px solid var(--color4);
+    }
+
+    .card .content h2 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        margin: 15px;
+        font-size: 32px;
+    }
+
+    .container .showM {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        opacity: 1;
+        transform: translateX(-50%) translateY(calc(-50% + calc(500px * var(--k)))) rotate(0) skew(0, 0) scale(1);
+    }
+}
+
+/* form */
+.card .content {
+    background: var(--color2);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.content input[type="text"] {
+    text-align: center;
+    width: 3em;
+    outline: none;
+    border: none;
+    background: var(--color2);
+    color: var(--color4);
+    cursor: default;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+}
+
+label {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    color: var(--color4);
+    font-weight:800;
+}
+
+.content div.bingkai span.previous,
+.content div.bingkai span.next {
+    background: unset;
+    display: inline-block;
+    position: absolute;
+    border-top: 2px solid var(--color4);
+    border-left: 2px solid var(--color4);
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    cursor: pointer;
+    transform: unset;
+    transform-origin: unset;
+    transition-delay: unset;
+    transition: .5s;
+}
+.content div.bingkai span.previous {
+    transform: rotate(-45deg);
+    top: 9px;
+    left: 12px;
+    bottom: unset;
+    right: unset;
+}
+
+.content div.bingkai span.next {
+    transform: rotate(135deg);
+    top: 9px;
+    bottom: unset;
+    left: unset;
+    right: 12px;
+}
+
+.bingkai {
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 103, 1, .2);
+    padding: 5px 0;
+    width: 80px;
+    transition: .5s;
+}
+
+.bingkai:hover {
+    width: 110px;
+    border: 2px solid rgba(255, 103, 1, 1);
+}
+.content div.bingkai:hover span.previous,
+.content div.bingkai:hover span.next {
+    opacity: .5;
+}
+.content div.bingkai:hover span.previous:hover,
+.content div.bingkai:hover span.next:hover {
+    opacity: 1;
+}
+
+.content input[type="checkbox"] {
+    appearance: none;
+}
+.content input[type="checkbox"] ~ .labelCheck {
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid rgba(255, 103, 1, 0);
+    border-left: 3px solid red;
+    font-style: italic;
+    text-decoration: line-through;
+    color: #798777;
+    transition: .5s;
+}
+.content input:checked[type="checkbox"] ~ .labelCheck {
+    border-left: 3px solid #81B214;
+    text-decoration: none;
+    font-style: normal;
+    color: var(--color4);
+}
+.content input[type="checkbox"] ~ .labelCheck:hover {
+    border: 2px solid rgba(255, 103, 1, 1);
+    border-left: 3px solid red;
+}
+.content input:checked[type="checkbox"] ~ .labelCheck:hover {
+    border-left: 3px solid #81B214;
+}
+
+.content form button {
+    padding: 10px;
+    background: var(--color2);
+    border: 2px solid rgba(255, 103, 1, .2);
+    border-radius: 3px;
+    width: 140px;
+    font-family: 'Raleway', sans-serif;
+    color: var(--color4);
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+}
+.content form button:hover {
+    border: 2px solid rgba(255, 103, 1, 1);
+    width: 170px;
+}
+/* akhir form */
+

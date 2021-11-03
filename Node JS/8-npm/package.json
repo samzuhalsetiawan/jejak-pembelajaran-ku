@@ -1,0 +1,16 @@
+{
+  "name": "8-npm",
+  "version": "1.0.0",
+  "description": "mencoba node js",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app",
+    "dev": "ls",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Zuhal Setiawan",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

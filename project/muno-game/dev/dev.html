@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            border: 1px solid red;
+        }
+
+        .pemain {
+            display: flex;
+            justify-content: space-evenly;
+            border: 1px solid blue;
+            height: 200px;
+            width: 700px;
+        }
+
+        .kartu {
+            margin: 10px;
+            border: 1px solid black;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        const numCards = 5;
+        const numPlayers = 3;
+        const container = document.getElementById("container");
+
+        for (let i = 0; i < numPlayers; i++) {
+            const player = document.createElement("div");
+            player.classList.add("pemain");
+            player.id = `player${i}`;
+            for (let j = 0; j < numCards; j++) {
+                const card = document.createElement("div");
+                card.classList.add("kartu")
+                card.id = `player${i}card${j}`;
+                player.appendChild(card);
+            }
+            container.appendChild(player);
+        }
+    </script>
+</body>
+</html>

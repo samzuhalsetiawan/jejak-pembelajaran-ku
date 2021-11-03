@@ -1,0 +1,28 @@
+<form action="/lobby" method="POST">
+    <input type="hidden" value="lead">
+    <label for="max-player">Max Player</label><br>
+    <div class="bingkai">
+        <span class="previous" onclick="nextPrev('max-player', 'prev')"></span><span class="next" onclick="nextPrev('max-player', 'next')"></span>
+        <input type="text" name="max-player" value="4" id="max-player" readonly>
+    </div><br>
+    <label for="hand-card">Banyak Kartu di Tangan</label><br>
+    <div class="bingkai">
+        <span class="previous" onclick="nextPrev('hand-card', 'prev')"></span><span class="next" onclick="nextPrev('hand-card', 'next')"></span>
+        <input type="text" name="hand-card" value="5" id="hand-card" readonly>
+    </div><br>
+    <label for="deck-card">Banyak Deck yang Dimainkan</label><br>
+    <div class="bingkai">
+        <span class="previous" onclick="nextPrev('deck-card', 'prev')"></span><span class="next" onclick="nextPrev('deck-card', 'next')"></span>
+        <input type="text" name="deck-card" value="2" id="deck-card" readonly>
+    </div><br>
+    <label for="timeout">Timeout</label><br>
+    <div class="bingkai">
+        <span class="previous" onclick="nextPrev('timeout', 'prev')"></span><span class="next" onclick="nextPrev('timeout', 'next')"></span>
+        <input type="text" name="timeout" value="15 s" id="timeout" readonly>
+    </div><br>
+    <div>
+        <input type="checkbox" name="allow-access" id="allow-access" checked>
+        <label for="allow-access" class="labelCheck">Izinkan Siapapun Bergabung</label>
+    </div><br><button type="button" id="kembali" onclick="getKembali()">Kembali</button><br>
+    <button type="submit" id="submit">Masuk Lobby</button>
+</form>

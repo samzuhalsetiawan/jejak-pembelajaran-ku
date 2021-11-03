@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="../public/style.css"> -->
+    <link rel="stylesheet" href="modal.css">
+    <!-- <link rel="stylesheet" href="../public/modal.css"> -->
+    <link rel="stylesheet" href="modal-login.css">
+    <title>Onlen</title>
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+            <ul class="nav">
+                <li>About<span></span></li>
+                <% if (user) { %>
+                    <li class="username"><%- user %> </li>
+                <% } else { %>  
+                    <li id="login-btn" onclick="loginModal()">Log in<span></span></li>
+                <% } %> 
+            </ul>
+            <h1>Peer to All Class</h1>
+            <!-- <h3>Belajar Kapanpun Dimanapun</h3> -->
+            <h3 id="type-text"></h3>
+            <div class="header-button">
+                <button type="button" id="buat-kelas">Buat Kelas</button>
+                <button type="button" id="masuk-kelas" onclick="toRoom('siswa')">Masuk Kelas</button>
+            </div>
+        </header>
+        <div class="middle">
+            <div class="intro">
+                <h4 data-aos="fade-up">Apa itu Peer to All Class ?</h4>
+                <div class="image" data-aos="fade-right" data-aos-delay="500">
+                    <img src="./img/intro.png" alt="intro">
+                    <!-- <img src="../public/img/intro.png" alt="intro"> -->
+                </div>
+                <p data-aos="fade-left" data-aos-delay="800">
+                    Peer to All Class Adalah sebuah kelas virtual atau Online Class berbasis video conference.
+                    Peer to All Class didesign khusus untuk melakukan online class dimana sangat cocok untuk diterapkan dimasa pandemi Covid-19 ini.
+                    Berbagai fitur khusus diterapkan pada aplikasi ini guna menunjang pembelajaran online lebih baik, yang dimana sulit ditemukan pada aplikasi video conference pada umumnya.
+                    Peer to All Class menggunakan topologi Peer to Peer (WebRTC Technologies) untuk melakukan video conference.
+                </p>
+            </div>
+            <div class="absensi">
+                <h4 data-aos="fade-up">Absensi diawal dan akhir</h4>
+                <div class="image" data-aos="fade-left">
+                    <img src="./img/absensi.png" alt="absensi">
+                    <!-- <img src="../public/img/absensi.png" alt="absensi"> -->
+                </div>
+                <p data-aos="fade-right" data-aos-delay="300">
+                    Dengan Peer to All Class anda sebagai guru/dosen tidak perlu lagi meng-absen murid/mahasiswa dengan memanggil nama mereka satu per satu secara manual.
+                    di Peer to All Class absensi akan dilakukan otomatis oleh sistem diawal dan akhir pembelajaran dan memberikan laporannya kepada anda.
+                </p>
+            </div>
+            <div class="polling">
+                <h4 data-aos="fade-up">Live Polling</h4>
+                <div class="image"  data-aos="fade-right">
+                    <img src="./img/polling.png" alt="polling">
+                    <!-- <img src="../public/img/polling.png" alt="polling"> -->
+                </div>
+                <p data-aos="fade-left" data-aos-delay="300">
+                    Jadikan kelas lebih interaktif dengan polling dan voting secara real-time.
+                    dengan Peer to All Class anda tidak perlu lagi menggunakan aplikasi terpisah untuk melakukan polling atau voting.
+                    Cukup menggunakan Peer to All Class.
+                </p>
+            </div>
+        </div>
+        <div class="outro">
+            <img src="./img/bel.png" alt="bell" width="200">
+            <!-- <img src="../public/img/bel.png" alt="bell" width="200"> -->
+            <h4>Lonceng Kelas Berbunyi !</h4>
+            <a href="#header">
+                <button type="button">Siapkan Kelasmu Sekarang</button>
+            </a>
+        </div>
+        <footer>
+            <h5> &copy;2021 | Created and Designed by <span>Sam Zuhal Setiawan</span></h5>
+        </footer>
+    </div>
+
+<!-- Modal -->
+    <div class="modal-bg">
+        <div class="modal">
+            <div class="modal-close-btn">&times;</div>
+            <button onclick="toRoom('univ')">Universitas</button>
+            <button onclick="toRoom('sklh')">SD, SMP, SMA sederajat</button>
+        </div>
+    </div>
+<!-- end modal -->
+<!-- modal login -->
+    <div class="login-bg">
+        <div class="login-content">
+            <span class="cls-login">&times;</span>
+            <span class="cls-login">&times;</span>
+            <div class="login-inner">
+                <div class="signin">
+                    <h3>Sudah punya akun ?</h3>
+                    <button class="sign-btn">Masuk</button>
+                </div>
+                <div class="signup">
+                    <h3>Belum punya akun ?</h3>
+                    <button class="sign-btn">Buat Akun</butto>
+                </div>
+                <div class="login-outer">
+                    <div class="form">
+                        <div class="form-signup">
+                            <h1>Masuk Akun</h1>
+                            <label for="username-in">Username</label>
+                            <input type="text" name="username" id="username-in" autocomplete="off">
+                            <label for="password-in">Password</label>
+                            <input type="password" name="password" id="password-in">
+                            <div class="btn-container">
+                                <button id="btn-masuk-akun" onclick="masukAkun()">Masuk</button>
+                            </div>
+                        </div>
+                        <div class="form-signin">
+                            <h1>Buat Akun</h1>
+                            <label for="username-up">Username</label>
+                            <input type="text" name="username" id="username-up">
+                            <label for="password-up">Password</label>
+                            <input type="password" name="password" id="password-up">
+                            <label for="password2-up">Ketik ulang password</label>
+                            <input type="password" name="password2" id="password2-up">
+                            <div class="btn-container">
+                                <button id="btn-buat-akun" onclick="buatAkun()">Buat Akun</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- end modal login -->
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="svg.js"></script>
+    <script src="sanitize.js"></script>
+    <script src="script.js"></script>
+    <!-- <script src="../public/script.js"></script> -->
+    <script src="modal-login.js"></script>
+</body>
+</html>

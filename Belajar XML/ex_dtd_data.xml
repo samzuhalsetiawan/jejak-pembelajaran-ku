@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Sam SYSTEM "./external_dtd.dtd">
+
+<Sam>
+    <nama>Sam</nama>
+    <usia>21</usia>
+    <kota>Tarakan</kota>
+</Sam>

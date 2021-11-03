@@ -1,0 +1,50 @@
+.head {
+    background-color: aqua;
+    text-align: center;
+    padding: 3px 100px 20px;
+}
+
+.info {
+    background-color: aquamarine;
+    text-align: center;
+    padding-bottom: 20px;
+    border-top: 2px solid yellowgreen;
+}
+
+.pilihan {
+    display: flex;
+    justify-content: space-around;
+}
+
+.about,
+.contact {
+    height: 150px;
+    width: 150px;
+    background-color: yellow;
+    line-height: 150px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.about:hover,
+.contact:hover {
+    transform: rotate(360deg);
+    border-radius: 50%;
+}
+
+.mhs table td,
+.mhs table th {
+    border: 1px solid black; 
+}
+
+.mhs table {
+    border-collapse: collapse;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+button:hover {
+    cursor: pointer;
+}

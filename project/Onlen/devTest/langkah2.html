@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer to All Class</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        
+        :root {
+            --blue: #006cb6;
+            --green: #00ac6e;
+            --yellow: #f9a13c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        h6 {
+            color: grey;
+        }
+        .container {
+            background: blue;
+            padding: 10vh 10vw;
+            height: 100vh;
+            max-height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+            font-family: "poppins", sans-serif;
+        }
+        .content {
+            background: white;
+            border-radius: 10px;
+            height: 80vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .content > span {
+            position: absolute;
+            font-size: 32px;
+            top: 0;
+            right: 10px;
+            cursor: pointer;
+        }
+        .content > span:hover {
+            color: red;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            border-radius: unset;
+            border-bottom: 1px solid var(--blue);
+            padding: 10px 20px;
+            transition: .3s;
+        }
+
+        .link-kelas {
+            width: 80%;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        button {
+            margin-top: 20px;
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: .3s;
+        }
+        .next {
+            background-color: var(--blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <span>&times;</span>
+            <div class="image">
+                <img src="../public/img/intro.png" alt="" width="200">
+            </div>
+            <h1>Berikut link kelas kamu</h1>
+            <input type="text" class="link-kelas" value="xxx-xxx-xxx-xxx" readonly>
+            <p>Gunakan link tersebut untuk bergabung kedalam kelas
+               <br> atau <br> masuk kelas sekarang
+            </p>
+            <button class="next">Masuk Kelas</button>
+        </div>
+    </div>
+</body>
+</html>

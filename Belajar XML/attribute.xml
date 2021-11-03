@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Nankatsu category="football club">
+    <pemain posisi="MF">
+        <nama>Tsubasa Ozora</nama>
+        <posisi>MF</posisi>
+        <Nomor>10</Nomor>
+        <usia>12</usia>
+    </pemain>
+    <pemain posisi="MF">
+        <nama>Taro Misaki</nama>
+        <posisi>MF</posisi>
+        <Nomor>11</Nomor>
+        <usia>12</usia>
+    </pemain>
+    <pemain posisi="GK">
+        <nama>Genzo Wakabayashi</nama>
+        <posisi>GK</posisi>
+        <Nomor>1</Nomor>
+        <usia>12</usia>
+    </pemain>
+</Nankatsu>

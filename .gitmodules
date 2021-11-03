@@ -1,0 +1,3 @@
+[submodule "project/simple-group-chat"]
+	path = project/simple-group-chat
+	url = https://github.com/SamZ03/simple-group-chat
