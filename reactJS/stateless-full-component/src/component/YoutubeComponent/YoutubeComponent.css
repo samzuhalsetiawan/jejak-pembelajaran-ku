@@ -1,0 +1,35 @@
+.container {
+  display: inline-block;
+}
+
+.video {
+  position: relative;
+  height: 100px;
+  width: 200px;
+  background-color: chartreuse;
+  border: 1px solid black;
+  margin: 5px 10px;
+}
+
+.time {
+  padding: 2px 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 5px;
+  background-color: black;
+  color: #eee;
+  font-size: 12px;
+}
+
+.title {
+  margin: 5px 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.desc {
+  margin: 5px 10px;
+  color: #aaa;
+}

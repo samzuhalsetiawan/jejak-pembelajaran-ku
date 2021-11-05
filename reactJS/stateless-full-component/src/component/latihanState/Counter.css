@@ -1,0 +1,33 @@
+.containerCounter {
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px #aaa;
+  width: fit-content;
+  padding: 5px;
+}
+
+.plus,
+.minus {
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #eee;
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  background-color: green;
+  border-radius: 5px;
+  margin: 2px 5px;
+}
+
+.value {
+  height: 50px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  box-shadow: 0 0 5px #aaa;
+  text-align: center;
+  font-size: 32px;
+}
