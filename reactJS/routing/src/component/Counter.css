@@ -1,0 +1,39 @@
+.CounterContainer {
+  border-radius: 10px;
+  box-shadow: 0 2px 2px #aaa;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 10px;
+}
+
+.CounterDisplay {
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  font-size: 72px;
+  text-align: center;
+  box-shadow: 0 2px 2px #aaa;
+}
+
+.up,
+.down {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.CounterContainer div {
+  padding: 10px;
+}
+
+.up {
+  transform: rotate(-45deg);
+}
+
+.down {
+  transform: rotate(135deg);
+}
