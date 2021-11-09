@@ -1,0 +1,3 @@
+﻿  Testing.cpp
+D:\Coding\C++\Testing\Testing.cpp(3,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Testing.vcxproj -> D:\Coding\C++\Testing\x64\Debug\Testing.exe
