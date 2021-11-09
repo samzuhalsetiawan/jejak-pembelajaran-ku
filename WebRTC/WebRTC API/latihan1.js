@@ -8,7 +8,7 @@ peer.createOffer().then(offer => peer.setLocalDescription(offer));
 
 ///////////////////////////////////////////////////
 const peerB = new RTCPeerConnection();
-const peerB.onicecandidate = () => console.log(JSON.stringify(peerB.localDescription));
+peerB.onicecandidate = () => console.log(JSON.stringify(peerB.localDescription));
 let dataChannelB;
 peerB.ondatachannel = e => {
 	dataChannelB = e.channel;
