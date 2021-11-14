@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* reset */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color1: #18225D;
+      --color2: #FF5722;
+      --white1: #F2F2F2;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    
+    body {
+      background-color: var(--white1);
+      font-family: 'Poppins', sans-serif;
+    }
+    /* end-reset */
+    .content-blogs {
+      display: inline-block;
+      width: fit-content;
+    }
+    .content-blogs-preview {
+      border-radius: 10px;
+      min-height: 150px;
+      min-width: 300px;
+      background-color: gray;
+    }
+    .content-blogs-desc {
+      padding: .5em 1em;
+    }
+    .content-blogs-desc * {
+      margin: .3em 0;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="content-blogs">
+    <div class="content-blogs-preview"></div>
+    <div class="content-blogs-desc">
+      <h3 class="content-blogs-judul">Judul</h3>
+      <p class="content-blogs-keterangan">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, voluptas!</p>
+    </div>
+  </div>
+</body>
+</html>

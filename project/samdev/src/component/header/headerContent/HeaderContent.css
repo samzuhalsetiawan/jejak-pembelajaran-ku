@@ -1,0 +1,7 @@
+.header-content {
+  background-color: var(--color1);
+  border-bottom: 3px solid var(--color2);
+  color: white;
+  padding: .5em 0;
+  text-align: center;
+}

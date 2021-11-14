@@ -1,0 +1,18 @@
+.about-me-foto-dan-keterangan {
+  display: flex;
+}
+
+.about-me-foto,
+.about-me-keterangan {
+  margin: 1.2em;
+}
+
+.about-me-foto {
+  height: 100px;
+  min-height: 100px;
+  width: 100px;
+  min-width: 100px;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: white;
+}

@@ -1,0 +1,21 @@
+.navbar {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  background-color: var(--color1);
+  border-bottom: 5px solid var(--color2);
+  padding: 0 5em;
+}
+.navbar-brand {
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  font-size: 2em;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-btn-list {
+  display: flex;
+}
