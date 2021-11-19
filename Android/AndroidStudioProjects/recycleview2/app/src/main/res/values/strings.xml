@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">recycle view 2</string>
+    <string-array name="mahasiswa_list">
+        <item>Sam</item>
+        <item>Zuhal</item>
+        <item>Setiawan</item>
+        <item>Bambang</item>
+        <item>Asep</item>
+        <item>Agus</item>
+        <item>Budi</item>
+        <item>Cahyo</item>
+        <item>Septio</item>
+        <item>Bagus</item>
+    </string-array>
+    <string-array name="detail_list">
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+        <item>anggap aja ini detail yang sangat panjang</item>
+    </string-array>
+</resources>

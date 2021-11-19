@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">recycle view 3</string>
+    <string-array name="list_nama">
+        <item>sam</item>
+        <item>cwecev</item>
+        <item>amscnkasc</item>
+        <item>ascbhjc</item>
+        <item>ajcbvjwebc</item>
+        <item>lasjasdln</item>
+        <item>asnakjsnca</item>
+        <item>askjakcnjs</item>
+        <item>askjsaj</item>
+        <item>njdsnjdnc</item>
+    </string-array>
+    <string-array name="list_detail">
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+        <item>Anggap aja ini adalah detail yang sangat panjang</item>
+    </string-array>
+</resources>
