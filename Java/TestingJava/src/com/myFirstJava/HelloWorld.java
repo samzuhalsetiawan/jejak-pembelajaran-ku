@@ -4,12 +4,8 @@ import java.util.Arrays;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        int[] myArray = new int[10];
-        for (int i = 0; i < myArray.length; i++) {
-            myArray[i] = i;
-        }
-//        String[] myArray = new String[10];
-//        myArray[3] = "Sam";
-        System.out.println(Arrays.toString(myArray));
+        System.out.print("1 2 3 4 5 ");
+        System.out.println();
+        System.out.print("5 4 3 2 1 ");
     }
 }
