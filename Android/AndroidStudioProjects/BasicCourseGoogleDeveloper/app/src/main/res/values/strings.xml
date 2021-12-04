@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Basic Course Google Developer</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="option_3">Option 3</string>
+    <string name="switch_1">Switch 1</string>
+    <string name="debug_1">Debug 1</string>
+    <string name="debug_2">Debug 2</string>
+    <string name="curency">curency: %s</string>
+</resources>
