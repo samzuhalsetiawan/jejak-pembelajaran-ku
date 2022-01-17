@@ -1,4 +1,3 @@
 package data
 
-class SuperClass {
-}
+open class SuperClass (val name: String)
