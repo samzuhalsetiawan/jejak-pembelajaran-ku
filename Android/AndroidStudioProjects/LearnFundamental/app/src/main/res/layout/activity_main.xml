@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -72,8 +72,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Latihan Text View"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnToLatihanRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Radio Button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_to_latihan_text_view" />
+
+        <Button
+            android:id="@+id/btnToLatihanToast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Toast"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanRadioButton" />
+
+        <Button
+            android:id="@+id/btnToLatihanPermission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="latihan Permission"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanToast" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

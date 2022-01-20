@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LatihanRadioButton">
+
+    <TextView
+        android:id="@+id/tvPilihanDaging"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Pesan Burger dengan daging:"
+        android:textSize="21sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/rgPilihanDaging"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPilihanDaging">
+
+        <RadioButton
+            android:id="@+id/rbDagingAyam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:text="Ayam" />
+
+        <RadioButton
+            android:id="@+id/rbDagingSapi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:checked="true"
+            android:text="Sapi" />
+
+        <RadioButton
+            android:id="@+id/rbDagingKambing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:text="Kambing" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvTambahanTopping"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Tambahan Topping: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rgPilihanDaging" />
+
+    <CheckBox
+        android:id="@+id/cbToppingKeju"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Keju"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTambahanTopping" />
+
+    <CheckBox
+        android:id="@+id/cbToppingSelada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selada"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbToppingKeju" />
+
+    <CheckBox
+        android:id="@+id/cbToppingTelur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telur"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbToppingSelada" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order"
+        android:id="@+id/btnOrder"
+        app:layout_constraintTop_toBottomOf="@id/cbToppingTelur"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

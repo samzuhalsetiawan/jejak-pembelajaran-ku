@@ -10,6 +10,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var btnApply: Button
     private lateinit var btnToLatihanTextView: Button
+    private lateinit var btnToLatihanRadioButton: Button
+    private lateinit var btnToLatihanToast: Button
+    private lateinit var btnToLatihanPermission: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,19 @@ class MainActivity : AppCompatActivity() {
         btnToLatihanTextView.setOnClickListener {
             val intent = Intent(this, LatihanTextView::class.java)
             startActivity(intent)
+        }
+
+        btnToLatihanRadioButton = findViewById(R.id.btnToLatihanRadioButton)
+        btnToLatihanRadioButton.setOnClickListener {
+            startActivity(Intent(this, LatihanRadioButton::class.java))
+        }
+        btnToLatihanToast = findViewById(R.id.btnToLatihanToast)
+        btnToLatihanToast.setOnClickListener {
+            startActivity(Intent(this, LatihanToast::class.java))
+        }
+        btnToLatihanPermission = findViewById(R.id.btnToLatihanPermission)
+        btnToLatihanPermission.setOnClickListener {
+            startActivity(Intent(this, LatihanPermission::class.java))
         }
 
     }

@@ -4,8 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/activity_latihan_constraint_layout.xml" value="0.22" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/activity_latihan_permission.xml" value="0.1213768115942029" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/activity_latihan_radio_button.xml" value="0.2" />
         <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/activity_latihan_text_view.xml" value="0.22" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/activity_latihan_toast.xml" value="0.22" />
         <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/activity_orderan_burger.xml" value="0.22" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental/app/src/main/res/layout/costum_toast.xml" value="0.22" />
       </map>
     </option>
   </component>

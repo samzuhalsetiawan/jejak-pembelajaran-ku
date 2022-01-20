@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:id="@+id/clCostumToast"
+    android:background="@android:color/holo_red_dark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_notification"
+        android:id="@+id/ivIconNotif"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ini Adalah Costum Toast"
+        android:id="@+id/tvDescNotif"
+        app:layout_constraintTop_toTopOf="@+id/ivIconNotif"
+        app:layout_constraintBottom_toBottomOf="@id/ivIconNotif"
+        app:layout_constraintStart_toEndOf="@id/ivIconNotif" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
