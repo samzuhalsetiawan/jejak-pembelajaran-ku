@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
@@ -14,6 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LearnFundamental">
+        <activity
+            android:name=".LatihanPermission5"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanPermission4"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanPermission3"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanPermission2"
+            android:exported="false" />
         <activity
             android:name=".LatihanPermission"
             android:exported="false" />

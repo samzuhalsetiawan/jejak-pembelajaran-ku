@@ -18,7 +18,7 @@ class LatihanPermission : AppCompatActivity() {
 
         btnRequestPermission = findViewById(R.id.btnRequestPermission)
         btnRequestPermission.setOnClickListener {
-            requestPermission()
+            makeRequestPermission()
             val isInternetGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED
             Log.d("LatihanPermission", "Internet Granted ? : $isInternetGranted")
         }
@@ -43,7 +43,7 @@ class LatihanPermission : AppCompatActivity() {
         }
     }
 
-    private fun requestPermission() {
+    private fun makeRequestPermission() {
         val isWriteStorageGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         val isForegroundLocationGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
         val isBackgroundLocationGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED

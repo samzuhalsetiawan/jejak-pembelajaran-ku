@@ -99,6 +99,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnToLatihanToast" />
 
+        <Button
+            android:id="@+id/btnToLatihanPermission2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="latihan Permission 2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanPermission" />
+
+        <Button
+            android:id="@+id/btnToLatihanPermission3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="latihan Permission 3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanPermission2" />
+
+        <Button
+            android:id="@+id/btnToLatihanPermission4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="latihan Permission 4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanPermission3" />
+
+        <Button
+            android:id="@+id/btnToLatihanPermission5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="latihan Permission 5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanPermission4" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

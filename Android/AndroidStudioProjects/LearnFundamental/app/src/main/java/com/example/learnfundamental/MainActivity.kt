@@ -13,6 +13,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnToLatihanRadioButton: Button
     private lateinit var btnToLatihanToast: Button
     private lateinit var btnToLatihanPermission: Button
+    private lateinit var btnToLatihanPermission2: Button
+    private lateinit var btnToLatihanPermission3: Button
+    private lateinit var btnToLatihanPermission4: Button
+    private lateinit var btnToLatihanPermission5: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,22 @@ class MainActivity : AppCompatActivity() {
         btnToLatihanPermission = findViewById(R.id.btnToLatihanPermission)
         btnToLatihanPermission.setOnClickListener {
             startActivity(Intent(this, LatihanPermission::class.java))
+        }
+        btnToLatihanPermission2 = findViewById(R.id.btnToLatihanPermission2)
+        btnToLatihanPermission2.setOnClickListener {
+            startActivity(Intent(this, LatihanPermission2::class.java))
+        }
+        btnToLatihanPermission3 = findViewById(R.id.btnToLatihanPermission3)
+        btnToLatihanPermission3.setOnClickListener {
+            startActivity(Intent(this, LatihanPermission3::class.java))
+        }
+        btnToLatihanPermission4 = findViewById(R.id.btnToLatihanPermission4)
+        btnToLatihanPermission4.setOnClickListener {
+            startActivity(Intent(this, LatihanPermission4::class.java))
+        }
+        btnToLatihanPermission5 = findViewById(R.id.btnToLatihanPermission5)
+        btnToLatihanPermission5.setOnClickListener {
+            startActivity(Intent(this, LatihanPermission5::class.java))
         }
 
     }
