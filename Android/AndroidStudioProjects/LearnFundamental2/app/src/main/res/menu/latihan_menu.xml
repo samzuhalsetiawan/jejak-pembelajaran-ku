@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/miAddContact"
+        android:title="Add Contact"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_add_contact"/>
+    <item
+        android:id="@+id/miFavorite"
+        android:title="Favorite"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_favorite" />
+    <item
+        android:id="@+id/miSettings"
+        android:title="Settings"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_settings" />
+    <item
+        android:id="@+id/miAboutme"
+        android:title="About Me"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/miCloseApp"
+        android:title="Close App"
+        app:showAsAction="never" />
+</menu>
