@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental2/app/src/main/res/layout/activity_dummy_result.xml" value="0.12771739130434784" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental2/app/src/main/res/layout/activity_dummy_result2.xml" value="0.12771739130434784" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental2/app/src/main/res/layout/activity_latihan_implicit_intent.xml" value="0.12771739130434784" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental2/app/src/main/res/layout/activity_latihan_implicit_intent2.xml" value="0.2" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental2/app/src/main/res/layout/activity_latihan_implicit_intent3.xml" value="0.1859375" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental2/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LearnFundamental2/app/src/main/res/menu/latihan_menu.xml" value="0.2" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
