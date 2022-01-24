@@ -46,12 +46,40 @@
         app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent2" />
 
     <Button
+        android:id="@+id/btnToLatihanMenuItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Latihan Menu Item"
-        android:id="@+id/btnToLatihanMenuItem"
-        app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent3" />
+
+    <Button
+        android:id="@+id/btnToLatihanAlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latihan Alert Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnToLatihanMenuItem" />
+
+    <Button
+        android:id="@+id/btnToLatihanSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latihan Spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnToLatihanAlertDialog" />
+
+    <Button
+        android:id="@+id/btnToLatihanRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latihan Recycler View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnToLatihanSpinner" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

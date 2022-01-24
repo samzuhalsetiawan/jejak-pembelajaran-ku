@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearnFundamental2">
         <activity
+            android:name=".LatihanRecyclerViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanSpinnerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanAlertDialogActivity"
+            android:exported="false" />
+        <activity
             android:name=".LatihanMenuItemActivity"
             android:exported="false" />
         <activity

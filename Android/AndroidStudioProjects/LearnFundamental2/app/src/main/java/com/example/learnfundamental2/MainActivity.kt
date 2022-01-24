@@ -26,5 +26,14 @@ class MainActivity : AppCompatActivity() {
         binding.btnToLatihanMenuItem.setOnClickListener {
             startActivity(Intent(this, LatihanMenuItemActivity::class.java))
         }
+        binding.btnToLatihanAlertDialog.setOnClickListener {
+            startActivity(Intent(this, LatihanAlertDialogActivity::class.java))
+        }
+        binding.btnToLatihanSpinner.setOnClickListener {
+            startActivity(Intent(this, LatihanSpinnerActivity::class.java))
+        }
+        binding.btnToLatihanRecyclerView.setOnClickListener {
+            startActivity(Intent(this, LatihanRecyclerViewActivity::class.java))
+        }
     }
 }

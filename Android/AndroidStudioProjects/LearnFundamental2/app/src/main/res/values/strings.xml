@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Learn Fundamental 2</string>
+    <string-array name="nama_nama_bulan">
+        <item>January</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </string-array>
 </resources>
