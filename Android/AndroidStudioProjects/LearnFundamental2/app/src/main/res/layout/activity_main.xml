@@ -1,85 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvTitleLearnFundamental"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Learn Fundamental"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnToLatihanImplicitIntent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latihan Implicit Intent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleLearnFundamental" />
+        <TextView
+            android:id="@+id/tvTitleLearnFundamental"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Learn Fundamental"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnToLatihanImplicitIntent2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latihan Implicit Intent 2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent" />
+        <Button
+            android:id="@+id/btnToLatihanImplicitIntent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Implicit Intent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleLearnFundamental" />
 
-    <Button
-        android:id="@+id/btnToLatihanImplicitIntent3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latihan Implicit Intent 3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent2" />
+        <Button
+            android:id="@+id/btnToLatihanImplicitIntent2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Implicit Intent 2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent" />
 
-    <Button
-        android:id="@+id/btnToLatihanMenuItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latihan Menu Item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent3" />
+        <Button
+            android:id="@+id/btnToLatihanImplicitIntent3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Implicit Intent 3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent2" />
 
-    <Button
-        android:id="@+id/btnToLatihanAlertDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latihan Alert Dialog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnToLatihanMenuItem" />
+        <Button
+            android:id="@+id/btnToLatihanMenuItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Menu Item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanImplicitIntent3" />
 
-    <Button
-        android:id="@+id/btnToLatihanSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latihan Spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnToLatihanAlertDialog" />
+        <Button
+            android:id="@+id/btnToLatihanAlertDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Alert Dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanMenuItem" />
 
-    <Button
-        android:id="@+id/btnToLatihanRecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latihan Recycler View"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnToLatihanSpinner" />
+        <Button
+            android:id="@+id/btnToLatihanSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanAlertDialog" />
 
+        <Button
+            android:id="@+id/btnToLatihanRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Recycler View"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanSpinner" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnToLatihanFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanRecyclerView" />
+
+        <Button
+            android:id="@+id/btnToLatihanBottomNavigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Bottom Navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanFragment" />
+
+        <Button
+            android:id="@+id/btnToLatihanViewPager2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan View Pager 2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanBottomNavigation" />
+
+        <Button
+            android:id="@+id/btnToLatihanTabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Tab Layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanViewPager2" />
+
+        <Button
+            android:id="@+id/btnToLatihanNavigationDrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Navigation Drawer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanTabLayout" />
+
+        <Button
+            android:id="@+id/btnToLatihanSharedPreference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Shared Preference"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanNavigationDrawer" />
+
+        <Button
+            android:id="@+id/btnToLatihanNotofication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Notification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanSharedPreference" />
+
+        <Button
+            android:id="@+id/btnToLatihanIntentService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Intent Service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanNotofication" />
+
+        <Button
+            android:id="@+id/btnToLatihanIntentService2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Intent Service 2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanIntentService" />
+
+        <Button
+            android:id="@+id/btnToLatihanService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanIntentService2" />
+
+        <Button
+            android:id="@+id/btnToLatihanDragAndDrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Drag and Drop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanService" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latihan Broadcast Receiver"
+            android:id="@+id/btnToLatihanBroadcast"
+            app:layout_constraintTop_toBottomOf="@id/btnToLatihanDragAndDrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

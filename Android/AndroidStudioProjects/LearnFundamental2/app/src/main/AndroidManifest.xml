@@ -10,6 +10,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearnFundamental2">
         <activity
+            android:name=".LatihanBroadcastActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanDragAndDropActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanIntentService2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanIntentServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanSharedPreferenceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanNavigationDrawerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanTabLayoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanViewPager2"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanBottomNavigationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LatihanFragmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".LatihanRecyclerViewActivity"
             android:exported="false" />
         <activity
@@ -45,6 +81,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".services.MyIntentService" />
+        <service android:name=".services.MyIntentService2" />
+        <service android:name=".services.MyService" />
     </application>
 
 </manifest>
