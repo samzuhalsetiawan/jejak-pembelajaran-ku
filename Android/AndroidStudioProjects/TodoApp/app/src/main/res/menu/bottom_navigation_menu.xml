@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Todo Daily"
+        android:id="@+id/menuItemFragment1"
+        android:icon="@drawable/ic_weekly" />
+    <item
+        android:title="Reminder"
+        android:icon="@drawable/ic_alarm"
+        android:id="@+id/menuItemFragment2" />
+    <item
+        android:title="Fragment 3"
+        android:id="@+id/menuItemFragment3" />
+</menu>

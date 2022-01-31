@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hari"
+        android:textSize="16sp"
+        android:labelFor="@id/spinnerNamaHari"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/spinnerNamaHari"
+        app:layout_constraintBottom_toBottomOf="@id/spinnerNamaHari" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/nama_nama_hari"
+        android:id="@+id/spinnerNamaHari"
+        app:layout_constraintStart_toStartOf="@id/glEditText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/etAddNewTodo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@+id/etAddNewTodo"
+        android:text="Todo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etAddNewTodo"
+        app:layout_constraintBottom_toBottomOf="@id/etAddNewTodo"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/etAddNewTodo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Add New Todo"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/glEditText"
+        app:layout_constraintTop_toBottomOf="@id/spinnerNamaHari" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

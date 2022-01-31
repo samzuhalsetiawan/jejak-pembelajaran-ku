@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Todo App</string>
+    <string name="open_drawer">Buka</string>
+    <string name="close_drawer">Tutup</string>
+    <string-array name="nama_nama_hari">
+        <item>Senin</item>
+        <item>Selasa</item>
+        <item>Rabu</item>
+        <item>Kamis</item>
+        <item>Jumat</item>
+        <item>Sabtu</item>
+        <item>Minggu</item>
+    </string-array>
+</resources>
