@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Color Mixer</string>
+    <string name="percent">%1$d%%</string>
+    <string name="percent50">50%</string>
+    <string name="merah">Merah</string>
+    <string name="hijau">Hijau</string>
+    <string name="biru">Biru</string>
 </resources>

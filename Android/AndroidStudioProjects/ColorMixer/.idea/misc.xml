@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Coding/Android/AndroidStudioProjects/ColorMixer/app/src/main/res/drawable/custom_border.xml" value="0.21614583333333334" />
-        <entry key="..\:/Coding/Android/AndroidStudioProjects/ColorMixer/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/ColorMixer/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Coding/Android/AndroidStudioProjects/ColorMixer/app/src/main/res/layout/color_template_card.xml" value="0.12771739130434784" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/ColorMixer/app/src/main/res/layout/slider_viewpager_layout.xml" value="0.1" />
       </map>
     </option>
   </component>

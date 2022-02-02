@@ -9,198 +9,134 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         tools:context=".MainActivity">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_warna1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="14dp"
-            app:layout_constraintEnd_toStartOf="@+id/cv_warna2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
+        <View
+            android:id="@+id/viewMainWarnaHasil"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp" />
+            tools:background="@android:color/holo_blue_dark" />
 
         <TextView
-            android:id="@+id/tv_label_cv_warna1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@id/cv_warna1"
-            app:layout_constraintStart_toStartOf="@id/cv_warna1"
-            app:layout_constraintTop_toBottomOf="@id/cv_warna1"
-            tools:text="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/tv_label_cv_warna2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@id/cv_warna2"
-            app:layout_constraintStart_toStartOf="@id/cv_warna2"
-            app:layout_constraintTop_toBottomOf="@id/cv_warna2"
-            tools:text="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/tv_label_cv_warna3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@id/cv_warna3"
-            app:layout_constraintStart_toStartOf="@id/cv_warna3"
-            app:layout_constraintTop_toBottomOf="@id/cv_warna3"
-            tools:text="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/plus"
+            android:id="@+id/tvMainLabelWarnaHasil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+"
-            android:textSize="21sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/cv_warna1"
-            app:layout_constraintEnd_toStartOf="@+id/cv_warna2"
-            app:layout_constraintStart_toEndOf="@+id/cv_warna1"
-            app:layout_constraintTop_toTopOf="@+id/cv_warna1" />
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="@id/viewMainWarnaHasil"
+            app:layout_constraintEnd_toEndOf="@id/viewMainWarnaHasil"
+            app:layout_constraintStart_toStartOf="@id/viewMainWarnaHasil"
+            app:layout_constraintTop_toTopOf="@id/viewMainWarnaHasil"
+            tools:text="#abc123" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_warna2"
-            android:layout_width="100dp"
+        <View
+            android:id="@+id/viewMainWarna1"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="14dp"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_warna1"
-            app:layout_constraintEnd_toStartOf="@+id/cv_warna3"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cv_warna1"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp" />
+            app:layout_constraintEnd_toStartOf="@id/viewMainWarna2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewMainWarnaHasil"
+            tools:background="@android:color/holo_red_dark" />
 
         <TextView
-            android:id="@+id/equals"
+            android:id="@+id/tvMainLabelWarna1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="="
-            android:textSize="21sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_warna2"
-            app:layout_constraintEnd_toStartOf="@+id/cv_warna3"
-            app:layout_constraintStart_toEndOf="@+id/cv_warna2"
-            app:layout_constraintTop_toTopOf="@+id/cv_warna2" />
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@id/viewMainWarna1"
+            app:layout_constraintEnd_toEndOf="@id/viewMainWarna1"
+            app:layout_constraintStart_toStartOf="@id/viewMainWarna1"
+            app:layout_constraintTop_toTopOf="@id/viewMainWarna1"
+            tools:text="#abc123" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_warna3"
-            android:layout_width="100dp"
+        <View
+            android:id="@+id/viewMainWarna2"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="14dp"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_warna2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cv_warna2"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp" />
+            app:layout_constraintStart_toEndOf="@id/viewMainWarna1"
+            app:layout_constraintTop_toBottomOf="@id/viewMainWarnaHasil"
+            tools:background="@android:color/holo_green_dark" />
 
         <TextView
-            android:id="@+id/tv_label_sl_merah"
+            android:id="@+id/tvMainLabelWarna2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Merah : "
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/sl_merah"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sl_merah" />
-
-        <com.google.android.material.slider.Slider
-            android:id="@+id/sl_merah"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:value="1.0"
-            android:valueFrom="0.0"
-            android:valueTo="1.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_label_sl_merah"
-            app:layout_constraintTop_toBottomOf="@id/tv_label_cv_warna1" />
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@id/viewMainWarna2"
+            app:layout_constraintEnd_toEndOf="@id/viewMainWarna2"
+            app:layout_constraintStart_toStartOf="@id/viewMainWarna2"
+            app:layout_constraintTop_toTopOf="@id/viewMainWarna2"
+            tools:text="#abc123" />
 
         <TextView
-            android:id="@+id/tv_label_sl_hijau"
+            android:id="@+id/tvMainKompisisiWarna1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hijau : "
-            app:layout_constraintBottom_toBottomOf="@id/sl_hijau"
+            android:layout_marginStart="10dp"
+            android:text="@string/percent50"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@id/sliderMainKomposisi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sl_hijau" />
+            app:layout_constraintTop_toTopOf="@id/sliderMainKomposisi" />
 
         <com.google.android.material.slider.Slider
-            android:id="@+id/sl_hijau"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:value="1.0"
-            android:valueFrom="0.0"
-            android:valueTo="1.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/sl_merah"
-            app:layout_constraintTop_toBottomOf="@id/sl_merah" />
-
-        <TextView
-            android:id="@+id/tv_label_sl_biru"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Biru : "
-            app:layout_constraintBottom_toBottomOf="@id/sl_biru"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sl_biru" />
-
-        <com.google.android.material.slider.Slider
-            android:id="@+id/sl_biru"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:value="1.0"
-            android:valueFrom="0.0"
-            android:valueTo="1.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/sl_merah"
-            app:layout_constraintTop_toBottomOf="@id/sl_hijau" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_komposisi_label_warna1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="@id/sl_komposisi"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sl_komposisi"
-            app:strokeColor="@android:color/black"
-            app:strokeWidth="1dp" />
-
-        <com.google.android.material.slider.Slider
-            android:id="@+id/sl_komposisi"
+            android:id="@+id/sliderMainKomposisi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:value="0.5"
             android:valueFrom="0.0"
             android:valueTo="1.0"
-            app:layout_constraintEnd_toStartOf="@id/cv_komposisi_label_warna2"
-            app:layout_constraintStart_toStartOf="@id/sl_merah"
-            app:layout_constraintTop_toBottomOf="@id/sl_biru" />
+            app:layout_constraintEnd_toStartOf="@id/tvMainKompisisiWarna2"
+            app:layout_constraintStart_toEndOf="@id/tvMainKompisisiWarna1"
+            app:layout_constraintTop_toBottomOf="@id/viewMainWarna1" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_komposisi_label_warna2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="@id/sl_komposisi"
+        <TextView
+            android:id="@+id/tvMainKompisisiWarna2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/percent50"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@id/sliderMainKomposisi"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sl_komposisi"
-            app:strokeColor="@android:color/black"
-            app:strokeWidth="1dp" />
+            app:layout_constraintTop_toTopOf="@id/sliderMainKomposisi" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlMainSliderTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sliderMainKomposisi" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpMainSliderViewPager"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tlMainSliderTab" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_color_template"
@@ -209,7 +145,7 @@
             android:layout_marginVertical="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sl_komposisi" />
+            app:layout_constraintTop_toBottomOf="@+id/vpMainSliderViewPager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,10 +8,12 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.colormixer.adapter.ColorListAdapter
+import com.example.colormixer.adapter.SliderViewPagerAdapter
+import com.example.colormixer.data.SliderColor
 import com.example.colormixer.databinding.ActivityMainBinding
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.slider.Slider
-import kotlin.properties.Delegates
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,61 +21,55 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private lateinit var binding: ActivityMainBinding
-        private lateinit var activeCard: MaterialCardView
-        var activeColor by Delegates.notNull<Int>()
-        lateinit var slKomposisi: Slider
+        const val TAB_PERTAMA = 0
+        const val TAB_KEDUA = 1
+        var activeTab = TAB_PERTAMA
 
-        private fun onColorChange(warnaBaru: Int) {
-            when (activeCard) {
-                binding.cvWarna1 -> CardColor.warna1 = warnaBaru
-                binding.cvWarna2 -> CardColor.warna2 = warnaBaru
-            }
-            campurWarna()
-            activeCard.setCardBackgroundColor(warnaBaru)
-            activeColor = warnaBaru
+        fun updateColor() {
+            val warna1 = Color.rgb(
+                SliderColor.warna1.merah,
+                SliderColor.warna1.hijau,
+                SliderColor.warna1.biru
+            )
+            val warna2 = Color.rgb(
+                SliderColor.warna2.merah,
+                SliderColor.warna2.hijau,
+                SliderColor.warna2.biru
+            )
+            binding.viewMainWarna1.setBackgroundColor(warna1)
+            binding.viewMainWarna2.setBackgroundColor(warna2)
+            campurWarna(warna1, warna2)
         }
 
-        fun setSliderTo(color: Int) {
-            binding.slMerah.value = color.red / 255f
-            binding.slHijau.value = color.green / 255f
-            binding.slBiru.value = color.blue / 255f
-        }
-
-        private fun campurWarna() {
-            val rasio = 1 - binding.slKomposisi.value
+        private fun campurWarna(warna1: Int, warna2: Int) {
+            val rasio = binding.sliderMainKomposisi.value
             val newRed =
-                getKomposisi(CardColor.warna1.red / 255f, CardColor.warna2.red / 255f, rasio)
+                getKomposisi(warna1.red / 255f, warna2.red / 255f, rasio)
             val newGreen =
-                getKomposisi(CardColor.warna1.green / 255f, CardColor.warna2.green / 255f, rasio)
+                getKomposisi(warna1.green / 255f, warna2.green / 255f, rasio)
             val newBlue =
-                getKomposisi(CardColor.warna1.blue / 255f, CardColor.warna2.blue / 255f, rasio)
-            CardColor.warna3 = Color.rgb(newRed, newGreen, newBlue)
-            binding.cvWarna3.setCardBackgroundColor(CardColor.warna3)
-            updateColorLabelKomposisi()
-            updateColorLabel()
+                getKomposisi(warna1.blue / 255f, warna2.blue / 255f, rasio)
+            val warnaHasil = Color.rgb(newRed, newGreen, newBlue)
+            binding.viewMainWarnaHasil.setBackgroundColor(warnaHasil)
+            updateColorLabel(warna1, warna2, warnaHasil)
         }
 
-        private fun updateColorLabelKomposisi() {
-            binding.cvKomposisiLabelWarna1.setCardBackgroundColor(CardColor.warna1)
-            binding.cvKomposisiLabelWarna2.setCardBackgroundColor(CardColor.warna2)
-        }
-
-        private fun updateColorLabel() {
-            val warna1 =
-                "#${intToHexColor(CardColor.warna1.red)}${intToHexColor(CardColor.warna1.green)}${
-                    intToHexColor(CardColor.warna1.blue)
+        private fun updateColorLabel(warna1: Int, warna2: Int, warnaHasil: Int) {
+            val hexWarna1 =
+                "#${intToHexColor(warna1.red)}${intToHexColor(warna1.green)}${
+                    intToHexColor(warna1.blue)
                 }"
-            val warna2 =
-                "#${intToHexColor(CardColor.warna2.red)}${intToHexColor(CardColor.warna2.green)}${
-                    intToHexColor(CardColor.warna2.blue)
+            val hexWarna2 =
+                "#${intToHexColor(warna2.red)}${intToHexColor(warna2.green)}${
+                    intToHexColor(warna2.blue)
                 }"
-            val warna3 =
-                "#${intToHexColor(CardColor.warna3.red)}${intToHexColor(CardColor.warna3.green)}${
-                    intToHexColor(CardColor.warna3.blue)
+            val hexWarnaHasil =
+                "#${intToHexColor(warnaHasil.red)}${intToHexColor(warnaHasil.green)}${
+                    intToHexColor(warnaHasil.blue)
                 }"
-            binding.tvLabelCvWarna1.text = warna1
-            binding.tvLabelCvWarna2.text = warna2
-            binding.tvLabelCvWarna3.text = warna3
+            binding.tvMainLabelWarna1.text = hexWarna1
+            binding.tvMainLabelWarna2.text = hexWarna2
+            binding.tvMainLabelWarnaHasil.text = hexWarnaHasil
         }
 
         private fun getKomposisi(color1: Float, color2: Float, rasio: Float): Float {
@@ -101,48 +97,52 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        activeCard = binding.cvWarna1
-        activeColor = CardColor.warna1
-        slKomposisi = binding.slKomposisi
-
         recyclerView = binding.rvColorTemplate
         recyclerView.layoutManager = GridLayoutManager(this, 3)
         recyclerView.adapter = ColorListAdapter()
 
-        campurWarna()
+        binding.vpMainSliderViewPager.adapter =
+            SliderViewPagerAdapter(listOf(SliderColor.warna1, SliderColor.warna2))
 
-        binding.apply {
-            cvWarna1.setCardBackgroundColor(CardColor.warna1)
-            cvWarna2.setCardBackgroundColor(CardColor.warna2)
-            cvWarna3.setCardBackgroundColor(CardColor.warna3)
-            cvWarna1.setOnClickListener {
-                activeColor = CardColor.warna1
-                activeCard = cvWarna1
-                setSliderTo(activeColor)
-                slKomposisi.value = 0.5f
+        TabLayoutMediator(
+            binding.tlMainSliderTab,
+            binding.vpMainSliderViewPager
+        ) { tab: TabLayout.Tab, i: Int ->
+            when (i) {
+                0 -> tab.text = "Warna Pertama"
+                1 -> tab.text = "Warna Kedua"
             }
-            cvWarna2.setOnClickListener {
-                activeColor = CardColor.warna2
-                activeCard = cvWarna2
-                setSliderTo(activeColor)
-                slKomposisi.value = 0.5f
+        }.attach()
+
+        binding.tlMainSliderTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    when (it.position) {
+                        0 -> activeTab = TAB_PERTAMA
+                        1 -> activeTab = TAB_KEDUA
+                    }
+                }
             }
-            slMerah.addOnChangeListener { _, value, _ ->
-                val warnaBaru = Color.rgb(value, slHijau.value, slBiru.value)
-                onColorChange(warnaBaru)
-            }
-            slHijau.addOnChangeListener { _, value, _ ->
-                val warnaBaru = Color.rgb(slMerah.value, value, slBiru.value)
-                onColorChange(warnaBaru)
-            }
-            slBiru.addOnChangeListener { _, value, _ ->
-                val warnaBaru = Color.rgb(slMerah.value, slHijau.value, value)
-                onColorChange(warnaBaru)
-            }
-            slKomposisi.addOnChangeListener { _, _, _ ->
-                val warnaBaru = Color.rgb(slMerah.value, slHijau.value, slBiru.value)
-                onColorChange(warnaBaru)
-            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
+
+            override fun onTabReselected(tab: TabLayout.Tab?) = Unit
+        })
+
+        binding.sliderMainKomposisi.addOnChangeListener { _, value, _ ->
+            updateColor()
+            updatePercentages(value)
         }
+
+        updateColor()
+
     }
+
+    private fun updatePercentages(value: Float) {
+        val percent = (value * 100).toInt()
+        binding.tvMainKompisisiWarna1.text = resources.getString(R.string.percent).format(percent)
+        binding.tvMainKompisisiWarna2.text =
+            resources.getString(R.string.percent).format(100 - percent)
+    }
+
 }

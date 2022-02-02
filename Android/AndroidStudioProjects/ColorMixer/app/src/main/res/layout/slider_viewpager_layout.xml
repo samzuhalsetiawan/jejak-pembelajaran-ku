@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slVpSliderMerah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvVpSliderMerah"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvVpSliderMerah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/merah"
+        app:layout_constraintBottom_toBottomOf="@id/slVpSliderMerah"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/slVpSliderMerah" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slVpSliderHijau"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        app:layout_constraintEnd_toEndOf="@id/slVpSliderMerah"
+        app:layout_constraintStart_toStartOf="@id/slVpSliderMerah"
+        app:layout_constraintTop_toBottomOf="@id/slVpSliderMerah" />
+
+    <TextView
+        android:id="@+id/tvVpSliderHijau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hijau"
+        app:layout_constraintBottom_toBottomOf="@id/slVpSliderHijau"
+        app:layout_constraintStart_toStartOf="@id/tvVpSliderMerah"
+        app:layout_constraintTop_toTopOf="@id/slVpSliderHijau" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slVpSliderBiru"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        app:layout_constraintEnd_toEndOf="@id/slVpSliderMerah"
+        app:layout_constraintStart_toStartOf="@id/slVpSliderMerah"
+        app:layout_constraintTop_toBottomOf="@id/slVpSliderHijau" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/biru"
+        app:layout_constraintBottom_toBottomOf="@id/slVpSliderBiru"
+        app:layout_constraintStart_toStartOf="@id/tvVpSliderMerah"
+        app:layout_constraintTop_toTopOf="@id/slVpSliderBiru" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
