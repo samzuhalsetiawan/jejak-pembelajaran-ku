@@ -4,8 +4,10 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+import androidx.core.graphics.drawable.IconCompat
 
 class App : Application() {
 
@@ -15,12 +17,15 @@ class App : Application() {
         const val CHANNEL_ID_LOW = "lowNotificationChannel"
         const val CHANNEL_NAME_LOW = "Notifikasi Kecil"
         const val EXTRA_PENDING_INTENT_MESSAGE = "EXTRA_PENDING_INTENT_MESSAGE"
+        const val EXTRA_REPLY_MESSAGE = "EXTRA_REPLY_MESSAGE"
+        var myIcon : IconCompat? = null
     }
 
     private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
 
     override fun onCreate() {
         super.onCreate()
+        myIcon = IconCompat.createWithBitmap(BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ichika))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(CHANNEL_ID_IMPORTANT, CHANNEL_NAME_IMPORTANT, NotificationManager.IMPORTANCE_HIGH)
             createNotificationChannel(CHANNEL_ID_LOW, CHANNEL_NAME_LOW, NotificationManager.IMPORTANCE_LOW)

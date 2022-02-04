@@ -62,9 +62,54 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NotificationInboxStyle"
-        android:id="@+id/btnNotificationInboxStyle"
+        android:text="Notification Big Text Style"
+        android:id="@+id/btnBigTextStyle"
         app:layout_constraintTop_toBottomOf="@id/btnNotifWithAction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inbox Style (Multiline)"
+        android:id="@+id/btnInboxStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBigTextStyle"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Big Picture Style"
+        android:id="@+id/btnBigPictureStyle"
+        app:layout_constraintTop_toBottomOf="@id/btnInboxStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Media Style"
+        app:layout_constraintTop_toBottomOf="@id/btnBigPictureStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btnMediaStyle" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Messaging Style"
+        android:id="@+id/btnMessagingStyle"
+        app:layout_constraintTop_toBottomOf="@id/btnMediaStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress Notification"
+        android:id="@+id/btnProgress"
+        app:layout_constraintTop_toBottomOf="@id/btnMessagingStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
