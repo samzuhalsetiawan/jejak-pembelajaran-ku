@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "411714657530",
+    "project_id": "latihan-firebase-auth2",
+    "storage_bucket": "latihan-firebase-auth2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411714657530:android:085c7c0a14673cea3e7d43",
+        "android_client_info": {
+          "package_name": "com.samzuhalsetiawan.latihanfirebaseauth2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411714657530-60bdj0l1vd1i21an5cqbnhud6tisbn55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKUOkZQ1TJV3PyKtFmqCZ4IX_Vd93qQuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411714657530-60bdj0l1vd1i21an5cqbnhud6tisbn55.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
