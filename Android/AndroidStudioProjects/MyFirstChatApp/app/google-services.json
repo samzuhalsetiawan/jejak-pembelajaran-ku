@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "462562507770",
+    "project_id": "my-first-chat-app-2ceb1",
+    "storage_bucket": "my-first-chat-app-2ceb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462562507770:android:df20ecf5b82477b9344243",
+        "android_client_info": {
+          "package_name": "com.example.myfirstchatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462562507770-3r1jcvml0paue6f9atjv7g0n414keir5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb3txdWvdsX04lzktYst1oa8ayLepJJew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462562507770-3r1jcvml0paue6f9atjv7g0n414keir5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

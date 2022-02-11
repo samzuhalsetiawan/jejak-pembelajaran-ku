@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".SignInActivity">
+
+    <ImageView
+        android:id="@+id/ivHandshake"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Handshake Logo"
+        android:scaleType="centerInside"
+        android:src="@drawable/handshake"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/input_background"
+        android:hint="Masukan Email Anda"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivHandshake" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:autofillHints="password"
+        android:background="@drawable/input_background"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@id/etEmail"
+        app:layout_constraintStart_toStartOf="@id/etEmail"
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLogin"
+        android:text="LOG IN"
+        app:cornerRadius="10dp"
+        app:backgroundTint="@color/green_g"
+        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="SIGN UP"
+        android:id="@+id/btnSignUp"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        app:layout_constraintStart_toStartOf="@id/btnLogin"
+        app:layout_constraintEnd_toEndOf="@id/btnLogin"
+        app:cornerRadius="10dp"
+        app:backgroundTint="@color/green_g" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
