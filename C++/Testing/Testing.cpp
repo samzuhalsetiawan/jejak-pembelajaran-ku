@@ -1,11 +1,9 @@
 #include<iostream>
 
-void main() {
+using namespace std;
 
-	int arrayKu[10]{};
-
-	for (int a = 0; a < 10; a++) {
-		arrayKu[a] = a;
-	}
-	std::cout << arrayKu[5] << std::endl;
+int main()
+{
+	cout << "Hello World" << endl;
+	return 0;
 }
