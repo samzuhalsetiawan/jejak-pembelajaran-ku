@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "633006826866",
+    "firebase_url": "https://latihan-chat-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "latihan-chat-app",
+    "storage_bucket": "latihan-chat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633006826866:android:71912fa3bfeaaaa08129eb",
+        "android_client_info": {
+          "package_name": "com.samzuhalsetiawan.latihanchatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633006826866-t26r5aanpum39visho4idmejtreh75bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDea1tW4JCb0UBcAsUVlQ1ofOzykKL37uE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633006826866-t26r5aanpum39visho4idmejtreh75bm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
