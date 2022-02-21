@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Coding/Android/AndroidStudioProjects/LatihanChatApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LatihanChatApp/app/src/main/res/layout/activity_private_message.xml" value="0.17074275362318841" />
         <entry key="..\:/Coding/Android/AndroidStudioProjects/LatihanChatApp/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
         <entry key="..\:/Coding/Android/AndroidStudioProjects/LatihanChatApp/app/src/main/res/layout/activity_sign_up.xml" value="0.1859375" />
         <entry key="..\:/Coding/Android/AndroidStudioProjects/LatihanChatApp/app/src/main/res/layout/list_user.xml" value="0.21" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LatihanChatApp/app/src/main/res/layout/receiver_msg_layout.xml" value="0.17074275362318841" />
+        <entry key="..\:/Coding/Android/AndroidStudioProjects/LatihanChatApp/app/src/main/res/layout/sender_msg_layout.xml" value="0.17074275362318841" />
       </map>
     </option>
   </component>

@@ -1,0 +1,78 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+:root {
+  --blue: #006cb6;
+  --green: #00ac6e;
+  --yellow: #f9a13c;
+  --red: #f0565b;
+  --black: #35333c;
+  --white: #ffffff;
+  /* secondary */
+  --gray: #c5cbdd;
+  --pink: #e0868d;
+  --green2: #118861;
+  --orange: #d57c39;
+}
+
+/* START OF NAVBAR */
+
+.nav-bar {
+  display: flex;
+  background-color: #18225d;
+  justify-content: end;
+  padding-right: 100px;
+}
+
+.nav-bar ul {
+  display: flex;
+}
+
+.nav-bar li {
+  color: white;
+  font-size: 1.2em;
+  list-style-type: none;
+  padding: 20px 15px;
+  transition: .3s;
+}
+
+.nav-bar li:hover {
+  background-color: #e86c38;
+  cursor: pointer;
+}
+
+/* END OF NAVBAR */
+
+/* START OF BIGTRON */
+
+.big-tron {
+  height: 400px;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+.big-tron .slider {
+  display: flex;
+  height: 100%;
+  width: fit-content;
+  border: 1px solid black;
+}
+.slider img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+/* .big-tron .quotes {
+  position: absolute;
+  color: white;
+  bottom: 30px;
+  font-size: 2.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-shadow: 5px 5px 5px var(--black);
+} */
+
+/* END OF BIGTRON */

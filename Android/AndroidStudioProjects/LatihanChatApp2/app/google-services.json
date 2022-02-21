@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "696558953271",
+    "project_id": "latihan-chat-app2",
+    "storage_bucket": "latihan-chat-app2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696558953271:android:154c038e28a1a0bc65f0b2",
+        "android_client_info": {
+          "package_name": "com.samzuhalsetiawan.latihanchatapp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696558953271-36uii2813qijjlnft2s04rd0b9mkkp9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASlalm9DQbZRK6dsgiU751L_RAUoPP-98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696558953271-36uii2813qijjlnft2s04rd0b9mkkp9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

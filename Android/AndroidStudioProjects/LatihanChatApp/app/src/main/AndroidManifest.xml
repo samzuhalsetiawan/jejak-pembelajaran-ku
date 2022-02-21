@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LatihanChatApp">
         <activity
+            android:name=".PrivateMessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity

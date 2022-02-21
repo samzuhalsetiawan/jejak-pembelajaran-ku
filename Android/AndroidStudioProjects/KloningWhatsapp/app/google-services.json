@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "732398138030",
+    "project_id": "kloning-whatsapp-d26a8",
+    "storage_bucket": "kloning-whatsapp-d26a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732398138030:android:6b791808b3a6c7dca9b33f",
+        "android_client_info": {
+          "package_name": "com.samzuhalsetiawan.kloningwhatsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732398138030-2kab72r21j302a8pl6050gnpmdnkerla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfR3PKv2QnnzzKUGZXPUDsyuy2sGrwMf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732398138030-2kab72r21j302a8pl6050gnpmdnkerla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
