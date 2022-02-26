@@ -22,6 +22,10 @@ import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
 
+    companion object {
+        var myPhoneNumber = ""
+    }
+
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val auth by lazy { Firebase.auth }
     private var mVerificationId: String? = null
@@ -52,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
         val callback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 signInWithPhoneAuthCredential(credential)
+                myPhoneNumber = getInputPhoneNumber()
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
@@ -108,6 +113,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             when {
                 it.isSuccessful -> {
+                    myPhoneNumber = getInputPhoneNumber()
                     userIsLoggedIn()
                 }
             }

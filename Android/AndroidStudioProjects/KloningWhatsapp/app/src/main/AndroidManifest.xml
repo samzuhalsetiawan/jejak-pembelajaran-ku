@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KloningWhatsapp">
         <activity
+            android:name=".PrivateChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".FindUserActivity"
             android:exported="false" />
         <activity
