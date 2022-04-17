@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="settingNamaJasaMotor" type="id" />
+    <item name="settingNamaJasaMobil" type="id" />
+    <item name="settingNamaDriver" type="id" />
+    <item name="settingNamaMotor" type="id" />
+    <item name="settingPlatMotor" type="id" />
+    <item name="settingHargaMotor" type="id" />
+    <item name="settingHargaMobil" type="id" />
+</resources>
