@@ -1,0 +1,53 @@
+<!-- Selalu buat kerangka HTML dahulu -->
+<!-- jika di vscode cukup mengetikan `!` -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas 2</title>
+  <!-- style: Untuk memberi desain/style ke elemen -->
+  <style>
+    /* Tulis Selectornya dahulu */
+    /* jika class, dimulai dengan titik */
+    /* jika id, dimulai dengan pagar */
+    .judul1 {
+      color: blue;
+      /* untuk menengahkan teks gunakan properti text-align */
+      text-align: center;
+    }
+    .container {
+      /* untuk menengahkan element */
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+  <!-- style sebaiknya dibuat di file yang terpisah -->
+  <!-- nama filenya adalah css -->
+  <!-- dengan menggunakan tag link -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- untuk memberi style pada element dari file css, buat atribute class atau id -->
+  <h1 class="nama-class-bebas" id="id-juga-bebas">Ini Judul</h1>
+  <!-- untuk membuat  elemen berada di tengah, caranya:
+        1. bungkus tag yang ingin ditengahin ke dalam tag div 
+        2. beri class pada div tersebut
+        3. beri css display: flex, justify-content: center -->
+    <div class="container">
+      <h1 class="judul1">Ini Judul Juga</h1>
+    </div>
+    <!-- Jika yang ingin ditengahkan itu lebih dari 1 element/tag maka buat dua parent/pembungkus -->
+    <div class="container">
+      <div>
+        <h1 class="judul1">Ini Judul 1</h1>
+        <h1 class="judul1">Ini Judul 2</h1>
+        <h1 class="judul1">Ini Judul 3</h1>
+        <h1 class="judul1">Ini Judul 4</h1>
+      </div>
+    </div>
+</body>
+</html>
+
+<!-- Pelajaran selanjutnya, margin dan padding -->

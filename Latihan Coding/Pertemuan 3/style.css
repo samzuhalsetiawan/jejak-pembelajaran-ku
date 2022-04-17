@@ -1,0 +1,10 @@
+.tes1 {
+  display: inline-block;
+  border: 1px solid black;
+  margin: 50px;
+  padding: 25px;
+  background-color: white;
+}
+body {
+  background-color: blue;
+}

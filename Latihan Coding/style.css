@@ -1,0 +1,28 @@
+.label1 {
+  color: green;
+}
+.label2 {
+  color: salmon;
+}
+.label3 {
+  color: blueviolet;
+}
+#label4 {
+  color: blue;
+}
+.label4 {
+  color: fuchsia;
+}
+label {
+  color: black;
+}
+#judul-utama {
+  border: 2px solid blue;
+  text-align: center;
+  width: 75vw;
+  height: 300px;
+}
+.parent, .container {
+  display: flex;
+  justify-content: center;
+}
