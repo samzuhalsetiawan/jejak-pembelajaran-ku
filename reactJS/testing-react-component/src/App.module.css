@@ -1,0 +1,47 @@
+.dialog-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  border: none;
+  color: var(--inner-background-color);
+}
+.dialog-container form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background: var(--linear-primary-color);
+}
+.dialog-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.dialog-button-container button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dialog-button-container button svg {
+  transform: scale(0.7, 0.7);
+  transition: 0.3s;
+}
+.dialog-button-container button svg:hover {
+  transform: scale(0.7, 0.7) translateY(-1rem);
+}
+.dialog-button-container button svg:active {
+  transform: scale(0.7, 0.7) translateY(-1rem);
+}
+.dialog-button-container button span {
+  color: var(--inner-background-color);
+}

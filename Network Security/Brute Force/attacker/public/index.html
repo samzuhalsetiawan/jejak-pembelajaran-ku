@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="tombol">send</button>
+  <script>
+    function addContainer() {
+      const blank = document.createElement("div");
+      blank.id = "MY-ID";
+      blank.style.minHeight = "100vh";
+      document.body.appendChild(blank);
+    }
+
+    function addData(kode, status) {
+      const blank = document.getElementById("MY-ID");
+      const p = document.createElement("p");
+      p.textContent = `${kode} ==> ${status}`;
+      blank.appendChild(p);
+    }
+
+    const myPass = "HAHA";
+    document.getElementById("tombol").addEventListener("click", function () {
+      fetch("http://localhost:3000/cek-pass", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ myPass })
+      }).then(async res => {
+        const data = await res.json();
+        console.log(data); 
+      }).catch(err => {
+        console.error(err);
+      });
+    });
+  </script>
+</body>
+
+</html>

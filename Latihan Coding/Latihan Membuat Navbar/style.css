@@ -1,0 +1,31 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+li {
+  list-style: none;
+  padding: 10px 50px;
+  /* border: 1px solid blue; */
+}
+.container-navbar {
+  /* border: 1px solid red; */
+  background-color: aqua;
+  border-bottom: 2px solid darkmagenta;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  /* bottom: 0px; */
+  /* right: 0px; */
+  width: 100%;
+}
+ul {
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  height: 50px;
+}
+
+body {
+  height: 1000px;
+}
