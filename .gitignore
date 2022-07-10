@@ -1,3 +1,4 @@
 node_modules
 *.blend
 *.blend1
+*.gltf
