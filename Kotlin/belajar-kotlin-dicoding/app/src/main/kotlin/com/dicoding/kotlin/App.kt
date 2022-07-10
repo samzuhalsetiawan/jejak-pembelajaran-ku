@@ -42,6 +42,6 @@ fun main() {
 //    println(doubleMaxValue)
 
     println(Gender.Pria)
-    println(Gender.Pria.kind)
+    println(Gender.Pria)
 
 }
