@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "./dist",
+    "noImplicitAny": true,
+    "jsx": "react",
+    "module": "ES6",
+    "target": "ES6",
+    "strict": true,
+    "sourceMap": true,
+    "moduleResolution": "Node",
+    "strictNullChecks": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": []
+}
