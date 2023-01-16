@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LatihanCoroutinePart3</string>
+    <string name="default_year">N/A</string>
 </resources>
