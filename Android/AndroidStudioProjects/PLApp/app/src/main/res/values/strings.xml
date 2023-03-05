@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Programming Language App</string>
+    <string name="my_name">Sam Zuhal Setiawan</string>
+    <string name="my_email">samzuhal095@gmail.com</string>
+    <string name="label_dibuat_pada">Dibuat pada</string>
+    <string name="label_pembuat">Pembuat</string>
+    <string name="label_ekstensi_file">Ekstensi File</string>
+    <string name="menu_title_about">About</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PLApp.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/design_default_color_primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_code</item>
+        <item name="postSplashScreenTheme">@style/Theme.PLApp</item>
+    </style>
+</resources>

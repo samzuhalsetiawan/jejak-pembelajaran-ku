@@ -34,7 +34,29 @@ class App {
     }
 }
 
+enum class ColorKu(val color: String) {
+    RED("Red"),
+    BLUE("Blue")
+}
+
+data class Saya(val nama: String)
+class Gua(val nama: String)
+
 fun main() {
 //    App().main()
-    LatihanRetrofit().main()
+//    LatihanRetrofit().main()
+//    val x = 11
+//    when (x) {
+//        10, 11 -> print("a")
+//        11, 12 -> print("b")
+//    }
+    val numbers = listOf<Long>(1L, 2L)
+    val numbers2 = listOf<Int>(1,2)
+    val numbers3 = listOf<String>("1","2")
+
+
+    println("Values: " + numbers)
+    println("Values: " + numbers)
+    println("Values: " + numbers)
+
 }
