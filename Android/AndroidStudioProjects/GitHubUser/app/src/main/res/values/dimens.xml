@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_small">6dp</dimen>
+    <dimen name="dimen_medium">12dp</dimen>
+    <dimen name="dimen_large">18dp</dimen>
+
+    <dimen name="card_corner_radius">@dimen/dimen_large</dimen>
+    <dimen name="card_height">100dp</dimen>
+    <dimen name="padding_root">@dimen/dimen_medium</dimen>
+    <dimen name="padding_vertical">@dimen/dimen_small</dimen>
+    <dimen name="padding_horizontal">@dimen/dimen_medium</dimen>
+</resources>

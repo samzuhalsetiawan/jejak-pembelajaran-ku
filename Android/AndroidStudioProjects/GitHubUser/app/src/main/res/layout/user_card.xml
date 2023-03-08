@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_height"
+        android:id="@+id/cvUserCard"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        android:layout_marginVertical="@dimen/padding_vertical"
+        android:layout_marginHorizontal="@dimen/padding_horizontal"
+        android:elevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="@dimen/card_height"
+                android:layout_height="@dimen/card_height"
+                android:id="@+id/ivUserProfilePicture"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:src="@tools:sample/avatars"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvUsername"
+                tools:text="Username"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/ivUserProfilePicture"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvPlaceholder"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:paddingHorizontal="@dimen/padding_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPlaceholder"
+                tools:text="Placeholder"
+                app:layout_constraintTop_toBottomOf="@id/tvUsername"
+                app:layout_constraintLeft_toRightOf="@id/ivUserProfilePicture"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:paddingHorizontal="@dimen/padding_horizontal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
