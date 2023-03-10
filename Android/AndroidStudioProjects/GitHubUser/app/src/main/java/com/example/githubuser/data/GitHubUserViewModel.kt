@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.githubuser.models.DetailUser
 import com.example.githubuser.models.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +19,11 @@ class GitHubUserViewModel : ViewModel() {
 
     private val _listOfFollowing = MutableLiveData<List<User>>()
     val listOfFollowing: LiveData<List<User>> = _listOfFollowing
+
+    private val _detailUser = MutableLiveData<DetailUser>()
+    val detailUser: LiveData<DetailUser> = _detailUser
+
+    var followType: FollowType? = null
 
     fun searchUserByName(name: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -37,6 +43,13 @@ class GitHubUserViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val users = Repository.getAllUserFollowedBy(name)
             _listOfFollowing.postValue(users)
+        }
+    }
+
+    fun getDetailUser(username: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = Repository.getDetailUser(username)
+            result?.let { _detailUser.postValue(it) }
         }
     }
 

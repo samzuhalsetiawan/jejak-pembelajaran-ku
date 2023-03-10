@@ -1,89 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.DetailFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:id="@+id/clHeaderContainer"
-        android:background="@color/design_default_color_primary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/ivUserProfilePicture"
-        tools:src="@tools:sample/avatars"
-        app:layout_constraintTop_toTopOf="@id/clHeaderContainer"
-        app:layout_constraintLeft_toLeftOf="@id/clHeaderContainer"
-        app:layout_constraintRight_toRightOf="@id/clHeaderContainer"
-        app:layout_constraintBottom_toTopOf="@id/tvUsername"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlFollowsTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvUsername"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        tools:text="Username"
-        android:layout_marginVertical="@dimen/padding_vertical"
-        android:textColor="@color/design_default_color_on_primary"
-        app:layout_constraintTop_toBottomOf="@id/ivUserProfilePicture"
-        app:layout_constraintLeft_toLeftOf="@id/ivUserProfilePicture"
-        app:layout_constraintRight_toRightOf="@id/ivUserProfilePicture"
-        app:layout_constraintBottom_toTopOf="@id/tvDividerFollowerAndFollowing"/>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp2FollowersAndFollowing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvUserFollowerCount"
-        tools:text="20 Followers"
-        android:textColor="@color/design_default_color_on_primary"
-        android:layout_marginHorizontal="@dimen/padding_horizontal"
-        style="@style/TextAppearance.MaterialComponents.Body2"
-        app:layout_constraintTop_toTopOf="@id/tvDividerFollowerAndFollowing"
-        app:layout_constraintLeft_toLeftOf="@id/ivUserProfilePicture"
-        app:layout_constraintRight_toLeftOf="@id/tvDividerFollowerAndFollowing"
-        app:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing" />
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/divider_followers_and_following"
-        android:id="@+id/tvDividerFollowerAndFollowing"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textColor="@color/design_default_color_on_primary"
-        app:layout_constraintTop_toBottomOf="@id/tvUsername"
-        app:layout_constraintLeft_toRightOf="@id/tvUserFollowerCount"
-        app:layout_constraintRight_toLeftOf="@id/tvUserFollowingCount"
-        app:layout_constraintBottom_toBottomOf="@id/clHeaderContainer" />
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ablAppBarLayoutDetailUser"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvUserFollowingCount"
-        tools:text="20 Following"
-        android:textColor="@color/design_default_color_on_primary"
-        style="@style/TextAppearance.MaterialComponents.Body2"
-        android:layout_marginHorizontal="@dimen/padding_horizontal"
-        app:layout_constraintTop_toTopOf="@id/tvDividerFollowerAndFollowing"
-        app:layout_constraintLeft_toRightOf="@id/tvDividerFollowerAndFollowing"
-        app:layout_constraintRight_toRightOf="@id/ivUserProfilePicture"
-        app:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing" />
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/mlMotionLayoutDetailUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="120dp"
+            android:padding="@dimen/padding_root"
+            app:layoutDescription="@xml/fragment_detail_scene"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/vp2FollowersAndFollowing"
-        app:layout_constraintTop_toBottomOf="@id/clHeaderContainer"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glActionBarSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_begin="1dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivUserProfilePicture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@id/tvUsername"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CircleImageView"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/padding_vertical"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toTopOf="@id/tvAccountName"
+                app:layout_constraintLeft_toLeftOf="@id/ivUserProfilePicture"
+                app:layout_constraintRight_toRightOf="@id/ivUserProfilePicture"
+                app:layout_constraintTop_toBottomOf="@id/ivUserProfilePicture"
+                tools:text="Username" />
+
+            <TextView
+                android:id="@+id/tvAccountName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toTopOf="@id/tvDividerFollowerAndFollowing"
+                app:layout_constraintLeft_toLeftOf="@id/tvUsername"
+                app:layout_constraintRight_toRightOf="@id/tvUsername"
+                app:layout_constraintTop_toBottomOf="@id/tvUsername"
+                tools:text="AccountName" />
+
+            <TextView
+                android:id="@+id/tvUserFollowerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/followers_static_label"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing"
+                app:layout_constraintLeft_toLeftOf="@id/ivUserProfilePicture"
+                app:layout_constraintRight_toLeftOf="@id/tvDividerFollowerAndFollowing"
+                app:layout_constraintTop_toTopOf="@id/tvDividerFollowerAndFollowing" />
+
+            <TextView
+                android:id="@+id/tvDividerFollowerAndFollowing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_horizontal"
+                android:layout_marginEnd="@dimen/padding_horizontal"
+                android:text="@string/divider_followers_and_following"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tvUserFollowerCount"
+                app:layout_constraintRight_toLeftOf="@id/tvUserFollowingCount"
+                app:layout_constraintTop_toBottomOf="@id/tvAccountName" />
+
+            <TextView
+                android:id="@+id/tvUserFollowingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/following_static_label"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing"
+                app:layout_constraintLeft_toRightOf="@id/tvDividerFollowerAndFollowing"
+                app:layout_constraintRight_toRightOf="@id/ivUserProfilePicture"
+                app:layout_constraintTop_toTopOf="@id/tvDividerFollowerAndFollowing" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerDetailUser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/shimmer_detail_fragment" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

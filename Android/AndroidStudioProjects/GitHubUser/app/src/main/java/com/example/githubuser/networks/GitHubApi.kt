@@ -1,5 +1,6 @@
 package com.example.githubuser.networks
 
+import com.example.githubuser.models.DetailUser
 import com.example.githubuser.models.SearchUsersResponse
 import com.example.githubuser.models.User
 import retrofit2.Response
@@ -17,4 +18,7 @@ interface GitHubApi {
 
     @GET("users/{username}/following")
     suspend fun getAllUserFollowedBy(@Path("username") username: String) : Response<List<User>>
+
+    @GET("users/{username}")
+    suspend fun getDetailUser(@Path("username") username: String): Response<DetailUser>
 }

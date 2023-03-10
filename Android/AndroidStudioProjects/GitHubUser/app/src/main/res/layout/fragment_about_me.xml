@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    app:layoutDescription="@xml/fragment_about_me_scene"
+    tools:context=".ui.fragments.AboutMeFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="@dimen/dimen_large"
+        android:src="@drawable/profile"
+        app:layout_constraintBottom_toTopOf="@id/tvProfileName"
+        app:layout_constraintLeft_toLeftOf="@id/tvProfileName"
+        app:layout_constraintRight_toRightOf="@id/tvProfileName"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CircleImageView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvProfileName"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:drawableStart="@drawable/ic_about"
+        android:drawablePadding="12dp"
+        android:text="@string/my_name"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvProfileEmail"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:text="@string/my_email"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintLeft_toLeftOf="@id/tvProfileName"
+        app:layout_constraintRight_toRightOf="@id/tvProfileName"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileName" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

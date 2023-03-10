@@ -8,22 +8,33 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.githubuser.ui.fragments.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        android:label="GitHub User"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_aboutMeFragment"
+            app:destination="@id/aboutMeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.githubuser.ui.fragments.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        android:label="Detail User"
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="user"
             app:argType="com.example.githubuser.models.User" />
         <action
             android:id="@+id/action_detailFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_aboutMeFragment"
+            app:destination="@id/aboutMeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutMeFragment"
+        android:name="com.example.githubuser.ui.fragments.AboutMeFragment"
+        android:label="About Me"
+        tools:layout="@layout/fragment_about_me" />
 </navigation>

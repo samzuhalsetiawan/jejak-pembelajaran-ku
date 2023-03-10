@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <KeyFrameSet />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start" />
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/tvUserFollowingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_horizontal"
+            motion:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing"
+            motion:layout_constraintLeft_toRightOf="@id/tvDividerFollowerAndFollowing"
+            motion:layout_constraintTop_toTopOf="@id/tvDividerFollowerAndFollowing" />
+
+        <Constraint
+            android:id="@+id/tvUserFollowerCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing"
+            motion:layout_constraintLeft_toLeftOf="@id/tvUsername"
+            motion:layout_constraintRight_toLeftOf="@id/tvDividerFollowerAndFollowing"
+            motion:layout_constraintTop_toTopOf="@id/tvDividerFollowerAndFollowing" />
+        <Constraint
+            android:id="@+id/ivUserProfilePicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="16dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/glActionBarSize" />
+
+        <Constraint
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_horizontal"
+            motion:layout_constraintBottom_toTopOf="@id/tvAccountName"
+            motion:layout_constraintLeft_toRightOf="@id/ivUserProfilePicture"
+            motion:layout_constraintTop_toTopOf="@id/ivUserProfilePicture" />
+
+        <Constraint
+            android:id="@+id/tvAccountName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/tvUsername"
+            motion:layout_constraintLeft_toLeftOf="@id/tvUsername"
+            motion:layout_constraintBottom_toTopOf="@id/tvDividerFollowerAndFollowing" />
+
+        <Constraint
+            android:id="@+id/tvDividerFollowerAndFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_horizontal"
+            android:layout_marginEnd="@dimen/padding_horizontal"
+            motion:layout_constraintBottom_toBottomOf="@id/ivUserProfilePicture"
+            motion:layout_constraintLeft_toRightOf="@id/tvUserFollowerCount"
+            motion:layout_constraintRight_toLeftOf="@id/tvUserFollowingCount"
+            motion:layout_constraintTop_toBottomOf="@id/tvAccountName" />
+
+    </ConstraintSet>
+</MotionScene>

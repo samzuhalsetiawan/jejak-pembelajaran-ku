@@ -10,7 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.UserCardBinding
 import com.example.githubuser.models.User
 
-class UserListAdapter(private val onUserCardClickListener: OnUserCardClickListener) : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
+class UserListAdapter(private val onUserCardClickListener: OnUserCardClickListener) :
+    RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
     fun interface OnUserCardClickListener {
         fun onUserCardClickListener(view: View?, user: User)
@@ -19,7 +20,8 @@ class UserListAdapter(private val onUserCardClickListener: OnUserCardClickListen
         }
     }
 
-    inner class ViewHolder(private val binding: UserCardBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: UserCardBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             val user = listOfUser[position]
             binding.apply {
@@ -28,14 +30,16 @@ class UserListAdapter(private val onUserCardClickListener: OnUserCardClickListen
                     .into(ivUserProfilePicture)
 
                 tvUsername.text = user.userName
-                tvPlaceholder.text = "Placeholder"
+                tvPlaceholder.text = user.htmlUrl
                 cvUserCard.setOnClickListener { onUserCardClickListener(it, user) }
             }
         }
     }
 
     private val diffCallback = object : DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean = oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
+            oldItem.id == newItem.id
+
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean = oldItem == newItem
     }
 

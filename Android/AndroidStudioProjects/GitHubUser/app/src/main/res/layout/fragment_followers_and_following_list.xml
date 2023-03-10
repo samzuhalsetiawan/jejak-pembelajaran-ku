@@ -6,8 +6,19 @@
     tools:context=".ui.fragments.FollowersAndFollowingListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFollowersAndFollowingList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvFollowersAndFollowingList" />
+        tools:listitem="@layout/user_card" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/flUserNotFound"
+        android:visibility="gone">
+        <include
+            android:id="@+id/includeNotFound"
+            layout="@layout/user_not_found" />
+    </FrameLayout>
 
 </FrameLayout>
