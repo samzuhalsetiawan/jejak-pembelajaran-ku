@@ -1,24 +1,17 @@
 package com.example.githubuser.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.githubuser.data.models.User
 import com.example.githubuser.databinding.UserCardBinding
-import com.example.githubuser.models.User
+import com.example.githubuser.interfaces.IUserCardClickEventHandler
 
-class UserListAdapter(private val onUserCardClickListener: OnUserCardClickListener) :
+class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
     RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
-
-    fun interface OnUserCardClickListener {
-        fun onUserCardClickListener(view: View?, user: User)
-        operator fun invoke(view: View?, user: User) {
-            onUserCardClickListener(view, user)
-        }
-    }
 
     inner class ViewHolder(private val binding: UserCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -29,9 +22,10 @@ class UserListAdapter(private val onUserCardClickListener: OnUserCardClickListen
                     .load(user.avatarUrl)
                     .into(ivUserProfilePicture)
 
-                tvUsername.text = user.userName
+                tvUsername.text = user.login
                 tvPlaceholder.text = user.htmlUrl
-                cvUserCard.setOnClickListener { onUserCardClickListener(it, user) }
+                cvUserCard.setOnClickListener { clickHandler.onCardClickListener(it, user) }
+                ivIconFavorite.setOnClickListener { clickHandler.onFavoriteIconClickListener(it, user) }
             }
         }
     }

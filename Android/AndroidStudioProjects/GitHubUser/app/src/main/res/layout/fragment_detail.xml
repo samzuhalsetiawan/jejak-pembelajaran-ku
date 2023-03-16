@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.DetailFragment">
+    tools:context=".ui.detail_user.DetailFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,8 +63,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/padding_vertical"
+                android:textColor="@color/white"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="?attr/colorOnPrimary"
                 app:layout_constraintBottom_toTopOf="@id/tvAccountName"
                 app:layout_constraintLeft_toLeftOf="@id/ivUserProfilePicture"
                 app:layout_constraintRight_toRightOf="@id/ivUserProfilePicture"
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceBody1"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@id/tvDividerFollowerAndFollowing"
                 app:layout_constraintLeft_toLeftOf="@id/tvUsername"
                 app:layout_constraintRight_toRightOf="@id/tvUsername"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/followers_static_label"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing"
                 app:layout_constraintLeft_toLeftOf="@id/ivUserProfilePicture"
                 app:layout_constraintRight_toLeftOf="@id/tvDividerFollowerAndFollowing"
@@ -103,7 +103,7 @@
                 android:layout_marginEnd="@dimen/padding_horizontal"
                 android:text="@string/divider_followers_and_following"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/tvUserFollowerCount"
                 app:layout_constraintRight_toLeftOf="@id/tvUserFollowingCount"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/following_static_label"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/tvDividerFollowerAndFollowing"
                 app:layout_constraintLeft_toRightOf="@id/tvDividerFollowerAndFollowing"
                 app:layout_constraintRight_toRightOf="@id/ivUserProfilePicture"
@@ -128,7 +128,8 @@
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerDetailUser"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <include layout="@layout/shimmer_detail_fragment" />
 

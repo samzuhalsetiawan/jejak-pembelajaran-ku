@@ -12,4 +12,5 @@
     <string name="label_user_not_found">Maaf, User Tidak ditemukan</string>
     <string name="label_user_empty_follower">User Tidak Memiliki Follower</string>
     <string name="label_user_empty_following">User Tidak Memfollow Siapapun</string>
+    <string name="label_dark_mode">Dark Mode</string>
 </resources>
