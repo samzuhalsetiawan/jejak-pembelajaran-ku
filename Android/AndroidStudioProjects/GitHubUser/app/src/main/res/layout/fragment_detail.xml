@@ -27,6 +27,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablAppBarLayoutDetailUser"
         android:layout_width="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_height="250dp">
 
         <androidx.constraintlayout.motion.widget.MotionLayout
@@ -129,7 +131,7 @@
         android:id="@+id/shimmerDetailUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        tools:visibility="gone">
 
         <include layout="@layout/shimmer_detail_fragment" />
 

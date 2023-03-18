@@ -9,23 +9,34 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.data.models.User
 import com.example.githubuser.databinding.UserCardBinding
 import com.example.githubuser.interfaces.IUserCardClickEventHandler
+import com.example.githubuser.utils.DebugHelper
 
 class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
     RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: UserCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(position: Int) {
-            val user = listOfUser[position]
+
+        fun bind(user: User) {
             binding.apply {
                 Glide.with(binding.root)
                     .load(user.avatarUrl)
                     .into(ivUserProfilePicture)
 
                 tvUsername.text = user.login
-                tvPlaceholder.text = user.htmlUrl
-                cvUserCard.setOnClickListener { clickHandler.onCardClickListener(it, user) }
-                ivIconFavorite.setOnClickListener { clickHandler.onFavoriteIconClickListener(it, user) }
+                tvHtmlUrl.text = user.htmlUrl
+                cvUserCard.setOnClickListener { clickHandler.onCardClickListener(cvUserCard, user) }
+                cbFavoriteButton.isChecked = user.isFavorite
+                cbFavoriteButton.setOnClickListener {
+                    user.isFavorite = !user.isFavorite
+                    if (user.isFavorite) {
+                        cbFavoriteButton.isChecked = true
+                        clickHandler.onFavoriteIconCheckedListener(cbFavoriteButton, user)
+                    } else {
+                        cbFavoriteButton.isChecked = false
+                        clickHandler.onFavoriteIconUncheckedListener(cbFavoriteButton, user)
+                    }
+                }
             }
         }
     }
@@ -34,7 +45,9 @@ class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
         override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean = oldItem == newItem
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+            return oldItem.isFavorite == newItem.isFavorite
+        }
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
@@ -52,7 +65,7 @@ class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(listOfUser[position])
     }
 
     override fun getItemCount(): Int = listOfUser.size

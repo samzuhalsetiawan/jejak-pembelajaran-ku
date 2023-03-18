@@ -34,14 +34,14 @@
                 android:layout_marginHorizontal="@dimen/padding_horizontal"
                 android:layout_marginVertical="@dimen/padding_vertical"
                 android:background="@color/gray"
-                app:layout_constraintBottom_toTopOf="@id/tvPlaceholder"
+                app:layout_constraintBottom_toTopOf="@id/tvHtmlUrl"
                 app:layout_constraintLeft_toRightOf="@id/ivUserProfilePicture"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintWidth_percent="0.5" />
 
             <View
-                android:id="@+id/tvPlaceholder"
+                android:id="@+id/tvHtmlUrl"
                 android:layout_width="0dp"
                 android:layout_height="12dp"
                 android:background="@color/gray"

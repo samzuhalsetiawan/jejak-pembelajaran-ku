@@ -38,24 +38,30 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
         installSplashScreen()
         setContentView(binding.root)
 
-        gitHubUserViewModel.darkThemePreference.observe(this) { isEnabled ->
-            AppCompatDelegate.setDefaultNightMode(
-                if (isEnabled) AppCompatDelegate.MODE_NIGHT_YES
-                else AppCompatDelegate.MODE_NIGHT_NO
-            )
-        }
+        setupAppThemeMode()
 
         addMenuProvider(this)
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.searchFragment, R.id.favoriteUserFragment), binding.mainDrawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.searchFragment, R.id.detailFragment, R.id.favoriteUserFragment), binding.mainDrawerLayout
+        )
         supportActionBar?.elevation = 0f
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.nvDrawer.apply {
             setupWithNavController(navController)
             setCheckedItem(R.id.menuSearchUser)
             setNavigationItemSelectedListener(this@MainActivity)
+        }
+    }
+
+    private fun setupAppThemeMode() {
+        gitHubUserViewModel.darkThemePreference.observe(this) { isEnabled ->
+            AppCompatDelegate.setDefaultNightMode(
+                if (isEnabled) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
         }
     }
 
@@ -72,7 +78,6 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
             R.id.menuDarkMode -> true.also {
                 menuItem.isChecked = !menuItem.isChecked
                 gitHubUserViewModel.setDarkModeEnabled(menuItem.isChecked)
-                Log.d(TAG, "onMenuItemSelected: called, ${menuItem.isChecked}")
             }
             else -> false
         }
@@ -90,9 +95,11 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menuSearchUser -> true.also {
+                navController.popBackStack(R.id.searchFragment, true)
                 navController.navigate(R.id.searchFragment)
             }
             R.id.menuFavoriteUser -> true.also {
+                navController.popBackStack(R.id.favoriteUserFragment, true)
                 navController.navigate(R.id.favoriteUserFragment)
             }
             else -> false

@@ -1,12 +1,15 @@
 package com.example.githubuser.interfaces
 
-import android.view.View
+import android.widget.CheckBox
+import androidx.cardview.widget.CardView
 import com.example.githubuser.data.models.User
 
 interface IUserCardClickEventHandler {
 
-    fun onCardClickListener(view: View, user: User)
+    fun onCardClickListener(card: CardView, user: User)
 
-    fun onFavoriteIconClickListener(view: View, user: User)
+    fun onFavoriteIconCheckedListener(favButton: CheckBox, user: User)
+
+    fun onFavoriteIconUncheckedListener(favButton: CheckBox, user: User)
 
 }

@@ -5,10 +5,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.favorite_user.FavoriteUserFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/app_name"
-        android:gravity="center" />
+        android:id="@+id/rvFavoriteUser"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        tools:listitem="@layout/user_card" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone"
+        android:id="@+id/flUserNotFound">
+
+        <include
+            android:id="@+id/includeUserNotFound"
+            layout="@layout/user_not_found" />
+
+    </FrameLayout>
 
 </FrameLayout>

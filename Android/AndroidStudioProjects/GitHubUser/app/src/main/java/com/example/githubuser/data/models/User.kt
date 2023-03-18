@@ -144,6 +144,34 @@ data class User(
 
     @ColumnInfo("score")
     @SerializedName("score")
-    val score: Double? = null
+    val score: Double? = null,
 
-) : Parcelable
+    @ColumnInfo("is_favorite", defaultValue = "1")
+    @SerializedName("is_favorite")
+    var isFavorite: Boolean = false
+
+) : Parcelable {
+    override fun equals(other: Any?): Boolean {
+        if (other !is User) return false
+        val isSame = listOf(
+            id == other.id,
+            login == other.login,
+            avatarUrl == other.avatarUrl,
+            htmlUrl == other.htmlUrl,
+            name == other.name,
+            email == other.email
+        )
+        return isSame.none { !it }
+    }
+
+    override fun hashCode(): Int {
+        val hashPadding = 31
+        var result = id
+        result = hashPadding * result + login.hashCode()
+        result = hashPadding * result + (avatarUrl?.hashCode() ?: 0)
+        result = hashPadding * result + (htmlUrl?.hashCode() ?: 0)
+        result = hashPadding * result + (name?.hashCode() ?: 0)
+        result = hashPadding * result + (email?.hashCode() ?: 0)
+        return result
+    }
+}

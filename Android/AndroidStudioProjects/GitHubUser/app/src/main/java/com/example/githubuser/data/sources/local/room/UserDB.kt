@@ -17,7 +17,9 @@ abstract class UserDB : RoomDatabase() {
 
         fun getInstance(context: Context): UserDB {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Room.databaseBuilder(context, UserDB::class.java, "user_db").build()
+                INSTANCE ?: Room.databaseBuilder(context, UserDB::class.java, "user_db")
+                    .fallbackToDestructiveMigration()
+                    .build()
             }
         }
     }

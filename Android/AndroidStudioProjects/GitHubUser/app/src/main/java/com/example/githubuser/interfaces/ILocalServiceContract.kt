@@ -8,7 +8,11 @@ interface ILocalServiceContract {
 
     fun getAllUserFavorite(): LiveData<List<User>>
 
+    fun getAllUserFavoriteAsList(): List<User>
+
     suspend fun addUserToFavorite(user: User)
+
+    suspend fun removeUserFromFavorite(user: User)
 
     fun getDarkThemeEnabledPreference() : Flow<Boolean>
 

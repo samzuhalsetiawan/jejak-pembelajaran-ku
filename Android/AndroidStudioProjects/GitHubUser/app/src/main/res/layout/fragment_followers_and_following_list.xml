@@ -9,16 +9,30 @@
         android:id="@+id/rvFollowersAndFollowingList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
+        tools:visibility="visible"
         tools:listitem="@layout/user_card" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFollowsList"
+        android:layout_width="match_parent"
+        tools:visibility="gone"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/shimmer_list_of_user" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/flUserNotFound"
         android:visibility="gone">
+
         <include
             android:id="@+id/includeNotFound"
             layout="@layout/user_not_found" />
+
     </FrameLayout>
 
 </FrameLayout>

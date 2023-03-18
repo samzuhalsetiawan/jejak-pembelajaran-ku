@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -16,15 +18,18 @@ import com.example.githubuser.data.models.User
 import com.example.githubuser.ui.viewmodel.GitHubUserViewModel
 import com.example.githubuser.databinding.FragmentSearchBinding
 import com.example.githubuser.interfaces.IUserCardClickEventHandler
+import com.example.githubuser.utils.DebugHelper
+import com.google.android.material.imageview.ShapeableImageView
 
 class SearchFragment : Fragment(),
-    Observer<List<User>?>,
     IUserCardClickEventHandler,
     SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var userListAdapter: UserListAdapter
     private val gitHubUserViewModel: GitHubUserViewModel by activityViewModels()
+    private val initializeProgress = mutableListOf(false, false)
+    private var shouldShowErrorPage = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,27 +44,38 @@ class SearchFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         userListAdapter = UserListAdapter(this)
+        setupRecyclerView()
+        binding.svSearchUser.setOnQueryTextListener(this)
+        doInitialUserSearch()
+        setupLiveDataObserver()
 
+    }
+
+    private fun doInitialUserSearch() {
+        if (gitHubUserViewModel.listOfUser.value == null) gitHubUserViewModel.searchUserByName(resources.getString(R.string.initial_search_name)).also { showShimmer() }
+    }
+
+    private fun setupRecyclerView() {
         binding.apply {
             rvUserList.adapter = userListAdapter
             rvUserList.layoutManager = LinearLayoutManager(this@SearchFragment.requireContext())
-            svSearchUser.setOnQueryTextListener(this@SearchFragment)
         }
-
-        if (gitHubUserViewModel.listOfUser.value == null) gitHubUserViewModel.searchUserByName(resources.getString(R.string.initial_search_name)).also { showShimmer() }
-
-        gitHubUserViewModel.listOfUser.observe(viewLifecycleOwner, this)
     }
 
-    override fun onChanged(value: List<User>?) {
-        if (value == null || value.isEmpty()) {
-            binding.flUserNotFound.visibility = View.VISIBLE
-            userListAdapter.listOfUser = emptyList()
-        } else {
-            binding.flUserNotFound.visibility = View.GONE
-            userListAdapter.listOfUser = value
-        }
-        closeShimmer()
+    private fun setupLiveDataObserver() {
+        gitHubUserViewModel.listOfUser.observe(viewLifecycleOwner, onListOfUserChange)
+        gitHubUserViewModel.getAllUserFavorite().observe(viewLifecycleOwner, onListOfFavoriteUserChange)
+    }
+
+    private val onListOfUserChange = Observer { value: List<User> ->
+        shouldShowErrorPage = value.isEmpty()
+        updateInitializeProgress(0)
+        userListAdapter.listOfUser = value
+    }
+
+    private val onListOfFavoriteUserChange = Observer { value: List<User> ->
+        updateInitializeProgress(1)
+        gitHubUserViewModel.notifyFavoriteUserChange(value)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -71,20 +87,37 @@ class SearchFragment : Fragment(),
 
     override fun onQueryTextChange(newText: String?): Boolean = false
 
-    override fun onCardClickListener(view: View, user: User) {
+    override fun onCardClickListener(card: CardView, user: User) {
         val action = SearchFragmentDirections.actionSearchFragmentToDetailFragment(user)
         findNavController().navigate(action)
     }
 
-    override fun onFavoriteIconClickListener(view: View, user: User) {
+    override fun onFavoriteIconCheckedListener(favButton: CheckBox, user: User) {
         gitHubUserViewModel.addUserToFavorite(user)
     }
 
+    override fun onFavoriteIconUncheckedListener(favButton: CheckBox, user: User) {
+        gitHubUserViewModel.removeUserFromFavorite(user)
+    }
+
+    private fun updateInitializeProgress(index: Int) {
+        initializeProgress[index] = true
+        if (initializeProgress.all { it }) closeShimmer(shouldShowErrorPage)
+    }
+
     private fun showShimmer() {
+        binding.flUserNotFound.visibility = View.GONE
+        binding.rvUserList.visibility = View.INVISIBLE
         binding.shimmerSearchUser.visibility = View.VISIBLE
     }
 
-    private fun closeShimmer() {
+    private fun closeShimmer(shouldShowErrorPage: Boolean = false) {
         binding.shimmerSearchUser.visibility = View.GONE
+        if (shouldShowErrorPage) {
+            binding.flUserNotFound.visibility = View.VISIBLE
+        } else {
+            binding.flUserNotFound.visibility = View.GONE
+        }
+        binding.rvUserList.visibility = View.VISIBLE
     }
 }

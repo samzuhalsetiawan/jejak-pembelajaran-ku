@@ -9,6 +9,7 @@ import com.example.githubuser.data.sources.local.datastore.SettingPreference
 import com.example.githubuser.enums.FollowType
 import com.example.githubuser.data.models.User
 import com.example.githubuser.data.sources.repository.Repository
+import com.example.githubuser.utils.ExtensionUtils.mapBasedOnFavoriteWith
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,10 +21,10 @@ class GitHubUserViewModel(application: Application) : AndroidViewModel(applicati
     val listOfUser: LiveData<List<User>> = _listOfUser
 
     private val _listOfFollower = MutableLiveData<List<User>>()
-    private val listOfFollower: LiveData<List<User>> = _listOfFollower
+    val listOfFollower: LiveData<List<User>> = _listOfFollower
 
     private val _listOfFollowing = MutableLiveData<List<User>>()
-    private val listOfFollowing: LiveData<List<User>> = _listOfFollowing
+    val listOfFollowing: LiveData<List<User>> = _listOfFollowing
 
     private val _detailUser = MutableLiveData<User>()
     val detailUser: LiveData<User> = _detailUser
@@ -59,7 +60,7 @@ class GitHubUserViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun setDarkModeEnabled(isEnabled: Boolean) {
-        viewModelScope.launch(Dispatchers.Unconfined) {
+        viewModelScope.launch(Dispatchers.Default) {
             repository.setDarkThemeEnabledPreference(isEnabled)
         }
     }
@@ -70,7 +71,15 @@ class GitHubUserViewModel(application: Application) : AndroidViewModel(applicati
 
     fun addUserToFavorite(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
+            user.isFavorite = true
             repository.addUserToFavorite(user)
+        }
+    }
+
+    fun removeUserFromFavorite(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            user.isFavorite = false
+            repository.removeUserFromFavorite(user)
         }
     }
 
@@ -78,6 +87,31 @@ class GitHubUserViewModel(application: Application) : AndroidViewModel(applicati
         return when (followType) {
             FollowType.Follower -> listOfFollower
             FollowType.Following -> listOfFollowing
+        }
+    }
+
+    fun clearListOfFollowerAndFollowing() {
+        viewModelScope.launch(Dispatchers.Default) {
+            _listOfFollower.postValue(emptyList())
+            _listOfFollowing.postValue(emptyList())
+        }
+    }
+
+    fun notifyFavoriteUserChange(listOfFavorite: List<User>) {
+        val oldListOfUser = listOfUser.value ?: emptyList()
+        val oldFollowers = listOfFollower.value ?: emptyList()
+        val oldFollowing = listOfFollowing.value ?: emptyList()
+
+        viewModelScope.launch(Dispatchers.Default) {
+            _listOfUser.postValue(
+                oldListOfUser.mapBasedOnFavoriteWith(listOfFavorite)
+            )
+            _listOfFollower.postValue(
+                oldFollowers.mapBasedOnFavoriteWith(listOfFavorite)
+            )
+            _listOfFollowing.postValue(
+                oldFollowing.mapBasedOnFavoriteWith(listOfFavorite)
+            )
         }
     }
 

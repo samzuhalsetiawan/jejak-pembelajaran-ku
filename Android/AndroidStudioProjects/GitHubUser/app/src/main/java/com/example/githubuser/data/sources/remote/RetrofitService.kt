@@ -2,7 +2,6 @@ package com.example.githubuser.data.sources.remote
 
 import com.example.githubuser.BuildConfig
 import com.example.githubuser.data.models.User
-import com.example.githubuser.data.sources.remote.retrofit.GitHubApi
 import com.example.githubuser.interfaces.IRemoteServiceContract
 import com.example.githubuser.utils.DebugHelper
 import okhttp3.Interceptor
@@ -85,8 +84,6 @@ class RetrofitService private constructor(retrofit: Retrofit) : IRemoteServiceCo
 
         private val client by lazy {
             OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
                 .addInterceptor(authInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
                 .build()

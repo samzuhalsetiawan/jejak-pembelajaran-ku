@@ -1,4 +1,4 @@
-package com.example.githubuser.data.sources.remote.retrofit
+package com.example.githubuser.data.sources.remote
 
 import com.example.githubuser.data.models.User
 import com.example.githubuser.data.models.SearchUsersResponse

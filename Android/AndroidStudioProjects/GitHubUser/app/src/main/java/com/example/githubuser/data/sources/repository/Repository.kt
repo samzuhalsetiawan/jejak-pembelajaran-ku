@@ -1,15 +1,13 @@
 package com.example.githubuser.data.sources.repository
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.LiveData
 import com.example.githubuser.data.models.User
 import com.example.githubuser.data.sources.local.LocalService
-import com.example.githubuser.data.sources.local.room.UserDB
 import com.example.githubuser.data.sources.remote.RetrofitService
 import com.example.githubuser.interfaces.ILocalServiceContract
 import com.example.githubuser.interfaces.IRemoteServiceContract
+import com.example.githubuser.utils.ExtensionUtils.mapBasedOnFavoriteWith
 import kotlinx.coroutines.flow.Flow
 
 class Repository private constructor(
@@ -18,15 +16,18 @@ class Repository private constructor(
     ) {
 
     suspend fun getAllUserByName(name: String): List<User> {
-        return remoteService.getAllUserByName(name)
+        val listOfUser = remoteService.getAllUserByName(name)
+        return mapUsersWhetherTheyAreFavoriteOrNot(listOfUser)
     }
 
     suspend fun getAllFollowerOf(name: String): List<User> {
-        return remoteService.getAllFollowerOf(name)
+        val listOfUser = remoteService.getAllFollowerOf(name)
+        return mapUsersWhetherTheyAreFavoriteOrNot(listOfUser)
     }
 
     suspend fun getUsersFollowedBy(name: String): List<User> {
-        return remoteService.getUsersFollowedBy(name)
+        val listOfUser = remoteService.getUsersFollowedBy(name)
+        return mapUsersWhetherTheyAreFavoriteOrNot(listOfUser)
     }
 
     suspend fun getDetailUser(username: String): User? {
@@ -40,12 +41,21 @@ class Repository private constructor(
         localService.addUserToFavorite(user)
     }
 
+    suspend fun removeUserFromFavorite(user: User) {
+        localService.removeUserFromFavorite(user)
+    }
+
     fun getDarkThemeEnabledPreference() : Flow<Boolean> {
         return localService.getDarkThemeEnabledPreference()
     }
 
     suspend fun setDarkThemeEnabledPreference(isEnabled: Boolean) {
         localService.setDarkThemeEnabledPreference(isEnabled)
+    }
+
+    private fun mapUsersWhetherTheyAreFavoriteOrNot(usersFromServer: List<User>): List<User> {
+        val usersFromFavoriteList = localService.getAllUserFavoriteAsList()
+        return usersFromServer.mapBasedOnFavoriteWith(usersFromFavoriteList)
     }
 
     companion object {
