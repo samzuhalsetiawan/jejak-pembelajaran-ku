@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.R
 import com.example.githubuser.adapters.UserListAdapter
 import com.example.githubuser.data.models.User
 import com.example.githubuser.databinding.FragmentSearchBinding
@@ -50,7 +49,7 @@ class SearchFragment : Fragment(),
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query == null) return false
-        gitHubUserViewModel.searchUserByName(query).also { binding.showShimmer() }
+        doUserSearch(query)
         binding.svSearchUser.apply { setQuery("", false).also { clearFocus() } }
         return true
     }
@@ -70,10 +69,13 @@ class SearchFragment : Fragment(),
         gitHubUserViewModel.removeUserFromFavorite(user)
     }
 
+    private fun doUserSearch(query: String?) {
+        if (query == null) return
+        gitHubUserViewModel.searchUserByName(query).also { binding.showShimmer() }
+    }
+
     private fun doInitialUserSearch() {
-        if (gitHubUserViewModel.listOfUser.value == null) gitHubUserViewModel.searchUserByName(
-            resources.getString(R.string.initial_search_name)
-        ).also { binding.showShimmer() }
+        doUserSearch(gitHubUserViewModel.currentUserSearchQuery.value)
     }
 
     private fun FragmentSearchBinding.setupRecyclerView() {
@@ -82,6 +84,7 @@ class SearchFragment : Fragment(),
     }
 
     private fun GitHubUserViewModel.setupLiveDataObserver() {
+        isConnectionError.observe(viewLifecycleOwner, onConnectionError)
         listOfUser.observe(viewLifecycleOwner, onListOfUserChange)
         getAllUserFavorite().observe(viewLifecycleOwner, onListOfFavoriteUserChange)
     }
@@ -95,6 +98,10 @@ class SearchFragment : Fragment(),
     private val onListOfFavoriteUserChange = Observer { value: List<User> ->
         updateInitializeProgress(1)
         gitHubUserViewModel.notifyFavoriteUserChange(value)
+    }
+
+    private val onConnectionError = Observer { value: Boolean ->
+        if (value) doUserSearch(gitHubUserViewModel.currentUserSearchQuery.value)
     }
 
     private fun updateInitializeProgress(index: Int) {

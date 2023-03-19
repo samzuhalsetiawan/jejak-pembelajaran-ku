@@ -4,9 +4,12 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.githubuser.data.models.User
 import com.example.githubuser.data.sources.local.LocalService
-import com.example.githubuser.data.sources.remote.RetrofitService
+import com.example.githubuser.data.sources.remote.RemoteService
+import com.example.githubuser.exceptions.ApiIOException
+import com.example.githubuser.exceptions.ApiUnexpectedResponseException
 import com.example.githubuser.interfaces.ILocalServiceContract
 import com.example.githubuser.interfaces.IRemoteServiceContract
+import com.example.githubuser.sealed_class.NetworkResult
 import com.example.githubuser.utils.ExtensionUtils.mapBasedOnFavoriteWith
 import kotlinx.coroutines.flow.Flow
 
@@ -16,22 +19,47 @@ class Repository private constructor(
 ) {
 
     suspend fun getAllUserByName(name: String): List<User> {
-        val listOfUser = remoteService.getAllUserByName(name)
-        return mapUsersWhetherTheyAreFavoriteOrNot(listOfUser)
+        return when (val networkResult = remoteService.getAllUserByName(name)) {
+            is NetworkResult.ResultSuccess -> mapUsersWhetherTheyAreFavoriteOrNot(networkResult.data)
+            is NetworkResult.ResultError -> throw ApiUnexpectedResponseException(
+                networkResult.httpCode,
+                networkResult.message
+            )
+            is NetworkResult.ResultException -> throw ApiIOException(networkResult.err)
+        }
     }
 
     suspend fun getAllFollowerOf(name: String): List<User> {
-        val listOfUser = remoteService.getAllFollowerOf(name)
-        return mapUsersWhetherTheyAreFavoriteOrNot(listOfUser)
+        return when (val networkResult = remoteService.getAllFollowerOf(name)) {
+            is NetworkResult.ResultSuccess -> mapUsersWhetherTheyAreFavoriteOrNot(networkResult.data)
+            is NetworkResult.ResultError -> throw ApiUnexpectedResponseException(
+                networkResult.httpCode,
+                networkResult.message
+            )
+            is NetworkResult.ResultException -> throw ApiIOException(networkResult.err)
+        }
     }
 
     suspend fun getUsersFollowedBy(name: String): List<User> {
-        val listOfUser = remoteService.getUsersFollowedBy(name)
-        return mapUsersWhetherTheyAreFavoriteOrNot(listOfUser)
+        return when (val networkResult = remoteService.getUsersFollowedBy(name)) {
+            is NetworkResult.ResultSuccess -> mapUsersWhetherTheyAreFavoriteOrNot(networkResult.data)
+            is NetworkResult.ResultError -> throw ApiUnexpectedResponseException(
+                networkResult.httpCode,
+                networkResult.message
+            )
+            is NetworkResult.ResultException -> throw ApiIOException(networkResult.err)
+        }
     }
 
-    suspend fun getDetailUser(username: String): User? {
-        return remoteService.getUserByName(username)
+    suspend fun getDetailUser(username: String): User {
+        return when (val networkResult = remoteService.getUserByName(username)) {
+            is NetworkResult.ResultSuccess -> networkResult.data
+            is NetworkResult.ResultError -> throw ApiUnexpectedResponseException(
+                networkResult.httpCode,
+                networkResult.message
+            )
+            is NetworkResult.ResultException -> throw ApiIOException(networkResult.err)
+        }
     }
 
     fun getAllUserFavorite(): LiveData<List<User>> {
@@ -67,7 +95,7 @@ class Repository private constructor(
         fun getInstance(context: Context): Repository {
             return REPOSITORY_INSTANCE ?: synchronized(this) {
 
-                val remoteService = RetrofitService.getInstance()
+                val remoteService = RemoteService.getInstance()
                 val localService = LocalService.getInstance(context)
 
                 REPOSITORY_INSTANCE ?: Repository(remoteService, localService)

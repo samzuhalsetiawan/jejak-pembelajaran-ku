@@ -23,7 +23,7 @@ class UserTest {
         }
     }
 
-//    I want two instance of user is same if at least some attribute are same
+//    2 buah instance user bisa dikatakan sama jika property [id, login, avatarUrl, name, htmlUrl, email] sama
     @Test
     fun testEquality() {
         val dummyUser1 = dummyListOfUser[5]

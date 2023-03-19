@@ -3,7 +3,6 @@
     <string name="divider_followers_and_following">|</string>
     <string name="my_name">Sam Zuhal Setiawan</string>
     <string name="my_email">samzuhal095@gmail.com</string>
-    <string name="initial_search_name">a</string>
     <string name="followers_static_label">0 Followers</string>
     <string name="followers_dynamic_label">%1$d Followers</string>
     <string name="following_static_label">0 Following</string>
@@ -13,7 +12,6 @@
     <string name="label_user_empty_follower">User Tidak Memiliki Follower</string>
     <string name="label_user_empty_following">User Tidak Memfollow Siapapun</string>
     <string name="label_user_empty_favorite">Tidak Ada User Favorite</string>
-    <string name="label_connection_error"><![CDATA[Connection Error!. <b><u>Coba Lagi</u></b>.]]></string>
     <string name="label_dark_mode">Dark Mode</string>
     <string name="label_add_to_favorite">Add Favorite</string>
     <string name="label_to_search_user">Search User</string>

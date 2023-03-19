@@ -3,11 +3,13 @@ package com.example.githubuser.ui.detail_user
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
@@ -70,8 +72,21 @@ class DetailFragment : Fragment(),
         return when (menuItem.itemId) {
             R.id.menuAddFavorite -> true.also {
                 user.isFavorite = !user.isFavorite
-                if (user.isFavorite) gitHubUserViewModel.addUserToFavorite(user)
-                else gitHubUserViewModel.removeUserFromFavorite(user)
+                if (user.isFavorite) {
+                    gitHubUserViewModel.addUserToFavorite(user)
+                    Toast.makeText(
+                        requireContext(),
+                        "${user.login} added to favorite ❤️",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    gitHubUserViewModel.removeUserFromFavorite(user)
+                    Toast.makeText(
+                        requireContext(),
+                        "${user.login} removed from favorite️",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
             else -> false
         }
@@ -87,6 +102,11 @@ class DetailFragment : Fragment(),
         detailUser.observe(viewLifecycleOwner) {
             updateInitializeProgress(0)
             binding.updateUiDataWith(it)
+        }
+        isConnectionError.observe(viewLifecycleOwner) {
+            if (!it) return@observe
+            val action = DetailFragmentDirections.actionDetailFragmentToDetailFragment(user)
+            findNavController().navigate(action)
         }
         listOfFollower.observe(viewLifecycleOwner) { updateInitializeProgress(1) }
         listOfFollowing.observe(viewLifecycleOwner) { updateInitializeProgress(2) }
