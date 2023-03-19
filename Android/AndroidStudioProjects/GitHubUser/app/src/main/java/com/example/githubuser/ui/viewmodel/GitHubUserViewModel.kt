@@ -1,17 +1,14 @@
 package com.example.githubuser.ui.viewmodel
 
 import android.app.Application
-import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.*
-import com.example.githubuser.data.sources.local.datastore.SettingPreference
-import com.example.githubuser.enums.FollowType
 import com.example.githubuser.data.models.User
 import com.example.githubuser.data.sources.repository.Repository
+import com.example.githubuser.enums.FollowType
 import com.example.githubuser.utils.ExtensionUtils.mapBasedOnFavoriteWith
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GitHubUserViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -45,8 +42,11 @@ class GitHubUserViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun getDetailUser(name: String) {
+    fun getDetailUser(name: String, initial: User? = null) {
         viewModelScope.launch(Dispatchers.IO) {
+            if (initial != null) withContext(Dispatchers.Default) {
+                initial.let { _detailUser.postValue(it) }
+            }
             val user = repository.getDetailUser(name)
             user?.let { _detailUser.postValue(it) }
         }

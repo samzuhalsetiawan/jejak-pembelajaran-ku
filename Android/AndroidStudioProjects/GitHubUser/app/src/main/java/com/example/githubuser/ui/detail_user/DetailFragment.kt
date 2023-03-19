@@ -3,7 +3,6 @@ package com.example.githubuser.ui.detail_user
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -14,9 +13,9 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.adapters.FollowersAndFollowingAdapter
 import com.example.githubuser.data.models.User
+import com.example.githubuser.databinding.FragmentDetailBinding
 import com.example.githubuser.enums.FollowType
 import com.example.githubuser.ui.viewmodel.GitHubUserViewModel
-import com.example.githubuser.databinding.FragmentDetailBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,8 +35,7 @@ class DetailFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
-            FragmentDetailBinding.bind(inflater.inflate(R.layout.fragment_detail, container, false))
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -45,42 +43,27 @@ class DetailFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         activity?.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-        followersAndFollowingAdapter = FollowersAndFollowingAdapter(this)
-        getUserDetailData()
-        updateUiDataWith(user)
-        setupAppBarTabLayoutAndViewPager()
-        setupObserver()
+        binding.setupAppBarTabLayoutAndViewPager()
+        gitHubUserViewModel.getUserDetailData()
+        gitHubUserViewModel.setupObserver()
+        binding.updateUiDataWith(user)
 
-    }
-
-    private fun getUserDetailData() {
-        gitHubUserViewModel.getDetailUser(user.login).also { showShimmer() }
-        gitHubUserViewModel.getAllFollowerOf(user.login).also { showShimmer() }
-        gitHubUserViewModel.getUsersFollowedBy(user.login).also { showShimmer() }
-    }
-
-    private fun setupObserver() {
-        gitHubUserViewModel.detailUser.observe(viewLifecycleOwner) {
-            updateInitializeProgress(0)
-            updateUiDataWith(it)
-        }
-        gitHubUserViewModel.listOfFollower.observe(viewLifecycleOwner) { updateInitializeProgress(1) }
-        gitHubUserViewModel.listOfFollowing.observe(viewLifecycleOwner) { updateInitializeProgress(2) }
-    }
-
-    override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-        binding.mlMotionLayoutDetailUser.progress =
-            -verticalOffset / appBarLayout.totalScrollRange.toFloat()
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.detail_user_menu, menu)
         val favIconMenu = menu.findItem(R.id.menuAddFavorite)
+        switchFavIconToFavorite(favIconMenu, user.isFavorite)
         gitHubUserViewModel.getAllUserFavorite().observe(viewLifecycleOwner) { value: List<User> ->
             updateInitializeProgress(3)
             gitHubUserViewModel.notifyFavoriteUserChange(value)
             switchFavIconToFavorite(favIconMenu, value.contains(user))
         }
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+        binding.mlMotionLayoutDetailUser.progress =
+            -verticalOffset / appBarLayout.totalScrollRange.toFloat()
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -94,52 +77,68 @@ class DetailFragment : Fragment(),
         }
     }
 
+    private fun GitHubUserViewModel.getUserDetailData() {
+        getDetailUser(user.login, user).also { binding.showShimmer() }
+        getAllFollowerOf(user.login).also { binding.showShimmer() }
+        getUsersFollowedBy(user.login).also { binding.showShimmer() }
+    }
+
+    private fun GitHubUserViewModel.setupObserver() {
+        detailUser.observe(viewLifecycleOwner) {
+            updateInitializeProgress(0)
+            binding.updateUiDataWith(it)
+        }
+        listOfFollower.observe(viewLifecycleOwner) { updateInitializeProgress(1) }
+        listOfFollowing.observe(viewLifecycleOwner) { updateInitializeProgress(2) }
+    }
+
     private fun switchFavIconToFavorite(menu: MenuItem, isFavorite: Boolean) {
-        menu.icon = if (isFavorite) ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
-        else ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_border)
-        menu.icon?.setTint(Color.WHITE)
-    }
-
-    private fun setupAppBarTabLayoutAndViewPager() {
-        binding.apply {
-            vp2FollowersAndFollowing.adapter = followersAndFollowingAdapter
-            TabLayoutMediator(
-                tlFollowsTabLayout,
-                vp2FollowersAndFollowing
-            ) { tab: TabLayout.Tab, index: Int ->
-                tab.text = FollowType.values()[index].tabName
-            }.attach()
-            ablAppBarLayoutDetailUser.addOnOffsetChangedListener(this@DetailFragment)
+        menu.icon = if (isFavorite) {
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
+                .also { menu.icon?.setTint(ContextCompat.getColor(requireContext(), R.color.red1)) }
+        } else {
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_border)
+                .also { menu.icon?.setTint(Color.WHITE) }
         }
     }
 
-    private fun updateUiDataWith(user: User) {
-        binding.apply {
-            Glide.with(this@DetailFragment)
-                .load(user.avatarUrl)
-                .into(ivUserProfilePicture)
-            tvUsername.text = user.name
-            tvAccountName.text = user.login
-            tvUserFollowerCount.text =
-                resources.getString(R.string.followers_dynamic_label, user.followers)
-            tvUserFollowingCount.text =
-                resources.getString(R.string.following_dynamic_label, user.following)
-        }
+    private fun FragmentDetailBinding.setupAppBarTabLayoutAndViewPager() {
+        followersAndFollowingAdapter = FollowersAndFollowingAdapter(this@DetailFragment)
+        vp2FollowersAndFollowing.adapter = followersAndFollowingAdapter
+        TabLayoutMediator(
+            tlFollowsTabLayout,
+            vp2FollowersAndFollowing
+        ) { tab: TabLayout.Tab, index: Int ->
+            tab.text = FollowType.values()[index].tabName
+        }.attach()
+        ablAppBarLayoutDetailUser.addOnOffsetChangedListener(this@DetailFragment)
+    }
+
+    private fun FragmentDetailBinding.updateUiDataWith(user: User) {
+        Glide.with(this@DetailFragment)
+            .load(user.avatarUrl)
+            .into(ivUserProfilePicture)
+        tvUsername.text = user.name
+        tvAccountName.text = user.login
+        tvUserFollowerCount.text =
+            resources.getString(R.string.followers_dynamic_label, user.followers)
+        tvUserFollowingCount.text =
+            resources.getString(R.string.following_dynamic_label, user.following)
     }
 
     private fun updateInitializeProgress(index: Int) {
         initializeProgress[index] = true
-        if (initializeProgress.all { it }) closeShimmer()
+        if (initializeProgress.all { it }) binding.closeShimmer()
     }
 
-    private fun showShimmer() {
-        binding.ablAppBarLayoutDetailUser.visibility = View.INVISIBLE
-        binding.shimmerDetailUser.visibility = View.VISIBLE
+    private fun FragmentDetailBinding.showShimmer() {
+        ablAppBarLayoutDetailUser.visibility = View.INVISIBLE
+        shimmerDetailUser.visibility = View.VISIBLE
     }
 
-    private fun closeShimmer() {
-        binding.ablAppBarLayoutDetailUser.visibility = View.VISIBLE
-        binding.shimmerDetailUser.visibility = View.GONE
+    private fun FragmentDetailBinding.closeShimmer() {
+        ablAppBarLayoutDetailUser.visibility = View.VISIBLE
+        shimmerDetailUser.visibility = View.GONE
     }
 
 }

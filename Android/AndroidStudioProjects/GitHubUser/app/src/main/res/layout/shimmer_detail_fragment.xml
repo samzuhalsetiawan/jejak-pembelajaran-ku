@@ -37,14 +37,14 @@
             app:layout_constraintTop_toBottomOf="@id/ivUserProfilePicture" />
 
         <View
+            android:id="@+id/tvAccountName"
             android:layout_width="0dp"
             android:layout_height="18dp"
-            android:id="@+id/tvAccountName"
             android:background="@color/gray"
-            app:layout_constraintTop_toBottomOf="@id/tvUsername"
+            app:layout_constraintBottom_toTopOf="@id/tvDividerFollowerAndFollowing"
             app:layout_constraintLeft_toLeftOf="@id/tvUsername"
             app:layout_constraintRight_toRightOf="@id/tvUsername"
-            app:layout_constraintBottom_toTopOf="@id/tvDividerFollowerAndFollowing" />
+            app:layout_constraintTop_toBottomOf="@id/tvUsername" />
 
         <View
             android:id="@+id/tvUserFollowerCount"

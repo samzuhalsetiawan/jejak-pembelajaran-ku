@@ -6,18 +6,18 @@
     tools:context=".ui.favorite_user.FavoriteUserFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFavoriteUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvFavoriteUser"
         android:visibility="invisible"
-        tools:visibility="visible"
-        tools:listitem="@layout/user_card" />
+        tools:listitem="@layout/user_card"
+        tools:visibility="visible" />
 
     <FrameLayout
+        android:id="@+id/flUserNotFound"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:visibility="gone"
-        android:id="@+id/flUserNotFound">
+        tools:visibility="gone">
 
         <include
             android:id="@+id/includeUserNotFound"

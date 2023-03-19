@@ -7,8 +7,4 @@ object DebugHelper {
     fun loggingError(unit: String, message: String? = "", throwable: Throwable? = null) {
         Log.e(TAG, "[$unit] $message", throwable)
     }
-
-    fun loggingDebug(unit: String, message: String? = "") {
-        Log.d(TAG, "[$unit] $message")
-    }
 }

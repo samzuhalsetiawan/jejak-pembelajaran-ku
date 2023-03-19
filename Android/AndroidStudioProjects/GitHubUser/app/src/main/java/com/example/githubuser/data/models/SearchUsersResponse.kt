@@ -1,6 +1,5 @@
 package com.example.githubuser.data.models
 
-import android.util.Log
 import com.google.gson.annotations.SerializedName
 
 data class SearchUsersResponse(

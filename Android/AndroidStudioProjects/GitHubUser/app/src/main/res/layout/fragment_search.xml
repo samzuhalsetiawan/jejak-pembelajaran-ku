@@ -28,23 +28,23 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dimen_medium"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/svSearchUser"
-        tools:listitem="@layout/user_card" />
+        tools:listitem="@layout/user_card"
+        tools:visibility="visible" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerSearchUser"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dimen_medium"
-        tools:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/svSearchUser">
+        app:layout_constraintTop_toBottomOf="@id/svSearchUser"
+        tools:visibility="gone">
 
         <include layout="@layout/shimmer_list_of_user" />
 

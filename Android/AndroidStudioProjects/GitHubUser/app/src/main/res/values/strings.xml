@@ -13,5 +13,11 @@
     <string name="label_user_empty_follower">User Tidak Memiliki Follower</string>
     <string name="label_user_empty_following">User Tidak Memfollow Siapapun</string>
     <string name="label_user_empty_favorite">Tidak Ada User Favorite</string>
+    <string name="label_connection_error"><![CDATA[Connection Error!. <b><u>Coba Lagi</u></b>.]]></string>
     <string name="label_dark_mode">Dark Mode</string>
+    <string name="label_add_to_favorite">Add Favorite</string>
+    <string name="label_to_search_user">Search User</string>
+    <string name="label_to_favorite_user">Favorite User</string>
+    <string name="label_header_drawer_github_user">GitHub User</string>
+    <string name="label_by_sam">By SamZ</string>
 </resources>

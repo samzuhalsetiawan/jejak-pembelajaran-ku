@@ -15,16 +15,18 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 class LocalService private constructor(
-        private val settingPreference: SettingPreference,
-        private val userDB: UserDB
-    ): ILocalServiceContract {
+    private val settingPreference: SettingPreference,
+    private val userDB: UserDB
+) : ILocalServiceContract {
 
     override fun getAllUserFavorite(): LiveData<List<User>> {
         return try {
             userDB.getUserFavoriteDao().getAllUserFavorite().asFlow()
-                .map { it.onEach { user ->
-                    user.isFavorite = true
-                } }.asLiveData()
+                .map {
+                    it.onEach { user ->
+                        user.isFavorite = true
+                    }
+                }.asLiveData()
         } catch (tr: Throwable) {
             DebugHelper.loggingError("LocalService::getAllUserFavorite", tr.message, tr)
             MutableLiveData()
@@ -61,8 +63,12 @@ class LocalService private constructor(
     override fun getDarkThemeEnabledPreference(): Flow<Boolean> {
         return settingPreference.getFlowDarkThemePreferences()
             .catch { tr ->
-                DebugHelper.loggingError("LocalService::getDarkThemeEnabledPreference", tr.message, tr)
-        }
+                DebugHelper.loggingError(
+                    "LocalService::getDarkThemeEnabledPreference",
+                    tr.message,
+                    tr
+                )
+            }
     }
 
     override suspend fun setDarkThemeEnabledPreference(isEnabled: Boolean) {
@@ -75,7 +81,7 @@ class LocalService private constructor(
 
     companion object {
         @Volatile
-        private var LOCAL_SERVICE_INSTANCE :LocalService? = null
+        private var LOCAL_SERVICE_INSTANCE: LocalService? = null
 
         fun getInstance(context: Context): LocalService {
             return LOCAL_SERVICE_INSTANCE ?: synchronized(this) {
@@ -83,7 +89,10 @@ class LocalService private constructor(
                 val settingPreference = SettingPreference.getInstance(context)
                 val userDb = UserDB.getInstance(context)
 
-                LOCAL_SERVICE_INSTANCE ?: LocalService(settingPreference, userDb).also { LOCAL_SERVICE_INSTANCE = it }
+                LOCAL_SERVICE_INSTANCE ?: LocalService(
+                    settingPreference,
+                    userDb
+                ).also { LOCAL_SERVICE_INSTANCE = it }
             }
         }
     }

@@ -27,9 +27,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablAppBarLayoutDetailUser"
         android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_height="250dp">
+        tools:visibility="visible">
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/mlMotionLayoutDetailUser"
@@ -65,8 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/padding_vertical"
-                android:textColor="@color/white"
                 android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@id/tvAccountName"
                 app:layout_constraintLeft_toLeftOf="@id/ivUserProfilePicture"
                 app:layout_constraintRight_toRightOf="@id/ivUserProfilePicture"

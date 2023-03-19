@@ -11,9 +11,9 @@ import com.example.githubuser.utils.ExtensionUtils.mapBasedOnFavoriteWith
 import kotlinx.coroutines.flow.Flow
 
 class Repository private constructor(
-        private val remoteService: IRemoteServiceContract,
-        private val localService: ILocalServiceContract
-    ) {
+    private val remoteService: IRemoteServiceContract,
+    private val localService: ILocalServiceContract
+) {
 
     suspend fun getAllUserByName(name: String): List<User> {
         val listOfUser = remoteService.getAllUserByName(name)
@@ -33,6 +33,7 @@ class Repository private constructor(
     suspend fun getDetailUser(username: String): User? {
         return remoteService.getUserByName(username)
     }
+
     fun getAllUserFavorite(): LiveData<List<User>> {
         return localService.getAllUserFavorite()
     }
@@ -45,7 +46,7 @@ class Repository private constructor(
         localService.removeUserFromFavorite(user)
     }
 
-    fun getDarkThemeEnabledPreference() : Flow<Boolean> {
+    fun getDarkThemeEnabledPreference(): Flow<Boolean> {
         return localService.getDarkThemeEnabledPreference()
     }
 
@@ -61,7 +62,7 @@ class Repository private constructor(
     companion object {
 
         @Volatile
-        private var REPOSITORY_INSTANCE :Repository? = null
+        private var REPOSITORY_INSTANCE: Repository? = null
 
         fun getInstance(context: Context): Repository {
             return REPOSITORY_INSTANCE ?: synchronized(this) {

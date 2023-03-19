@@ -10,23 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
-        tools:visibility="visible"
-        tools:listitem="@layout/user_card" />
+        tools:listitem="@layout/user_card"
+        tools:visibility="visible" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerFollowsList"
         android:layout_width="match_parent"
-        tools:visibility="gone"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:visibility="gone">
 
         <include layout="@layout/shimmer_list_of_user" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <FrameLayout
+        android:id="@+id/flUserNotFound"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/flUserNotFound"
         android:visibility="gone">
 
         <include

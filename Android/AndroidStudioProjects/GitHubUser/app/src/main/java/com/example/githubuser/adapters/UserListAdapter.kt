@@ -1,7 +1,9 @@
 package com.example.githubuser.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.data.models.User
 import com.example.githubuser.databinding.UserCardBinding
 import com.example.githubuser.interfaces.IUserCardClickEventHandler
-import com.example.githubuser.utils.DebugHelper
 
 class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
     RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
@@ -17,37 +18,38 @@ class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
     inner class ViewHolder(private val binding: UserCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(user: User) {
-            binding.apply {
-                Glide.with(binding.root)
-                    .load(user.avatarUrl)
-                    .into(ivUserProfilePicture)
+        fun bind(user: User) = binding.bindData(user)
 
-                tvUsername.text = user.login
-                tvHtmlUrl.text = user.htmlUrl
-                cvUserCard.setOnClickListener { clickHandler.onCardClickListener(cvUserCard, user) }
-                cbFavoriteButton.isChecked = user.isFavorite
-                cbFavoriteButton.setOnClickListener {
-                    user.isFavorite = !user.isFavorite
-                    if (user.isFavorite) {
-                        cbFavoriteButton.isChecked = true
-                        clickHandler.onFavoriteIconCheckedListener(cbFavoriteButton, user)
-                    } else {
-                        cbFavoriteButton.isChecked = false
-                        clickHandler.onFavoriteIconUncheckedListener(cbFavoriteButton, user)
-                    }
-                }
-            }
+        private fun UserCardBinding.bindData(user: User) {
+            Glide.with(binding.root).load(user.avatarUrl).into(ivUserProfilePicture)
+            tvUsername.text = user.login
+            tvHtmlUrl.text = user.htmlUrl
+            cvUserCard.setOnClickListener { clickHandler.onCardClickListener(cvUserCard, user) }
+            cbFavoriteButton.isChecked = user.isFavorite
+            cbFavoriteButton.setOnClickListener { cbFavoriteButtonClickHandler(user) }
         }
+
+        private fun UserCardBinding.cbFavoriteButtonClickHandler(user: User) {
+            user.isFavorite = !user.isFavorite
+            cbFavoriteButton.isChecked = user.isFavorite
+            if (user.isFavorite) clickHandler.onFavoriteIconCheckedListener(cbFavoriteButton, user)
+                .also { root.context.showToast("${user.login} added to favorite ❤️") }
+            else clickHandler.onFavoriteIconUncheckedListener(cbFavoriteButton, user)
+                .also { root.context.showToast("${user.login} removed from favorite️") }
+        }
+
+        private fun Context.showToast(message: String) {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private val diffCallback = object : DiffUtil.ItemCallback<User>() {
         override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem.isFavorite == newItem.isFavorite
-        }
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
+            oldItem == newItem && oldItem.isFavorite == newItem.isFavorite
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)

@@ -8,8 +8,8 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/menuDarkMode"
-        android:title="@string/label_dark_mode"
         android:checkable="true"
-        app:showAsAction="never"/>
+        android:title="@string/label_dark_mode"
+        app:showAsAction="never" />
 
 </menu>

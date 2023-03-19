@@ -1,24 +1,22 @@
 package com.example.githubuser.ui.favorite_user
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.R
 import com.example.githubuser.adapters.UserListAdapter
 import com.example.githubuser.data.models.User
 import com.example.githubuser.databinding.FragmentFavoriteUserBinding
 import com.example.githubuser.interfaces.IUserCardClickEventHandler
 import com.example.githubuser.ui.viewmodel.GitHubUserViewModel
-import com.google.android.material.imageview.ShapeableImageView
 
 class FavoriteUserFragment : Fragment(),
     Observer<List<User>>,
@@ -32,7 +30,7 @@ class FavoriteUserFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavoriteUserBinding.bind(inflater.inflate(R.layout.fragment_favorite_user, container, false))
+        binding = FragmentFavoriteUserBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,17 +38,16 @@ class FavoriteUserFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         favoriteUserAdapter = UserListAdapter(this)
-
-        binding.includeUserNotFound.tvUserNotFound.text = resources.getString(R.string.label_user_empty_favorite)
-
-        setupRecyclerView()
-
+        binding.includeUserNotFound.tvUserNotFound.text =
+            resources.getString(R.string.label_user_empty_favorite)
+        binding.setupRecyclerView()
         gitHubUserViewModel.getAllUserFavorite().observe(viewLifecycleOwner, this)
+
     }
 
     override fun onChanged(value: List<User>) {
         gitHubUserViewModel.notifyFavoriteUserChange(value)
-        toggleDisplayErrorPage(value.isEmpty())
+        binding.toggleDisplayErrorPage(value.isEmpty())
         favoriteUserAdapter.listOfUser = value
     }
 
@@ -67,20 +64,18 @@ class FavoriteUserFragment : Fragment(),
         gitHubUserViewModel.removeUserFromFavorite(user)
     }
 
-    private fun setupRecyclerView() {
-        binding.rvFavoriteUser.apply {
-            adapter = favoriteUserAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+    private fun FragmentFavoriteUserBinding.setupRecyclerView() {
+        rvFavoriteUser.adapter = favoriteUserAdapter
+        rvFavoriteUser.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun toggleDisplayErrorPage(shouldShow: Boolean) {
+    private fun FragmentFavoriteUserBinding.toggleDisplayErrorPage(shouldShow: Boolean) {
         if (shouldShow) {
-            binding.flUserNotFound.visibility = View.VISIBLE
-            binding.rvFavoriteUser.visibility = View.INVISIBLE
+            flUserNotFound.visibility = View.VISIBLE
+            rvFavoriteUser.visibility = View.INVISIBLE
         } else {
-            binding.flUserNotFound.visibility = View.GONE
-            binding.rvFavoriteUser.visibility = View.VISIBLE
+            flUserNotFound.visibility = View.GONE
+            rvFavoriteUser.visibility = View.VISIBLE
         }
     }
 

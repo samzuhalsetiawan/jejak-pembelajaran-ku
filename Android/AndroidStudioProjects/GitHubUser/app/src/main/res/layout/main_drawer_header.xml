@@ -1,33 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
     android:paddingHorizontal="@dimen/padding_horizontal"
     android:paddingVertical="@dimen/padding_vertical">
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivGithubLogo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.4"
-        app:layout_constraintWidth_percent="0.2"
         android:src="@drawable/github_logo"
-        android:id="@+id/ivGithubLogo"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:tint="?attr/colorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:tint="?attr/colorOnPrimary"/>
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintWidth_percent="0.2" />
 
     <TextView
+        android:id="@+id/tvDrawerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textAppearance="?attr/textAppearanceHeadline6"
         android:ellipsize="end"
-        android:id="@+id/tvDrawerTitle"
+        android:text="@string/label_header_drawer_github_user"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toTopOf="@id/tvBySamZ"
         app:layout_constraintLeft_toRightOf="@id/ivGithubLogo"
-        app:layout_constraintBottom_toBottomOf="@id/ivGithubLogo"
         app:layout_constraintTop_toTopOf="@id/ivGithubLogo"
-        android:textColor="?attr/colorOnPrimary" />
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvBySamZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_by_sam"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/ivGithubLogo"
+        app:layout_constraintLeft_toLeftOf="@id/tvDrawerTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvDrawerTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

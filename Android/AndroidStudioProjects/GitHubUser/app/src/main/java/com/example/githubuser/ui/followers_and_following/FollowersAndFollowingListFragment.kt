@@ -8,22 +8,19 @@ import android.widget.CheckBox
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.adapters.UserListAdapter
 import com.example.githubuser.data.models.User
-import com.example.githubuser.enums.FollowType
-import com.example.githubuser.ui.viewmodel.GitHubUserViewModel
 import com.example.githubuser.databinding.FragmentFollowersAndFollowingListBinding
+import com.example.githubuser.enums.FollowType
 import com.example.githubuser.interfaces.IUserCardClickEventHandler
 import com.example.githubuser.ui.detail_user.DetailFragmentDirections
-import com.example.githubuser.utils.DebugHelper
-import com.google.android.material.imageview.ShapeableImageView
+import com.example.githubuser.ui.viewmodel.GitHubUserViewModel
 
-class FollowersAndFollowingListFragment() :
+class FollowersAndFollowingListFragment :
     Fragment(),
     IUserCardClickEventHandler {
 
@@ -55,9 +52,7 @@ class FollowersAndFollowingListFragment() :
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowersAndFollowingListBinding.bind(
-            inflater.inflate(R.layout.fragment_followers_and_following_list, container, false)
-        )
+        binding = FragmentFollowersAndFollowingListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -65,7 +60,7 @@ class FollowersAndFollowingListFragment() :
         super.onViewCreated(view, savedInstanceState)
 
         userListAdapter = UserListAdapter(this)
-        setupRecyclerView()
+        binding.setupRecyclerView()
         setupListOfUserAndObserve()
 
     }
@@ -95,13 +90,13 @@ class FollowersAndFollowingListFragment() :
         gitHubUserViewModel.notifyFavoriteUserChange(value)
     }
 
-    private fun setupRecyclerView() {
-        binding.rvFollowersAndFollowingList.apply {
+    private fun FragmentFollowersAndFollowingListBinding.setupRecyclerView() {
+        rvFollowersAndFollowingList.apply {
             adapter = userListAdapter
             layoutManager =
                 LinearLayoutManager(this@FollowersAndFollowingListFragment.requireContext())
         }
-        binding.includeNotFound.tvUserNotFound.text = when (followType) {
+        includeNotFound.tvUserNotFound.text = when (followType) {
             FollowType.Follower -> resources.getString(R.string.label_user_empty_follower)
             FollowType.Following -> resources.getString(R.string.label_user_empty_following)
             else -> return
@@ -110,22 +105,25 @@ class FollowersAndFollowingListFragment() :
 
     private fun setupListOfUserAndObserve() {
         val followType = followType ?: return
-        gitHubUserViewModel.getListOfUserBasedFollowType(followType).observe(viewLifecycleOwner, onListOfUserFollowsChange)
-        gitHubUserViewModel.getAllUserFavorite().observe(viewLifecycleOwner, onListOfFavoriteUserChange)
+        gitHubUserViewModel.getListOfUserBasedFollowType(followType)
+            .observe(viewLifecycleOwner, onListOfUserFollowsChange)
+        gitHubUserViewModel.getAllUserFavorite()
+            .observe(viewLifecycleOwner, onListOfFavoriteUserChange)
     }
 
     private fun updateInitializeProgress(index: Int) {
         initializeProgress[index] = true
-        if (initializeProgress.all { it }) closeShimmer(shouldShowErrorPage)
+        if (initializeProgress.all { it }) binding.closeShimmer(shouldShowErrorPage)
     }
 
-    private fun closeShimmer(shouldShowErrorPage: Boolean = false) {
-        binding.shimmerFollowsList.visibility = View.GONE
+    private fun FragmentFollowersAndFollowingListBinding.closeShimmer(shouldShowErrorPage: Boolean = false) {
+        shimmerFollowsList.visibility = View.GONE
         if (shouldShowErrorPage) {
-            binding.flUserNotFound.visibility = View.VISIBLE
+            flUserNotFound.visibility = View.VISIBLE
+            rvFollowersAndFollowingList.visibility = View.INVISIBLE
         } else {
-            binding.flUserNotFound.visibility = View.GONE
+            flUserNotFound.visibility = View.GONE
+            rvFollowersAndFollowingList.visibility = View.VISIBLE
         }
-        binding.rvFollowersAndFollowingList.visibility = View.VISIBLE
     }
 }

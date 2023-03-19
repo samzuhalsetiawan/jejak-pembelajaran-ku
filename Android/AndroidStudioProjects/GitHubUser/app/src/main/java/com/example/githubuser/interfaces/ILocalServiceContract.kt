@@ -14,7 +14,7 @@ interface ILocalServiceContract {
 
     suspend fun removeUserFromFavorite(user: User)
 
-    fun getDarkThemeEnabledPreference() : Flow<Boolean>
+    fun getDarkThemeEnabledPreference(): Flow<Boolean>
 
     suspend fun setDarkThemeEnabledPreference(isEnabled: Boolean)
 }

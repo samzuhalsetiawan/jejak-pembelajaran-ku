@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.githubuser.data.models.User
-import com.example.githubuser.interfaces.ILocalServiceContract
 
 @Database(entities = [User::class], version = 1, exportSchema = false)
 abstract class UserDB : RoomDatabase() {
@@ -13,7 +12,7 @@ abstract class UserDB : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE : UserDB? = null
+        private var INSTANCE: UserDB? = null
 
         fun getInstance(context: Context): UserDB {
             return INSTANCE ?: synchronized(this) {

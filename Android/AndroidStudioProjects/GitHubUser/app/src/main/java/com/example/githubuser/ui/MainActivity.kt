@@ -1,7 +1,6 @@
 package com.example.githubuser.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -23,10 +22,6 @@ import com.google.android.material.navigation.NavigationView.OnNavigationItemSel
 
 class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelectedListener {
 
-    companion object {
-        private const val TAG = "MainActivity"
-    }
-
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -39,29 +34,18 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
         setContentView(binding.root)
 
         setupAppThemeMode()
-
         addMenuProvider(this)
+        setupNavHostControllerAndAppBarConfig()
+        setupActionBarAndNavDrawer()
+    }
 
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.searchFragment, R.id.detailFragment, R.id.favoriteUserFragment), binding.mainDrawerLayout
-        )
+    private fun setupActionBarAndNavDrawer() {
         supportActionBar?.elevation = 0f
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.nvDrawer.apply {
             setupWithNavController(navController)
             setCheckedItem(R.id.menuSearchUser)
             setNavigationItemSelectedListener(this@MainActivity)
-        }
-    }
-
-    private fun setupAppThemeMode() {
-        gitHubUserViewModel.darkThemePreference.observe(this) { isEnabled ->
-            AppCompatDelegate.setDefaultNightMode(
-                if (isEnabled) AppCompatDelegate.MODE_NIGHT_YES
-                else AppCompatDelegate.MODE_NIGHT_NO
-            )
         }
     }
 
@@ -105,4 +89,25 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
             else -> false
         }
     }
+
+    private fun setupNavHostControllerAndAppBarConfig() {
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.searchFragment, R.id.detailFragment, R.id.favoriteUserFragment),
+            binding.mainDrawerLayout
+        )
+    }
+
+
+    private fun setupAppThemeMode() {
+        gitHubUserViewModel.darkThemePreference.observe(this) { isEnabled ->
+            AppCompatDelegate.setDefaultNightMode(
+                if (isEnabled) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
+        }
+    }
+
 }

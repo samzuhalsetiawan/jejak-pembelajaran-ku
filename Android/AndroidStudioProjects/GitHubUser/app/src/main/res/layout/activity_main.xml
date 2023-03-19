@@ -2,11 +2,11 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mainDrawerLayout"
-    tools:context=".ui.MainActivity"
     android:fitsSystemWindows="true"
+    tools:context=".ui.MainActivity"
     tools:openDrawer="start">
 
     <androidx.fragment.app.FragmentContainerView
@@ -18,12 +18,12 @@
         app:navGraph="@navigation/main_nav" />
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nvDrawer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/main_drawer_header"
-        app:menu="@menu/drawer_menu"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:id="@+id/nvDrawer" />
+        app:headerLayout="@layout/main_drawer_header"
+        app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
