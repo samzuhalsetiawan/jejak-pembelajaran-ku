@@ -40,7 +40,6 @@ class FollowersAndFollowingListFragment :
     private lateinit var userListAdapter: UserListAdapter
     private var followType: FollowType? = null
     private val gitHubUserViewModel: GitHubUserViewModel by activityViewModels()
-    private val initializeProgress = mutableListOf(false, false)
     private var shouldShowErrorPage = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +60,7 @@ class FollowersAndFollowingListFragment :
 
         userListAdapter = UserListAdapter(this)
         binding.setupRecyclerView()
-        setupListOfUserAndObserve()
+        gitHubUserViewModel.setupListOfUserAndObserve()
 
     }
 
@@ -79,15 +78,25 @@ class FollowersAndFollowingListFragment :
         gitHubUserViewModel.removeUserFromFavorite(user)
     }
 
+    private fun GitHubUserViewModel.setupListOfUserAndObserve() {
+        val followType = followType ?: return
+        getStateObservableOf(followType).observe(viewLifecycleOwner, onSearchFollowsStateChange)
+        getListOfUserBasedFollowType(followType).observe(viewLifecycleOwner, onListOfUserFollowsChange)
+        getAllUserFavorite().observe(viewLifecycleOwner, onListOfFavoriteUserChange)
+    }
+
     private val onListOfUserFollowsChange = Observer { value: List<User> ->
         shouldShowErrorPage = value.isEmpty()
-        updateInitializeProgress(0)
         userListAdapter.listOfUser = value
     }
 
     private val onListOfFavoriteUserChange = Observer { value: List<User> ->
-        updateInitializeProgress(1)
         gitHubUserViewModel.notifyFavoriteUserChange(value)
+    }
+
+    private val onSearchFollowsStateChange = Observer { isTrue: Boolean ->
+        if (isTrue) binding.showShimmer()
+        else checkIfShimmerCanBeClosed()
     }
 
     private fun FragmentFollowersAndFollowingListBinding.setupRecyclerView() {
@@ -103,24 +112,23 @@ class FollowersAndFollowingListFragment :
         }
     }
 
-    private fun setupListOfUserAndObserve() {
+    private fun checkIfShimmerCanBeClosed() {
         val followType = followType ?: return
-        gitHubUserViewModel.getListOfUserBasedFollowType(followType)
-            .observe(viewLifecycleOwner, onListOfUserFollowsChange)
-        gitHubUserViewModel.getAllUserFavorite()
-            .observe(viewLifecycleOwner, onListOfFavoriteUserChange)
+        val isSearchingFollows = gitHubUserViewModel.getStateObservableOf(followType).value ?: return
+        if (!isSearchingFollows) binding.closeShimmer(shouldShowErrorPage)
     }
 
-    private fun updateInitializeProgress(index: Int) {
-        initializeProgress[index] = true
-        if (initializeProgress.all { it }) binding.closeShimmer(shouldShowErrorPage)
+    private fun FragmentFollowersAndFollowingListBinding.showShimmer() {
+        shimmerFollowsList.visibility = View.VISIBLE
+        flUserNotFound.visibility = View.GONE
+        rvFollowersAndFollowingList.visibility = View.GONE
     }
 
     private fun FragmentFollowersAndFollowingListBinding.closeShimmer(shouldShowErrorPage: Boolean = false) {
         shimmerFollowsList.visibility = View.GONE
         if (shouldShowErrorPage) {
             flUserNotFound.visibility = View.VISIBLE
-            rvFollowersAndFollowingList.visibility = View.INVISIBLE
+            rvFollowersAndFollowingList.visibility = View.GONE
         } else {
             flUserNotFound.visibility = View.GONE
             rvFollowersAndFollowingList.visibility = View.VISIBLE

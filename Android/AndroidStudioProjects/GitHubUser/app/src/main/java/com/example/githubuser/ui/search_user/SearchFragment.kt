@@ -25,7 +25,6 @@ class SearchFragment : Fragment(),
     private lateinit var binding: FragmentSearchBinding
     private lateinit var userListAdapter: UserListAdapter
     private val gitHubUserViewModel: GitHubUserViewModel by activityViewModels()
-    private val initializeProgress = mutableListOf(false, false)
     private var shouldShowErrorPage = false
 
     override fun onCreateView(
@@ -49,7 +48,7 @@ class SearchFragment : Fragment(),
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query == null) return false
-        doUserSearch(query)
+        gitHubUserViewModel.setCurrentUserSearchQuery(query)
         binding.svSearchUser.apply { setQuery("", false).also { clearFocus() } }
         return true
     }
@@ -71,7 +70,7 @@ class SearchFragment : Fragment(),
 
     private fun doUserSearch(query: String?) {
         if (query == null) return
-        gitHubUserViewModel.searchUserByName(query).also { binding.showShimmer() }
+        gitHubUserViewModel.searchUserByName(query)
     }
 
     private fun doInitialUserSearch() {
@@ -85,18 +84,18 @@ class SearchFragment : Fragment(),
 
     private fun GitHubUserViewModel.setupLiveDataObserver() {
         isConnectionError.observe(viewLifecycleOwner, onConnectionError)
+        isSearching.observe(viewLifecycleOwner, onSearchUserStateChange)
         listOfUser.observe(viewLifecycleOwner, onListOfUserChange)
         getAllUserFavorite().observe(viewLifecycleOwner, onListOfFavoriteUserChange)
+        currentUserSearchQuery.observe(viewLifecycleOwner) { doUserSearch(it) }
     }
 
     private val onListOfUserChange = Observer { value: List<User> ->
         shouldShowErrorPage = value.isEmpty()
-        updateInitializeProgress(0)
         userListAdapter.listOfUser = value
     }
 
     private val onListOfFavoriteUserChange = Observer { value: List<User> ->
-        updateInitializeProgress(1)
         gitHubUserViewModel.notifyFavoriteUserChange(value)
     }
 
@@ -104,14 +103,19 @@ class SearchFragment : Fragment(),
         if (value) doUserSearch(gitHubUserViewModel.currentUserSearchQuery.value)
     }
 
-    private fun updateInitializeProgress(index: Int) {
-        initializeProgress[index] = true
-        if (initializeProgress.all { it }) binding.closeShimmer(shouldShowErrorPage)
+    private val onSearchUserStateChange = Observer { isTrue: Boolean ->
+        if (isTrue) binding.showShimmer()
+        else checkIfShimmerCanBeClosed()
+    }
+
+    private fun checkIfShimmerCanBeClosed() {
+        val isSearching = gitHubUserViewModel.isSearching.value ?: return
+        if (!isSearching) binding.closeShimmer(shouldShowErrorPage)
     }
 
     private fun FragmentSearchBinding.showShimmer() {
         flUserNotFound.visibility = View.GONE
-        rvUserList.visibility = View.INVISIBLE
+        rvUserList.visibility = View.GONE
         shimmerSearchUser.visibility = View.VISIBLE
     }
 

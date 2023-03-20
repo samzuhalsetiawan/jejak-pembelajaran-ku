@@ -9,6 +9,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -31,7 +32,6 @@ class DetailFragment : Fragment(),
     private val gitHubUserViewModel: GitHubUserViewModel by activityViewModels()
     private val args: DetailFragmentArgs by navArgs()
     private val user: User by lazy { args.user }
-    private val initializeProgress = mutableListOf(false, false, false, false)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +48,6 @@ class DetailFragment : Fragment(),
         binding.setupAppBarTabLayoutAndViewPager()
         gitHubUserViewModel.getUserDetailData()
         gitHubUserViewModel.setupObserver()
-        binding.updateUiDataWith(user)
 
     }
 
@@ -57,7 +56,6 @@ class DetailFragment : Fragment(),
         val favIconMenu = menu.findItem(R.id.menuAddFavorite)
         switchFavIconToFavorite(favIconMenu, user.isFavorite)
         gitHubUserViewModel.getAllUserFavorite().observe(viewLifecycleOwner) { value: List<User> ->
-            updateInitializeProgress(3)
             gitHubUserViewModel.notifyFavoriteUserChange(value)
             switchFavIconToFavorite(favIconMenu, value.contains(user))
         }
@@ -74,18 +72,10 @@ class DetailFragment : Fragment(),
                 user.isFavorite = !user.isFavorite
                 if (user.isFavorite) {
                     gitHubUserViewModel.addUserToFavorite(user)
-                    Toast.makeText(
-                        requireContext(),
-                        "${user.login} added to favorite ❤️",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), "${user.login} added to favorite ❤️", Toast.LENGTH_SHORT).show()
                 } else {
                     gitHubUserViewModel.removeUserFromFavorite(user)
-                    Toast.makeText(
-                        requireContext(),
-                        "${user.login} removed from favorite️",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), "${user.login} removed from favorite️", Toast.LENGTH_SHORT).show()
                 }
             }
             else -> false
@@ -93,23 +83,36 @@ class DetailFragment : Fragment(),
     }
 
     private fun GitHubUserViewModel.getUserDetailData() {
-        getDetailUser(user.login, user).also { binding.showShimmer() }
-        getAllFollowerOf(user.login).also { binding.showShimmer() }
-        getUsersFollowedBy(user.login).also { binding.showShimmer() }
+        getDetailUser(user.login)
+        getAllFollowerOf(user.login)
+        getUsersFollowedBy(user.login)
     }
 
     private fun GitHubUserViewModel.setupObserver() {
-        detailUser.observe(viewLifecycleOwner) {
-            updateInitializeProgress(0)
-            binding.updateUiDataWith(it)
-        }
+        isSearchDetailUser.observe(viewLifecycleOwner, onSearchDetailUserStateChange)
+        isSearchFollower.observe(viewLifecycleOwner, onSearchFollowerStateChange)
+        isSearchFollowing.observe(viewLifecycleOwner, onSearchFollowingStateChange)
+        detailUser.observe(viewLifecycleOwner) { binding.updateUiDataWith(it) }
         isConnectionError.observe(viewLifecycleOwner) {
             if (!it) return@observe
             val action = DetailFragmentDirections.actionDetailFragmentToDetailFragment(user)
             findNavController().navigate(action)
         }
-        listOfFollower.observe(viewLifecycleOwner) { updateInitializeProgress(1) }
-        listOfFollowing.observe(viewLifecycleOwner) { updateInitializeProgress(2) }
+    }
+
+    private val onSearchDetailUserStateChange = Observer { isTrue: Boolean ->
+        if (isTrue) binding.showShimmer()
+        else checkIfShimmerCanBeClosed()
+    }
+
+    private val onSearchFollowerStateChange = Observer { isTrue: Boolean ->
+        if (isTrue) binding.showShimmer()
+        else checkIfShimmerCanBeClosed()
+    }
+
+    private val onSearchFollowingStateChange = Observer { isTrue: Boolean ->
+        if (isTrue) binding.showShimmer()
+        else checkIfShimmerCanBeClosed()
     }
 
     private fun switchFavIconToFavorite(menu: MenuItem, isFavorite: Boolean) {
@@ -146,9 +149,12 @@ class DetailFragment : Fragment(),
             resources.getString(R.string.following_dynamic_label, user.following)
     }
 
-    private fun updateInitializeProgress(index: Int) {
-        initializeProgress[index] = true
-        if (initializeProgress.all { it }) binding.closeShimmer()
+    private fun checkIfShimmerCanBeClosed() {
+        val isSearchingDetailUser = gitHubUserViewModel.isSearchDetailUser.value ?: return
+        val isSearchingFollower = gitHubUserViewModel.isSearchFollower.value ?: return
+        val isSearchingFollowing = gitHubUserViewModel.isSearchFollowing.value ?: return
+        if (!isSearchingDetailUser && !isSearchingFollower && !isSearchingFollowing)
+            binding.closeShimmer()
     }
 
     private fun FragmentDetailBinding.showShimmer() {

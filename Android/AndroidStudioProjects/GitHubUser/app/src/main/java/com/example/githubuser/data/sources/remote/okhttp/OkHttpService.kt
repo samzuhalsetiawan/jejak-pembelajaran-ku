@@ -5,6 +5,7 @@ import com.example.githubuser.data.sources.remote.RemoteService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.util.concurrent.TimeUnit
 
 class OkHttpService private constructor() {
 
@@ -27,6 +28,9 @@ class OkHttpService private constructor() {
 
     val client by lazy {
         OkHttpClient.Builder()
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(authInterceptor)
             .addInterceptor(httpLoggingInterceptor)
             .build()
