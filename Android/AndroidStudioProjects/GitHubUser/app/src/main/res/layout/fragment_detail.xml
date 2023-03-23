@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail_user.DetailFragment">
+    tools:context=".presentation.ui.detail_user.DetailFragment">
 
     <LinearLayout
+        android:id="@+id/llViewPagerAndTabLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/llViewPagerAndTabLayout"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.tabs.TabLayout
@@ -28,7 +28,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablAppBarLayoutDetailUser"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/app_bar_layout_height"
         android:visibility="invisible"
         tools:visibility="visible">
 
@@ -131,11 +131,23 @@
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerDetailUser"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:visibility="gone">
 
         <include layout="@layout/shimmer_detail_fragment" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flErrorPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/includeErrorPage"
+            layout="@layout/error_page" />
+
+    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

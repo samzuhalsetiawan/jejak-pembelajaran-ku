@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.favorite_user.FavoriteUserFragment">
+    tools:context=".presentation.ui.favorite_user.FavoriteUserFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavoriteUser"
@@ -13,15 +13,25 @@
         tools:listitem="@layout/user_card"
         tools:visibility="visible" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFavUser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone">
+
+        <include layout="@layout/shimmer_list_of_user" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <FrameLayout
-        android:id="@+id/flUserNotFound"
+        android:id="@+id/flErrorPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:visibility="gone">
 
         <include
-            android:id="@+id/includeUserNotFound"
-            layout="@layout/user_not_found" />
+            android:id="@+id/includeErrorPage"
+            layout="@layout/error_page" />
 
     </FrameLayout>
 

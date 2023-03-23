@@ -18,13 +18,11 @@ class RetrofitService private constructor(retrofit: Retrofit) {
             client: OkHttpClient? = null
         ): RetrofitService {
             return RETROFIT_INSTANCE ?: synchronized(this) {
-                RETROFIT_INSTANCE ?: run {
-                    val retrofitBuilder = Retrofit.Builder()
-                        .baseUrl("https://api.github.com/")
-                        .addConverterFactory(converterFactory)
-                    if (client != null) retrofitBuilder.client(client)
-                    RetrofitService(retrofitBuilder.build()).also { RETROFIT_INSTANCE = it }
-                }
+                val retrofitBuilder = Retrofit.Builder()
+                    .baseUrl("https://api.github.com/")
+                    .addConverterFactory(converterFactory)
+                if (client != null) retrofitBuilder.client(client)
+                RetrofitService(retrofitBuilder.build()).also { RETROFIT_INSTANCE = it }
             }
         }
     }

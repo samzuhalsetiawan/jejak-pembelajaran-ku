@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.githubuser.ui.search_user.SearchFragment"
+        android:name="com.example.githubuser.presentation.ui.search_user.SearchFragment"
         android:label="GitHub User"
         tools:layout="@layout/fragment_search">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.githubuser.ui.detail_user.DetailFragment"
+        android:name="com.example.githubuser.presentation.ui.detail_user.DetailFragment"
         android:label="Detail User"
         tools:layout="@layout/fragment_detail">
         <action
@@ -37,13 +37,13 @@
     </fragment>
     <fragment
         android:id="@+id/aboutMeFragment"
-        android:name="com.example.githubuser.ui.about_me.AboutMeFragment"
+        android:name="com.example.githubuser.presentation.ui.about_me.AboutMeFragment"
         android:label="About Me"
         tools:layout="@layout/fragment_about_me" />
     <fragment
         android:id="@+id/favoriteUserFragment"
-        android:name="com.example.githubuser.ui.favorite_user.FavoriteUserFragment"
-        android:label="fragment_favorite_user"
+        android:name="com.example.githubuser.presentation.ui.favorite_user.FavoriteUserFragment"
+        android:label="Favorite User"
         tools:layout="@layout/fragment_favorite_user">
         <action
             android:id="@+id/action_favoriteUserFragment_to_detailFragment"

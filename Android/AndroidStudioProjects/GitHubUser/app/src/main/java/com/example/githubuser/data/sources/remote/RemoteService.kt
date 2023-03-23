@@ -2,12 +2,10 @@ package com.example.githubuser.data.sources.remote
 
 import com.example.githubuser.BuildConfig
 import com.example.githubuser.data.models.User
-import com.example.githubuser.data.sources.remote.okhttp.OkHttpService
 import com.example.githubuser.data.sources.remote.retrofit.RetrofitService
 import com.example.githubuser.interfaces.IRemoteServiceContract
 import com.example.githubuser.sealed_class.NetworkResult
 import com.example.githubuser.utils.DebugHelper
-import retrofit2.converter.gson.GsonConverterFactory
 
 class RemoteService private constructor(
     retrofitService: RetrofitService
@@ -78,14 +76,8 @@ class RemoteService private constructor(
         @Volatile
         private var INSTANCE: RemoteService? = null
 
-        fun getInstance(): RemoteService {
-            return INSTANCE ?: synchronized(this) {
-                val gsonConverter = GsonConverterFactory.create()
-                val okHttpService = OkHttpService.getInstance()
-                val retrofitService =
-                    RetrofitService.getInstance(gsonConverter, okHttpService.client)
-                INSTANCE ?: RemoteService(retrofitService)
-            }
+        fun getInstance(retrofit: RetrofitService): RemoteService {
+            return INSTANCE ?: synchronized(this) { RemoteService(retrofit) }
         }
 
     }

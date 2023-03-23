@@ -1,4 +1,4 @@
-package com.example.githubuser.ui
+package com.example.githubuser.presentation.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -17,7 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityMainBinding
-import com.example.githubuser.ui.viewmodel.GitHubUserViewModel
+import com.example.githubuser.presentation.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 
 class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelectedListener {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val gitHubUserViewModel: GitHubUserViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
             }
             R.id.menuDarkMode -> true.also {
                 menuItem.isChecked = !menuItem.isChecked
-                gitHubUserViewModel.setDarkModeEnabled(menuItem.isChecked)
+                mainViewModel.switchDarkMode(menuItem.isChecked)
             }
             else -> false
         }
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
 
     override fun onPrepareMenu(menu: Menu) {
         val switchDarkMode = menu.findItem(R.id.menuDarkMode)
-        switchDarkMode.isChecked = gitHubUserViewModel.darkThemePreference.value ?: false
+        switchDarkMode.isChecked = mainViewModel.themePreference.value ?: false
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(), MenuProvider, OnNavigationItemSelected
 
 
     private fun setupAppThemeMode() {
-        gitHubUserViewModel.darkThemePreference.observe(this) { isEnabled ->
+        mainViewModel.themePreference.observe(this) { isEnabled ->
             AppCompatDelegate.setDefaultNightMode(
                 if (isEnabled) AppCompatDelegate.MODE_NIGHT_YES
                 else AppCompatDelegate.MODE_NIGHT_NO

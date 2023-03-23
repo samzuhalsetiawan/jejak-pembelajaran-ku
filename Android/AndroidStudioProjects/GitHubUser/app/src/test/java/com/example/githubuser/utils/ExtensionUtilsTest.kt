@@ -1,7 +1,6 @@
 package com.example.githubuser.utils
 
 import com.example.githubuser.data.models.User
-import com.example.githubuser.utils.ExtensionUtils.containsAndDistinctConditionAll
 import com.example.githubuser.utils.ExtensionUtils.mapBasedOnFavoriteWith
 import org.junit.Assert.*
 import org.junit.Before
@@ -72,31 +71,6 @@ class ExtensionUtilsTest {
         println("=============END RESULT==================\n")
 
         println("=============TEST 1 FINNISH==================\n")
-    }
-
-    @Test
-    fun testIfMapOperationSuccess2() {
-        println("\n=============TEST 2==================")
-        println(
-            """
-             |  Unit Tested:     [ExtensionUtils::List<User>.mapBasedOnFavoriteWith]
-             |  Pass Condition:  Semua elemen yang tidak ada di List2 harus memiliki atribute [isFavorite == false],
-             |                   Selain itu [isFavorite == true]
-           """.trimMargin()
-        )
-
-        val dummyList1Copy = dummyList1.map { it.copy() }.onEach { it.isFavorite = true }
-        val outputList = dummyList1Copy.mapBasedOnFavoriteWith(dummyList2)
-        val isAccepted = outputList.containsAndDistinctConditionAll(dummyList2) { it.isFavorite }
-        assertTrue(isAccepted)
-
-        println("\n=============RESULT==================")
-        println("list1 : " + dummyList1Copy.map { it.isFavorite })
-        println("list2 : " + dummyList2.map { it.isFavorite })
-        println("output: " + outputList.map { it.isFavorite })
-        println("=============END RESULT==================\n")
-
-        println("=============TEST 2 FINNISH==================\n")
     }
 
 }

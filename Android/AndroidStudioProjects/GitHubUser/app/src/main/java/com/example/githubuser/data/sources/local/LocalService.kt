@@ -1,81 +1,81 @@
 package com.example.githubuser.data.sources.local
 
-import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.asLiveData
 import com.example.githubuser.data.models.User
 import com.example.githubuser.data.sources.local.datastore.SettingPreference
-import com.example.githubuser.data.sources.local.room.UserDB
+import com.example.githubuser.data.sources.local.db.UserDB
 import com.example.githubuser.interfaces.ILocalServiceContract
-import com.example.githubuser.utils.DebugHelper
+import com.example.githubuser.sealed_class.LocalResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
 
 class LocalService private constructor(
     private val settingPreference: SettingPreference,
     private val userDB: UserDB
 ) : ILocalServiceContract {
 
-    override fun getAllUserFavorite(): LiveData<List<User>> {
+    private val dao by lazy { userDB.getUserFavoriteDao() }
+
+    override fun getUserById(userId: Int): LocalResult<Flow<User?>> {
         return try {
-            userDB.getUserFavoriteDao().getAllUserFavorite().asFlow()
-                .map {
-                    it.onEach { user ->
-                        user.isFavorite = true
-                    }
-                }.asLiveData()
+            LocalResult.ResultSuccess(dao.getUserById(userId))
         } catch (tr: Throwable) {
-            DebugHelper.loggingError("LocalService::getAllUserFavorite", tr.message, tr)
-            MutableLiveData()
+            LocalResult.ResultException(tr)
         }
     }
 
-    override fun getAllUserFavoriteAsList(): List<User> {
+    override fun getUserByName(name: String): LocalResult<Flow<List<User>>> {
         return try {
-            userDB.getUserFavoriteDao().getAllUserFavoriteAsList().onEach { it.isFavorite = true }
+            LocalResult.ResultSuccess(dao.getUserByName(name))
         } catch (tr: Throwable) {
-            DebugHelper.loggingError("LocalService::getAllUserFavorite", tr.message, tr)
-            emptyList()
+            LocalResult.ResultException(tr)
         }
     }
 
-    override suspend fun addUserToFavorite(user: User) {
-        try {
+    override fun getAllUser(): LocalResult<Flow<List<User>>> {
+        return try {
+            LocalResult.ResultSuccess(dao.getAllUser())
+        } catch (tr: Throwable) {
+            LocalResult.ResultException(tr)
+        }
+    }
+
+    override fun getAllUserAsList(): LocalResult<List<User>> {
+        return try {
+            LocalResult.ResultSuccess(dao.getAllUserAsList())
+        } catch (tr: Throwable) {
+            LocalResult.ResultException(tr)
+        }
+    }
+
+    override suspend fun addUser(user: User): LocalResult<Unit> {
+        return try {
             user.isFavorite = true
-            userDB.getUserFavoriteDao().addUserToFavorite(user)
+            LocalResult.ResultSuccess(dao.addUser(user))
         } catch (tr: Throwable) {
-            DebugHelper.loggingError("LocalService::addUserToFavorite", tr.message, tr)
+            LocalResult.ResultException(tr)
         }
     }
 
-    override suspend fun removeUserFromFavorite(user: User) {
-        try {
-            user.isFavorite = false
-            userDB.getUserFavoriteDao().deleteUserFromFavorite(user)
+    override suspend fun deleteUser(user: User): LocalResult<Unit> {
+        return try {
+            LocalResult.ResultSuccess(dao.deleteUser(user))
         } catch (tr: Throwable) {
-            DebugHelper.loggingError("LocalService::removeUserFromFavorite", tr.message, tr)
+            LocalResult.ResultException(tr)
         }
     }
 
-    override fun getDarkThemeEnabledPreference(): Flow<Boolean> {
-        return settingPreference.getFlowDarkThemePreferences()
-            .catch { tr ->
-                DebugHelper.loggingError(
-                    "LocalService::getDarkThemeEnabledPreference",
-                    tr.message,
-                    tr
-                )
-            }
+    override fun getDarkThemeEnabledPreference(): LocalResult<Flow<Boolean>> {
+        return try {
+            LocalResult.ResultSuccess(settingPreference.getFlowDarkThemePreferences())
+        } catch (tr: Throwable) {
+            LocalResult.ResultException(tr)
+        }
     }
 
-    override suspend fun setDarkThemeEnabledPreference(isEnabled: Boolean) {
-        try {
-            settingPreference.setFlowDarkThemePreferences(isEnabled)
+    override suspend fun setDarkThemeEnabledPreference(isEnabled: Boolean): LocalResult<Unit> {
+        return try {
+            LocalResult.ResultSuccess(settingPreference.setFlowDarkThemePreferences(isEnabled))
         } catch (tr: Throwable) {
-            DebugHelper.loggingError("LocalService::setDarkThemeEnabledPreference", tr.message, tr)
+            LocalResult.ResultException(tr)
         }
     }
 
@@ -83,16 +83,9 @@ class LocalService private constructor(
         @Volatile
         private var LOCAL_SERVICE_INSTANCE: LocalService? = null
 
-        fun getInstance(context: Context): LocalService {
+        fun getInstance(settingPreference: SettingPreference, userDB: UserDB): LocalService {
             return LOCAL_SERVICE_INSTANCE ?: synchronized(this) {
-
-                val settingPreference = SettingPreference.getInstance(context)
-                val userDb = UserDB.getInstance(context)
-
-                LOCAL_SERVICE_INSTANCE ?: LocalService(
-                    settingPreference,
-                    userDb
-                ).also { LOCAL_SERVICE_INSTANCE = it }
+                LocalService(settingPreference, userDB).also { LOCAL_SERVICE_INSTANCE = it }
             }
         }
     }

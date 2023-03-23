@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
-@Entity(tableName = "user_favorite_table")
+@Entity(tableName = "user_table")
 data class User(
 
     @PrimaryKey
@@ -150,28 +150,4 @@ data class User(
     @SerializedName("is_favorite")
     var isFavorite: Boolean = false
 
-) : Parcelable {
-    override fun equals(other: Any?): Boolean {
-        if (other !is User) return false
-        val isSame = listOf(
-            id == other.id,
-            login == other.login,
-            avatarUrl == other.avatarUrl,
-            htmlUrl == other.htmlUrl,
-            name == other.name,
-            email == other.email
-        )
-        return isSame.none { !it }
-    }
-
-    override fun hashCode(): Int {
-        val hashPadding = 31
-        var result = id
-        result = hashPadding * result + login.hashCode()
-        result = hashPadding * result + (avatarUrl?.hashCode() ?: 0)
-        result = hashPadding * result + (htmlUrl?.hashCode() ?: 0)
-        result = hashPadding * result + (name?.hashCode() ?: 0)
-        result = hashPadding * result + (email?.hashCode() ?: 0)
-        return result
-    }
-}
+) : Parcelable

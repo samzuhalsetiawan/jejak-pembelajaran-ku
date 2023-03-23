@@ -1,20 +1,24 @@
 package com.example.githubuser.interfaces
 
-import androidx.lifecycle.LiveData
 import com.example.githubuser.data.models.User
+import com.example.githubuser.sealed_class.LocalResult
 import kotlinx.coroutines.flow.Flow
 
 interface ILocalServiceContract {
 
-    fun getAllUserFavorite(): LiveData<List<User>>
+    fun getUserById(userId: Int): LocalResult<Flow<User?>>
 
-    fun getAllUserFavoriteAsList(): List<User>
+    fun getUserByName(name: String): LocalResult<Flow<List<User>>>
 
-    suspend fun addUserToFavorite(user: User)
+    fun getAllUser(): LocalResult<Flow<List<User>>>
 
-    suspend fun removeUserFromFavorite(user: User)
+    fun getAllUserAsList(): LocalResult<List<User>>
 
-    fun getDarkThemeEnabledPreference(): Flow<Boolean>
+    suspend fun addUser(user: User): LocalResult<Unit>
 
-    suspend fun setDarkThemeEnabledPreference(isEnabled: Boolean)
+    suspend fun deleteUser(user: User): LocalResult<Unit>
+
+    fun getDarkThemeEnabledPreference(): LocalResult<Flow<Boolean>>
+
+    suspend fun setDarkThemeEnabledPreference(isEnabled: Boolean): LocalResult<Unit>
 }

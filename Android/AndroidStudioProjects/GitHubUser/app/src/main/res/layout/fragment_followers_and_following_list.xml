@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.followers_and_following.FollowersAndFollowingListFragment">
+    tools:context=".presentation.ui.followers_and_following.FollowersAndFollowingListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFollowersAndFollowingList"
@@ -24,14 +24,14 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <FrameLayout
-        android:id="@+id/flUserNotFound"
+        android:id="@+id/flErrorPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
 
         <include
-            android:id="@+id/includeNotFound"
-            layout="@layout/user_not_found" />
+            android:id="@+id/includeErrorPage"
+            layout="@layout/error_page" />
 
     </FrameLayout>
 

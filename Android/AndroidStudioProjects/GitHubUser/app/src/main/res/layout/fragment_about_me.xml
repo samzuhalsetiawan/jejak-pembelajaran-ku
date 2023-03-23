@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     app:layoutDescription="@xml/fragment_about_me_scene"
-    tools:context=".ui.about_me.AboutMeFragment">
+    tools:context=".presentation.ui.about_me.AboutMeFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivProfilePicture"

@@ -1,4 +1,4 @@
-package com.example.githubuser.ui.favorite_user
+package com.example.githubuser.presentation.ui.favorite_user
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.CheckBox
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
@@ -16,15 +16,17 @@ import com.example.githubuser.adapters.UserListAdapter
 import com.example.githubuser.data.models.User
 import com.example.githubuser.databinding.FragmentFavoriteUserBinding
 import com.example.githubuser.interfaces.IUserCardClickEventHandler
-import com.example.githubuser.ui.viewmodel.GitHubUserViewModel
+import com.example.githubuser.presentation.viewmodel.FavoriteUserViewModel
+import com.example.githubuser.presentation.viewmodel.MainViewModel
+import com.example.githubuser.sealed_class.ViewModelState
 
-class FavoriteUserFragment : Fragment(),
-    Observer<List<User>>,
+class FavoriteUserFragment : Fragment(R.layout.fragment_favorite_user),
     IUserCardClickEventHandler {
 
     private lateinit var binding: FragmentFavoriteUserBinding
     private lateinit var favoriteUserAdapter: UserListAdapter
-    private val gitHubUserViewModel: GitHubUserViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val favoriteUserViewModel: FavoriteUserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,18 +40,25 @@ class FavoriteUserFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         favoriteUserAdapter = UserListAdapter(this)
-        binding.includeUserNotFound.tvUserNotFound.text =
-            resources.getString(R.string.label_user_empty_favorite)
         binding.setupRecyclerView()
-        gitHubUserViewModel.getAllUserFavorite().observe(viewLifecycleOwner, this)
+        favoriteUserViewModel.listOfUser.observe(viewLifecycleOwner) {
+            when (it) {
+                is ViewModelState.Loading -> showLoading()
+                is ViewModelState.Success -> showData(it.data)
+                is ViewModelState.Error -> showError(it.displayMessage)
+            }
+        }
 
     }
 
-    override fun onChanged(value: List<User>) {
-        gitHubUserViewModel.notifyFavoriteUserChange(value)
-        binding.toggleDisplayErrorPage(value.isEmpty())
-        favoriteUserAdapter.listOfUser = value
+    private fun showLoading() = binding.showShimmer()
+
+    private fun showData(data: List<User>) {
+        favoriteUserAdapter.listOfUser = data
+        binding.closeShimmer(null)
     }
+
+    private fun showError(errorMessage: String) = binding.closeShimmer(errorMessage)
 
     override fun onCardClickListener(card: CardView, user: User) {
         val action = FavoriteUserFragmentDirections.actionFavoriteUserFragmentToDetailFragment(user)
@@ -57,11 +66,11 @@ class FavoriteUserFragment : Fragment(),
     }
 
     override fun onFavoriteIconCheckedListener(favButton: CheckBox, user: User) {
-        gitHubUserViewModel.addUserToFavorite(user)
+        mainViewModel.changeFavoriteStatusOfUser(user, true)
     }
 
     override fun onFavoriteIconUncheckedListener(favButton: CheckBox, user: User) {
-        gitHubUserViewModel.removeUserFromFavorite(user)
+        mainViewModel.changeFavoriteStatusOfUser(user, false)
     }
 
     private fun FragmentFavoriteUserBinding.setupRecyclerView() {
@@ -69,14 +78,22 @@ class FavoriteUserFragment : Fragment(),
         rvFavoriteUser.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun FragmentFavoriteUserBinding.toggleDisplayErrorPage(shouldShow: Boolean) {
-        if (shouldShow) {
-            flUserNotFound.visibility = View.VISIBLE
-            rvFavoriteUser.visibility = View.INVISIBLE
-        } else {
-            flUserNotFound.visibility = View.GONE
+    private fun FragmentFavoriteUserBinding.showShimmer() {
+        shimmerFavUser.visibility = View.VISIBLE
+        flErrorPage.visibility = View.GONE
+        rvFavoriteUser.visibility = View.GONE
+    }
+
+    private fun FragmentFavoriteUserBinding.closeShimmer(errorMessage: String?) {
+        if (errorMessage == null) {
+            flErrorPage.visibility = View.GONE
             rvFavoriteUser.visibility = View.VISIBLE
+        } else {
+            rvFavoriteUser.visibility = View.GONE
+            includeErrorPage.tvUserNotFound.text = errorMessage
+            flErrorPage.visibility = View.VISIBLE
         }
+        shimmerFavUser.visibility = View.GONE
     }
 
 }

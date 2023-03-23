@@ -1,4 +1,4 @@
-package com.example.githubuser.ui.about_me
+package com.example.githubuser.presentation.ui.about_me
 
 import androidx.fragment.app.Fragment
 import com.example.githubuser.R

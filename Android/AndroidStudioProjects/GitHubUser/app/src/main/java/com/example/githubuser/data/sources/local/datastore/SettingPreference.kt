@@ -15,6 +15,18 @@ class SettingPreference private constructor(context: Context) {
 
     private val dataStorePreference = context.dataStorePreference
 
+    fun getFlowDarkThemePreferences(): Flow<Boolean> {
+        return dataStorePreference.data.map { preferences ->
+            preferences[DARK_THEME_KEY] ?: false
+        }
+    }
+
+    suspend fun setFlowDarkThemePreferences(darkModeEnabled: Boolean) {
+        dataStorePreference.edit { preferences ->
+            preferences[DARK_THEME_KEY] = darkModeEnabled
+        }
+    }
+
     companion object {
 
         private val DARK_THEME_KEY = booleanPreferencesKey("com.example.githubuser.DARK_THEME_KEY")
@@ -26,18 +38,6 @@ class SettingPreference private constructor(context: Context) {
             return INSTANCE ?: synchronized(this) {
                 SettingPreference(context).also { INSTANCE = it }
             }
-        }
-    }
-
-    fun getFlowDarkThemePreferences(): Flow<Boolean> {
-        return dataStorePreference.data.map { preferences ->
-            preferences[DARK_THEME_KEY] ?: false
-        }
-    }
-
-    suspend fun setFlowDarkThemePreferences(darkModeEnabled: Boolean) {
-        dataStorePreference.edit { preferences ->
-            preferences[DARK_THEME_KEY] = darkModeEnabled
         }
     }
 

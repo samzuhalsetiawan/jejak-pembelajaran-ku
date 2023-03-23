@@ -1,9 +1,7 @@
 package com.example.githubuser.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -33,13 +31,7 @@ class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
             user.isFavorite = !user.isFavorite
             cbFavoriteButton.isChecked = user.isFavorite
             if (user.isFavorite) clickHandler.onFavoriteIconCheckedListener(cbFavoriteButton, user)
-                .also { root.context.showToast("${user.login} added to favorite ❤️") }
             else clickHandler.onFavoriteIconUncheckedListener(cbFavoriteButton, user)
-                .also { root.context.showToast("${user.login} removed from favorite️") }
-        }
-
-        private fun Context.showToast(message: String) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -49,7 +41,7 @@ class UserListAdapter(private val clickHandler: IUserCardClickEventHandler) :
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
-            oldItem == newItem && oldItem.isFavorite == newItem.isFavorite
+            oldItem == newItem
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
