@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuIconProfile"
+        android:title="@string/title_menu_icon_profile"
+        app:showAsAction="ifRoom"
+        android:contentDescription="@string/title_menu_icon_profile" />
+    <item
+        android:id="@+id/menuAbout"
+        android:title="@string/title_menu_about_me"
+        app:showAsAction="never" />
+</menu>

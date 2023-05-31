@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.camera_app.CameraActivity">
+
+    <androidx.camera.view.PreviewView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/pvCameraPreview"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glGuidelineCaptureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCapture"
+        style="?attr/materialIconButtonFilledStyle"
+        app:icon="@drawable/ic_camera"
+        app:iconSize="48dp"
+        app:layout_constraintTop_toTopOf="@id/glGuidelineCaptureButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnFlipCamera"
+        style="?attr/materialIconButtonStyle"
+        app:iconTint="?attr/colorOnPrimary"
+        app:icon="@drawable/ic_flip"
+        app:iconSize="40dp"
+        app:layout_constraintTop_toTopOf="@id/glGuidelineCaptureButton"
+        app:layout_constraintLeft_toRightOf="@id/btnCapture"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCancel"
+        style="?attr/materialIconButtonStyle"
+        app:iconTint="?attr/colorError"
+        app:icon="@drawable/ic_close"
+        app:iconSize="40dp"
+        app:layout_constraintTop_toTopOf="@id/glGuidelineCaptureButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btnCapture"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

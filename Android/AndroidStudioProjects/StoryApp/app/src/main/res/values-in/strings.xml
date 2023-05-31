@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="label_created_by">Di Tulis Oleh</string>
+    <string name="label_created_at">Tanggal dibuat</string>
+    <string name="label_description">Story</string>
+    <string name="label_btn_positive_got_it">Mengerti</string>
+    <string name="permission_rationale_title">Aplikasi ini perlu izin dari anda</string>
+    <string name="camera_permission_rationale_message">Agar aplikasi dapat berjalan dengan baik, aplikasi perlu izin anda untuk mengakses kamera dan penyimpanan</string>
+    <string name="location_permission_rationale_message">Agar aplikasi dapat berjalan dengan baik, aplikasi perlu izin untuk mengakses lokasi device anda</string>
+    <string name="permission_denied_dialog_title">Aplikasi tidak mendapatkan izin</string>
+    <string name="camera_permission_denied_dialog_message">Anda tidak mengizinkan aplikasi ini untuk mengakses kamera dan penyimpanan, mohon aktifkan izin melalui settings untuk dapat menggunakan fitur ini</string>
+    <string name="location_permission_denied_dialog_message">Anda tidak mengizinkan aplikasi ini untuk mengakses lokasi device anda, mohon aktifkan izin melalui settings untuk dapat menggunakan fitur ini</string>
+    <string name="content_desc_detail_story_photo">Foto Story</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_btn_login">Login</string>
+    <string name="label_btn_register">Register</string>
+    <string name="label_username">Username</string>
+    <string name="subtitle_register">Belum punya akun?</string>
+    <string name="label_btn_register_variant">Registrasi disini</string>
+    <string name="title_menu_icon_profile">icon profile</string>
+    <string name="title_menu_posting">Posting</string>
+    <string name="my_name">Sam Zuhal Setiawan</string>
+    <string name="my_email">samzuhal095@gmail.com</string>
+    <string name="title_menu_about_me">Tentang saya</string>
+    <string name="error_text_email_etl">Bukan email yang valid</string>
+    <string name="error_text_password_etl">Password minimal 8 character</string>
+    <string name="error_text_confirm_password_etl">Password tidak sesuai</string>
+    <string name="label_photo_picker">Klik untuk memilih gambar</string>
+    <string name="title_dialog_failed_capture_photo">Peringatan!</string>
+    <string name="dialog_failed_capture_photo_message">Foto gagal disimpan, coba sekali lagi.</string>
+    <string name="label_btn_positive_ok">Oke</string>
+    <string name="label_btn_logout">Logout</string>
+    <string name="title_dialog_icon_profile">Informasi Akun</string>
+    <string name="dialog_simple_warning_default_message">Pesan Default</string>
+    <string name="title_dialog_simple_warning">Peringatan</string>
+    <string name="label_fab_create_story">Buat Story</string>
+    <string name="content_desc_fab_create_story">Buat Story</string>
+    <string name="label_btn_negative">Batal</string>
+    <string name="label_dialog_photo_source_chooser">Pilih sumber foto</string>
+    <string name="label_btn_camera">Kamera</string>
+    <string name="label_btn_gallery">Galeri</string>
+</resources>
