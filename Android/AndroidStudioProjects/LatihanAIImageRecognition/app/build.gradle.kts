@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.samzuhalsetiawan.imagerecognition"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.samzuhalsetiawan.imagerecognition"
@@ -51,7 +51,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
@@ -66,4 +66,22 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+//    CameraX
+    val cameraxVersion = "1.4.0-alpha02"
+
+    implementation("androidx.camera:camera-core:${cameraxVersion}")
+    implementation("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation("androidx.camera:camera-video:${cameraxVersion}")
+    implementation("androidx.camera:camera-view:${cameraxVersion}")
+    implementation("androidx.camera:camera-mlkit-vision:${cameraxVersion}")
+    implementation("androidx.camera:camera-extensions:${cameraxVersion}")
+
+//    Tensorflow Lite
+    implementation("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")
+    implementation("org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.9.0")
+    implementation("com.google.android.gms:play-services-tflite-gpu:16.2.0")
+
 }
