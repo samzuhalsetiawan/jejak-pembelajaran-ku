@@ -40,4 +40,10 @@
     <string name="label_dialog_photo_source_chooser">Choose Photo Source</string>
     <string name="label_btn_camera">Camera</string>
     <string name="label_btn_gallery">Gallery</string>
+    <string name="maps_style_id" translatable="false">7d731933609e26cc</string>
+    <string name="label_menu_story">Story</string>
+    <string name="content_desc_menu_story">Menu Story</string>
+    <string name="label_menu_map">Maps</string>
+    <string name="content_desc_menu_map">Menu Map</string>
+    <string name="dialog_create_story_input_empty_message">Photo and Story cannot be empty</string>
 </resources>

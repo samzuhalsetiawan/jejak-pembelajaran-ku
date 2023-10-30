@@ -8,10 +8,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
@@ -124,9 +122,9 @@ class CreateStoryFragment : Fragment(R.layout.fragment_create_story),
 
     private val requestedCameraPermissionsCallback = ActivityResultCallback<Map<String, Boolean>> { result ->
         when {
-            result.all { !shouldShowRequestPermissionRationale(it.key) && it.value } -> dialogPhotoSource.show(parentFragmentManager, "dialog_photo_picker")
-            result.none { shouldShowRequestPermissionRationale(it.key) } -> dialogCameraPermissionNeeded.show(parentFragmentManager, "dialog_permission_needed")
-            else -> dialogCameraPermissionRationale.show(parentFragmentManager, "dialog_permission_rationale")
+            result.all { !shouldShowRequestPermissionRationale(it.key) && it.value } -> dialogPhotoSource.show(parentFragmentManager, null)
+            result.none { shouldShowRequestPermissionRationale(it.key) } -> dialogCameraPermissionNeeded.show(parentFragmentManager, null)
+            else -> dialogCameraPermissionRationale.show(parentFragmentManager, null)
         }
     }
 
@@ -230,7 +228,7 @@ class CreateStoryFragment : Fragment(R.layout.fragment_create_story),
                 val story = binding.etUserStory.text.toString()
                 val position = createStoryViewModel.currentSelectedLocation.value?.latLng
                 if (uri == null || story.isBlank()) {
-                    dialogSimpleWarning.setMessage("Foto dan story tidak boleh kosong")
+                    dialogSimpleWarning.setMessage(resources.getString(R.string.dialog_create_story_input_empty_message))
                     dialogSimpleWarning.show(parentFragmentManager, null)
                     return false
                 }
@@ -248,7 +246,7 @@ class CreateStoryFragment : Fragment(R.layout.fragment_create_story),
     }
 
     companion object {
-        private val REQUIRED_LOCATION_LOCATION = listOf(
+        val REQUIRED_LOCATION_LOCATION = listOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
         )

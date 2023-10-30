@@ -10,10 +10,6 @@ android {
     namespace 'com.example.storyapp'
     compileSdk 33
 
-//    Properties properties = new Properties()
-//    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//    def mapsApiKey = properties.getProperty('MAPS_API_KEY')
-
     defaultConfig {
         applicationId "com.example.storyapp"
         minSdk 26
@@ -38,6 +34,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+//        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
     buildFeatures {
         buildConfig true
@@ -51,14 +48,14 @@ kotlin {
 dependencies {
     def lifecycle_version = "2.6.1"
     def nav_version = "2.5.3"
-    def camerax_version = "1.3.0-alpha06"
+    def camerax_version = "1.3.0-alpha07"
     def room_version = "2.5.1"
 
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.activity:activity-ktx:1.7.1'
+    implementation 'androidx.activity:activity-ktx:1.7.2'
     implementation 'androidx.fragment:fragment-ktx:1.5.7'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
@@ -115,6 +112,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
 
 //    Lottie
     implementation 'com.airbnb.android:lottie:6.0.0'
@@ -126,9 +124,24 @@ dependencies {
 //    Room
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-paging:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
 
 //    SplashScreen API
     implementation "androidx.core:core-splashscreen:1.0.1"
 
+//    Paging 3
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+
+
+    //mockito
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
+
+    //special testing
+    testImplementation "androidx.arch.core:core-testing:2.2.0" // InstantTaskExecutorRule
+
+//    Mockk
+    testImplementation "io.mockk:mockk:1.13.5"
+    androidTestImplementation "io.mockk:mockk-android:1.13.5"
 }

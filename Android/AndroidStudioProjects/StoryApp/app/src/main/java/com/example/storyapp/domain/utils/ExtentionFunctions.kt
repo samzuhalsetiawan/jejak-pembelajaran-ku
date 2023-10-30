@@ -15,7 +15,7 @@ import java.io.OutputStream
 import java.util.Locale
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
-private const val MAXIMAL_SIZE = 1000000
+private const val MAXIMAL_SIZE = 1_000_000
 
 val timeStamp: String = SimpleDateFormat(
     FILENAME_FORMAT,

@@ -1,6 +1,10 @@
 package com.example.storyapp.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.storyapp.data.models.Story
+import com.example.storyapp.data.source.UserStory
+import com.example.storyapp.data.source.StoryPagingSource
 import com.example.storyapp.domain.interfaces.DataStorePreferences
 import com.example.storyapp.domain.interfaces.RemoteDataSource
 import com.example.storyapp.domain.interfaces.StoriesRepository
@@ -19,8 +23,22 @@ class StoriesRepositoryImpl private constructor(
         remoteDataSource.setAuthenticationToken(token)
     }
 
-    override suspend fun getAllStories(): ResponseStatus<List<Story>> {
-        return remoteDataSource.getAllStories(0, 30)
+    override fun getAllStories(page: Int): LiveData<ResponseStatus<List<UserStory>>> = liveData {
+        try {
+            val pager = UserStory(
+                size = 30,
+                pagingSourceFactory = {
+                    StoryPagingSource(remoteDataSource)
+                }
+            )
+            emit(ResponseStatus.Success(listOf(pager)))
+        } catch (e: Exception) {
+            emit(ResponseStatus.Error(e))
+        }
+    }
+
+    override suspend fun getAllStoriesWithLocation(): ResponseStatus<List<Story>> {
+        return remoteDataSource.getAllStoriesWithLocation(30)
     }
 
     override suspend fun getDetailStoryOf(storyId: String): ResponseStatus<Story> {

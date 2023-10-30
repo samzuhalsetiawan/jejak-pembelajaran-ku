@@ -44,11 +44,6 @@ class EmailEditText : TextInputLayout, TextWatcher {
         isErrorEnabled = true
     }
 
-    fun setupWithButton(button: Button) {
-        button.isEnabled = false
-        integratedButton = button
-    }
-
     fun setupWithButton(button: Button, vararg textField: TextInputLayout) {
         integratedEditText = textField.toList()
         button.isEnabled = false

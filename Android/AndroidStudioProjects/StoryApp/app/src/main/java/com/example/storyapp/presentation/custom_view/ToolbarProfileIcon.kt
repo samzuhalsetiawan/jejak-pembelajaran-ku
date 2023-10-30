@@ -1,5 +1,6 @@
 package com.example.storyapp.presentation.custom_view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.TextView
 import androidx.core.view.ActionProvider
 import com.example.storyapp.R
 
+@SuppressLint("InflateParams")
 class ToolbarProfileIcon(private val context: Context) : ActionProvider(context) {
 
     fun interface OnProfileIconClicked {

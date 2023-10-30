@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.storyapp.R
 import com.example.storyapp.databinding.ActivityMainBinding
 import com.example.storyapp.domain.sealed_class.MainActivityEvent
@@ -22,6 +23,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val navController = (supportFragmentManager.findFragmentById(R.id.fcvMainNav) as NavHostFragment).navController
+        binding.bnvMainBottomNav.setupWithNavController(navController)
 
         mainViewModel.event.observe(this) { event ->
             when (event) {

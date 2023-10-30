@@ -7,7 +7,9 @@ import java.io.File
 
 interface RemoteDataSource {
 
-    suspend fun getAllStories(page: Int = 1, size: Int = 30) : ResponseStatus<List<Story>>
+    suspend fun getAllStories(page: Int = 0, size: Int = 30) : ResponseStatus<List<Story>>
+
+    suspend fun getAllStoriesWithLocation(size: Int = 30) : ResponseStatus<List<Story>>
 
     suspend fun getDetailStory(id: String): ResponseStatus<Story>
 

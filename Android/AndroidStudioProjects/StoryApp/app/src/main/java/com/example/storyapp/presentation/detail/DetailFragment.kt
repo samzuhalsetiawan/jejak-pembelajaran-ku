@@ -3,12 +3,10 @@ package com.example.storyapp.presentation.detail
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment

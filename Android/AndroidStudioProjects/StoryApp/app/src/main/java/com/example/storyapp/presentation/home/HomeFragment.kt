@@ -1,25 +1,31 @@
 package com.example.storyapp.presentation.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storyapp.R
 import com.example.storyapp.data.models.Story
+import com.example.storyapp.data.source.UserStory
 import com.example.storyapp.databinding.FragmentHomeBinding
 import com.example.storyapp.domain.adapter.UserStoryAdapter
-import com.example.storyapp.domain.sealed_class.ViewModelState
+import com.example.storyapp.domain.adapter.UserStoryPagerAdapter
+import com.example.storyapp.domain.application.UserStoryApp
+import com.example.storyapp.domain.factory.HomeViewModelFactory
+import com.example.storyapp.domain.sealed_class.MainActivityEvent
+import com.example.storyapp.domain.sealed_class.ResponseStatus
 import com.example.storyapp.domain.utils.viewBindings
 import com.example.storyapp.presentation.custom_view.ToolbarProfileIcon
 import com.example.storyapp.presentation.dialogs.DialogIconProfile
@@ -34,8 +40,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 {
 
     private val binding by viewBindings(FragmentHomeBinding::bind)
-    private val userStoryAdapter by lazy { UserStoryAdapter(this) }
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val userStoryAdapter by lazy { UserStoryPagerAdapter(this) }
+    private val application by lazy { requireActivity().application as UserStoryApp }
+    private val homeViewModel: HomeViewModel by viewModels { HomeViewModelFactory(application.storiesRepository) }
     private val mainViewModel: MainViewModel by activityViewModels()
     private val dialogIconProfile by lazy { DialogIconProfile().apply { setOnLogoutClicked(this@HomeFragment) } }
     private val simpleDialog by lazy { DialogSimpleWarning() }
@@ -43,17 +50,18 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        showLoading()
         binding.rvStoryList.apply {
             adapter = userStoryAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        homeViewModel.listOfStories.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is ViewModelState.OnLoading -> showLoading()
-                is ViewModelState.OnData -> showData(state.data)
-                is ViewModelState.OnError -> showError(state.displayErrorMessage)
+        homeViewModel.getPagerStory().observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseStatus.Error -> showError(it.throwable.message.toString())
+                is ResponseStatus.Success -> {
+                    onPagerStory(it.data[0])
+                }
             }
         }
 
@@ -64,9 +72,18 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         mainViewModel.username.observe(viewLifecycleOwner) { username ->
             username?.let { toolbarProfileIcon.setUsername(it) }
         }
+        mainViewModel.event.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                is MainActivityEvent.OnPostingSuccess -> refreshPager()
+                else -> Unit
+            }
+        }
     }
 
-
+    private val onPagingDataChanged = Observer<PagingData<Story>> {
+        val shouldScrollToTop = mainViewModel.event.value is MainActivityEvent.OnPostingSuccess
+        showPagerData(it, shouldScrollToTop)
+    }
 
     override fun onStoryCardClicked(story: Story, card: MaterialCardView) {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(story.id)
@@ -111,15 +128,27 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         binding.pbLoading.visibility = View.GONE
     }
 
-    private fun showData(data: List<Story>) {
+    private fun onPagerStory(userStory: UserStory) {
+        userStory.pager.liveData.observe(viewLifecycleOwner, onPagingDataChanged)
+    }
+
+    private fun showPagerData(data: PagingData<Story>?, shouldScrollToTop: Boolean) {
+        data ?: return
+        userStoryAdapter.submitData(lifecycle, data)
+        if (shouldScrollToTop) {
+            binding.rvStoryList.smoothScrollToPosition(0)
+        }
         closeLoading()
-        userStoryAdapter.listOfStories = data
     }
 
     private fun showError(displayErrorMessage: String) {
         closeLoading()
         simpleDialog.setMessage(displayErrorMessage)
         simpleDialog.show(parentFragmentManager, null)
+    }
+
+    private fun refreshPager() {
+        userStoryAdapter.refresh()
     }
 
 }

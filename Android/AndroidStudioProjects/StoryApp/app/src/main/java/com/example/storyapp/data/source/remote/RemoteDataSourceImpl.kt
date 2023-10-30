@@ -22,7 +22,21 @@ class RemoteDataSourceImpl private constructor(): RemoteDataSource {
 
     override suspend fun getAllStories(page: Int, size: Int): ResponseStatus<List<Story>> {
         try {
-            val response = apiService.getAllStories(page, size)
+            val response = apiService.getAllStories(page, size, 0)
+            if (!response.isSuccessful) return ResponseStatus.Error(Throwable("response unsuccessful, error code: ${response.code()}, message: ${response.message()}"))
+            response.body()?.let {  getAllStoriesDto ->
+                if (getAllStoriesDto.error) return ResponseStatus.Error(Throwable("Server Response with error: true"))
+                val listOfStory = getAllStoriesDto.listStoryDto.map { it.toStory() }
+                return ResponseStatus.Success(listOfStory)
+            } ?: return ResponseStatus.Error(Throwable("Response body null"))
+        } catch (tr: Throwable) {
+            return ResponseStatus.Error(tr)
+        }
+    }
+
+    override suspend fun getAllStoriesWithLocation(size: Int): ResponseStatus<List<Story>> {
+        try {
+            val response = apiService.getAllStories(0, size, 1)
             if (!response.isSuccessful) return ResponseStatus.Error(Throwable("response unsuccessful, error code: ${response.code()}, message: ${response.message()}"))
             response.body()?.let {  getAllStoriesDto ->
                 if (getAllStoriesDto.error) return ResponseStatus.Error(Throwable("Server Response with error: true"))
@@ -88,7 +102,7 @@ class RemoteDataSourceImpl private constructor(): RemoteDataSource {
         try {
             Log.d("MY_DEBUG", "RemoteDataSource: createStory")
             val compressedPhoto = reduceFileImage(photo)
-            val photoExt = compressedPhoto.absolutePath.substring(compressedPhoto.absolutePath.lastIndexOf(". ")+1)
+            val photoExt = compressedPhoto.absolutePath.substring(compressedPhoto.absolutePath.lastIndexOf(".")+1)
             val photoAsReqBody = compressedPhoto.asRequestBody("image/${photoExt.lowercase()}".toMediaTypeOrNull())
             val photoPart = MultipartBody.Part.createFormData("photo", compressedPhoto.name, photoAsReqBody)
             val response = apiService.createStory(photoPart, description, lat, lon)
@@ -102,7 +116,7 @@ class RemoteDataSourceImpl private constructor(): RemoteDataSource {
         }
     }
 
-    private var token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLUFVVThQQzQ5Um5EeGdCQ2giLCJpYXQiOjE2ODIyNzY3MDV9.UiZLNFR9XZMl_LNe24NjWU8uvZRqQ9pRq-MsIE1c3Ks"
+    private var token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLV9GMEIxVmQtb0YtY0t4c18iLCJpYXQiOjE2ODYxMzUzMDB9.XzuGh2gDw8ddJhk7LEX7m9BUBCwr-B9Ff1u7brOLvD4"
 
     override fun setAuthenticationToken(token: String) {
         this.token = "Bearer $token"
@@ -127,7 +141,7 @@ class RemoteDataSourceImpl private constructor(): RemoteDataSource {
         .client(client)
         .build()
 
-    private val apiService = retrofit.create(UserStoriesApi::class.java)
+    private val apiService: UserStoriesApi = retrofit.create(UserStoriesApi::class.java)
 
     companion object {
         @Volatile
@@ -135,7 +149,13 @@ class RemoteDataSourceImpl private constructor(): RemoteDataSource {
 
         fun getInstance(): RemoteDataSource {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: RemoteDataSourceImpl()
+                INSTANCE ?: RemoteDataSourceImpl().also { INSTANCE = it }
+            }
+        }
+
+        fun getImplementation(): RemoteDataSourceImpl {
+            return (INSTANCE as? RemoteDataSourceImpl) ?: synchronized(this) {
+                RemoteDataSourceImpl().also { INSTANCE = it }
             }
         }
     }

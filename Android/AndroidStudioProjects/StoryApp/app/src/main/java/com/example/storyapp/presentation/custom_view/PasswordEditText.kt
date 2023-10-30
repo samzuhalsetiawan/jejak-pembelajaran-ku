@@ -4,10 +4,8 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Log
 import android.widget.Button
 import com.example.storyapp.R
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class PasswordEditText : TextInputLayout, TextWatcher {
@@ -52,11 +50,6 @@ class PasswordEditText : TextInputLayout, TextWatcher {
         integratedButton?.isEnabled = false
         error = errorText
         isErrorEnabled = true
-    }
-
-    fun setupWithButton(button: Button) {
-        button.isEnabled = false
-        integratedButton = button
     }
 
     fun setupWithButton(button: Button, vararg textField: TextInputLayout) {

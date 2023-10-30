@@ -19,7 +19,7 @@ import retrofit2.http.Query
 interface UserStoriesApi {
 
     @GET("stories")
-    suspend fun getAllStories(@Query("page") page: Int, @Query("size") size: Int): Response<GetAllStoriesResponseDto>
+    suspend fun getAllStories(@Query("page") page: Int, @Query("size") size: Int, @Query("location") location: Int): Response<GetAllStoriesResponseDto>
 
     @GET("stories/{id}")
     suspend fun getDetailStory(@Path("id") id: String): Response<GetDetailStoryResponseDto>

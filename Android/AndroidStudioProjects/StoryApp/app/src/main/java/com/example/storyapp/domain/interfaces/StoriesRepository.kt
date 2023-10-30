@@ -1,13 +1,17 @@
 package com.example.storyapp.domain.interfaces
 
+import androidx.lifecycle.LiveData
 import com.example.storyapp.data.models.Story
+import com.example.storyapp.data.source.UserStory
 import com.example.storyapp.domain.sealed_class.ResponseStatus
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 
 interface StoriesRepository {
 
-    suspend fun getAllStories(): ResponseStatus<List<Story>>
+    fun getAllStories(page: Int = 0): LiveData<ResponseStatus<List<UserStory>>>
+
+    suspend fun getAllStoriesWithLocation(): ResponseStatus<List<Story>>
 
     suspend fun getDetailStoryOf(storyId: String): ResponseStatus<Story>
 

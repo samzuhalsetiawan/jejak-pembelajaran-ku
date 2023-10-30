@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class CreateStoryViewModel(private val application: Application) : AndroidViewModel(application) {
+class CreateStoryViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _currentSelectedPhoto: MutableLiveData<Uri> = MutableLiveData()
     val currentSelectedPhoto: LiveData<Uri> = _currentSelectedPhoto
