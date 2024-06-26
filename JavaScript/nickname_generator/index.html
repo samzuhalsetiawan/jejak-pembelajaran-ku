@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nickname Generator</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    body {
+        min-height: 100vh;
+        min-width: 100vw;
+        background: #aeaeae;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+    }
+    .result_display {
+        border: 1px solid black;
+        padding: 1em 2em;
+        border-radius: 1em;
+        background: whitesmoke;
+        cursor: text;
+    }
+    h3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    span {
+        margin: 0;
+        padding: 0;
+    }
+    .btn_generate1,
+    .delete1,
+    .btn_generate2,
+    .delete2,
+    .btn_generate3,
+    .delete3,
+    .btn_add {
+        padding: 0.5em 1em;
+        cursor: pointer;
+    }
+    input[type="text"] {
+        padding: 0.5em 1em;
+        max-width: 6em;
+    }
+    input[type="text"]#custom_nickname {
+        max-width: none;
+    }
+</style>
+<body>
+    <h1>Nickname Generator</h1>
+    <div class="result_display">
+        <h3>
+            <span class="nick1">Click Generate to generate nickname</span>
+            <span class="nick2"></span>
+            <span class="nick3"></span>
+        </h3>
+    </div>
+    <div class="btnGenerateContainer">
+        <button class="btn_generate1">Generate</button>
+        <button class="delete1">Delete</button>
+        <input type="text" class="prefix1" placeholder="Prefix" maxlength="3">
+        <input type="text" class="suffix1" placeholder="Suffix" maxlength="3">
+    </div>
+    <div class="btnGenerateContainer">
+        <button class="btn_generate2">Generate</button>
+        <button class="delete2">Delete</button>
+        <input type="text" class="prefix2" placeholder="Prefix" maxlength="3">
+        <input type="text" class="suffix2" placeholder="Suffix" maxlength="3">
+    </div>
+    <div class="btnGenerateContainer">
+        <button class="btn_generate3">Generate</button>
+        <button class="delete3">Delete</button>
+        <input type="text" class="prefix3" placeholder="Prefix" maxlength="3">
+        <input type="text" class="suffix3" placeholder="Suffix" maxlength="3">
+    </div>
+    <button class="btn_add">Looks good</button>
+    <div class="kandidat"></div>
+    <input id="custom_nickname" type="text" placeholder="Add your own...">
+    <script src="script.js"></script>
+</body>
+</html>

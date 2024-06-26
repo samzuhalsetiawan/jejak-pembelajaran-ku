@@ -3,6 +3,7 @@ package com.samzuhalsetiawan.imagerecognition
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.camera.view.CameraController
@@ -55,6 +56,7 @@ class MainActivity : ComponentActivity() {
                             context = applicationContext
                         ),
                         onResult = {
+                            Log.d("ON_RESULT:", classifications.value.size.toString())
                             classifications.value = it
                         }
                     )
@@ -84,6 +86,15 @@ class MainActivity : ComponentActivity() {
                         classifications.value.forEach {
                             Text(
                                 text = it.name,
+                                modifier = Modifier.fillMaxWidth()
+                                    .background(MaterialTheme.colorScheme.primaryContainer)
+                                    .padding(8.dp),
+                                textAlign = TextAlign.Center,
+                                fontSize = 20.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = it.score.toString(),
                                 modifier = Modifier.fillMaxWidth()
                                     .background(MaterialTheme.colorScheme.primaryContainer)
                                     .padding(8.dp),

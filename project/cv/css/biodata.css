@@ -1,0 +1,38 @@
+.biodata {
+  margin-top: 5rem;
+}
+
+.biodata header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.biodata header h1,
+.biodata header h3 {
+  text-align: center;
+}
+
+.biodata .profile_picture {
+  border-radius: 100%;
+  overflow: hidden;
+  width: fit-content;
+  border: 1px solid black;
+}
+
+.biodata .profile_picture img {
+  width: 8rem;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.biodata .biodata__description_container {
+  margin-top: 2rem;
+}
+
+/* Untuk Layar Lebar */
+@media screen and (min-width: 768px) {
+
+}

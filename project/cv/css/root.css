@@ -1,0 +1,19 @@
+:root {
+	--hue: 223;
+	--trans-dur: 0.3s;
+	--trans-timing: cubic-bezier(0.65,0,0.35,1);
+	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
+
+}
+
+section {
+	margin-bottom: 5rem;
+}
+
+.sosmed img {
+  height: 2rem;
+}
+
+.sosmed {
+  gap: 1rem;
+}

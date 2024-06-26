@@ -1,0 +1,221 @@
+/*
+* Mobile First Priciple
+**/
+
+.hero {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+}
+.hero > div:nth-child(1) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70vw;
+}
+.hero > div:nth-child(1) img {
+	max-height: 40vh;
+}
+.hero > div:nth-child(2) * {
+	text-align: center;
+}
+
+.education > h1 {
+  margin-bottom: 5rem;
+}
+
+.education button {
+  border: none;
+}
+
+.timeline {
+	margin: auto;
+	padding: 0 1.5em;
+	width: 100%;
+	max-width: 36em;
+}
+.timeline__arrow {
+	background-color: transparent;
+	border-radius: 0.25em;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin-inline-end: 0.25em;
+	outline: transparent;
+	width: 2em;
+	height: 2em;
+	transition:
+		background-color calc(var(--trans-dur) / 2) linear,
+		color var(--trans-dur);
+	-webkit-appearance: none;
+	appearance: none;
+	-webkit-tap-highlight-color: transparent;
+}
+.timeline__arrow:focus-visible,
+.timeline__arrow:hover {
+	background-color: hsl(var(--hue),10%,50%,0.4);
+}
+.timeline__arrow-icon {
+	display: block;
+	pointer-events: none;
+	transform: rotate(-90deg);
+	transition: transform var(--trans-dur) var(--trans-timing);
+	width: 100%;
+	height: auto;
+}
+.timeline__date {
+	font-size: 0.833em;
+	line-height: 2.4;
+}
+.timeline__dot {
+	background-color: currentColor;
+	border-radius: 50%;
+	display: inline-block;
+	flex-shrink: 0;
+	margin: 0.625em 0;
+	margin-inline-end: 1em;
+	position: relative;
+	width: 0.75em;
+	height: 0.75em;
+}
+.timeline__item {
+	position: relative;
+	padding-bottom: 2.25em;
+}
+.timeline__item:not(:last-child):before {
+	background-color: currentColor;
+	content: "";
+	display: block;
+	position: absolute;
+	top: 1em;
+	left: 2.625em;
+	width: 0.125em;
+	height: 100%;
+	transform: translateX(-50%);
+}
+[dir="rtl"] .timeline__arrow-icon {
+	transform: rotate(90deg);
+}
+[dir="rtl"] .timeline__item:not(:last-child):before {
+	right: 2.625em;
+	left: auto;
+	transform: translateX(50%);
+}
+.timeline__item-header {
+	display: flex;
+}
+.timeline__item-body {
+	border-radius: 0.375em;
+	overflow: hidden;
+	margin-top: 0.5em;
+	margin-inline-start: 4em;
+	height: 0;
+}
+.timeline__item-body-content {
+	background-color: hsl(var(--hue),10%,50%,0.2);
+	opacity: 0;
+	padding: 0.5em 0.75em;
+	visibility: hidden;
+	transition:
+		opacity var(--trans-dur) var(--trans-timing),
+		visibility var(--trans-dur) steps(1,end);
+}
+.timeline__meta {
+	width: 100%;
+}
+.timeline__title {
+	font-size: 1.5em;
+	line-height: 1.333;
+}
+/* Expanded state */
+.timeline__item-body--expanded {
+	height: auto;
+}
+.timeline__item-body--expanded .timeline__item-body-content {
+	opacity: 1;
+	visibility: visible;
+	transition-delay: var(--trans-dur), 0s;
+}
+.timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
+	transform: rotate(0);
+}
+
+/* Skill Section */
+
+.skill .skill__container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.skill .skill__container img {
+	margin-top: 2rem;
+	height: 6rem;
+}
+
+/* End Skill Section */
+
+/* project section */
+
+.project .project__container {
+	margin-top: 3rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+.project .project__container img {
+	height: 10rem;
+	object-fit: cover;
+}
+
+/* endproject section */
+
+
+/* Untuk Layar Lebar */
+@media screen and (min-width: 768px) {
+	.hero {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.hero > div:nth-child(1) {
+		order: 2;
+		flex-grow: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: auto;
+	}
+	.hero > div:nth-child(1) img {
+		max-height: 60vh;
+	}
+	.hero > div:nth-child(2) {
+		order: 1;
+		flex-grow: 2;
+	}
+	.hero > div:nth-child(2) * {
+		text-align: left;
+	}
+
+	.skill {
+		margin-bottom: 40vh;
+	}
+
+	.skill .skill__container {
+		gap: 2rem;
+	}
+
+	.project .project__container {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.project .project__container > div {
+		width: 17rem !important;
+	}
+}

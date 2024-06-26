@@ -2,6 +2,7 @@ package com.samzuhalsetiawan.imagerecognition.data
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.Surface
 import com.samzuhalsetiawan.imagerecognition.domain.Classification
 import com.samzuhalsetiawan.imagerecognition.domain.LandmarkClassifier
@@ -28,13 +29,13 @@ data class TFLiteLandmarkClassifier(
         val options = ImageClassifier.ImageClassifierOptions.builder()
             .setBaseOptions(baseOption)
             .setMaxResults(maxResult)
-            .setScoreThreshold(threshold)
+//            .setScoreThreshold(threshold)
             .build()
 
         try {
             classifier = ImageClassifier.createFromFileAndOptions(
                 context,
-                "landmmark.tflite",
+                "indo_food_classifier_keras_model.tflite",
                 options
             )
         } catch (e: IllegalStateException) {
@@ -56,10 +57,12 @@ data class TFLiteLandmarkClassifier(
 
         val result = classifier?.classify(tensorImage, imageProcessingOptions)
 
+        Log.d("1ON_RESULT", result.toString())
+
         return result?.flatMap { classifications ->
             classifications.categories.map { category ->
                 Classification(
-                    name = category.displayName,
+                    name = category.label,
                     score = category.score
                 )
             }
