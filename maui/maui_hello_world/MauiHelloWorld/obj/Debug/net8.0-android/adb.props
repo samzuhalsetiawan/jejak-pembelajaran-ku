@@ -1,0 +1,2 @@
+AdbTarget=-s 10.32.152.92:35283
+AdbOptions=
