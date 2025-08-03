@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@plugin "daisyui" {
+   themes: retro;
+ }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
