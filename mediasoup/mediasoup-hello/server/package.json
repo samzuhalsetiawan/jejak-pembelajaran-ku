@@ -14,10 +14,12 @@
   "type": "module",
   "devDependencies": {
     "@types/express": "^5.0.3",
-    "@types/node": "^24.1.0"
+    "@types/node": "^24.1.0",
+    "@types/ws": "^8.18.1"
   },
   "dependencies": {
     "express": "^5.1.0",
-    "mediasoup": "^3.18.0"
+    "mediasoup": "^3.18.0",
+    "ws": "^8.18.3"
   }
 }
