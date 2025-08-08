@@ -1,42 +1,29 @@
-import { Device } from 'mediasoup-client';
-import { TransportOptions } from 'mediasoup-client/lib/Transport';
+import { RtpCapabilities } from "mediasoup-client/lib/RtpParameters";
+import { initializeDevice, initializeWebSocket, requestRouterRtpCapabilities } from "./lib/initialize";
+import { WebSocketEvent, WebSocketEventType } from "./types/websocket";
 
 async function main() {
-   let device: Device;
-   try {
-      device = await Device.factory();
-   } catch (error: any) {
-      if (error.name === 'UnsupportedError') {
-         console.warn('browser not supported');
-      } else {
-         console.error('Error creating mediasoup client device:', error);
+
+   const device = await initializeDevice();
+
+   const webSocket = await initializeWebSocket();
+
+   requestRouterRtpCapabilities(webSocket);
+
+   webSocket.onmessage = async (messageEvent: MessageEvent) => {
+      const event = JSON.parse(messageEvent.data) as WebSocketEvent;
+      switch (event.type) {
+         case WebSocketEventType.ROUTER_RTP_CAPABILITIES_RESPONSE:
+            await device.load({
+               routerRtpCapabilities: event.data as RtpCapabilities
+            })
+            console.log(`device loaded: ${device.loaded}`);
+            break;
+         default:
+            break;
       }
-      throw error;
-   }
-   const routerRtpCapabilities = {
-      codecs: [] // TODO: Get actual RTP capabilities from the server
-   };
-   await device.load({ routerRtpCapabilities });
-   device.rtpCapabilities //TODO: These RTP capabilities must be given to the mediasoup router in order to consume a remote stream.
-
-   // TODO: Get ICE Candidates and DTLS parameters from the server
-   const sendTransportOptions: TransportOptions = {
-      id: "",
-      iceParameters: {
-         usernameFragment: "",
-         password: "",
-         iceLite: false,
-      },
-      iceCandidates: [],
-      dtlsParameters: {
-         fingerprints: []
-      },
    }
 
-   // TODO: The transport must be previously created in the mediasoup router
-   const sendTransport = device.createSendTransport(sendTransportOptions)
 }
 
-main().catch((error) => {
-   console.error("Error in mediasoup client setup:", error);
-});
+main();
