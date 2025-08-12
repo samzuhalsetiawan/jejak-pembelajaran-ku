@@ -1,4 +1,4 @@
-import type { DtlsParameters, IceCandidate, IceParameters, MediaKind, RtpCapabilities, RtpParameters } from "mediasoup/types"
+import type { DtlsParameters, IceCandidate, IceParameters, MediaKind, RtpCapabilities, RtpParameters } from "mediasoup-client/types";
 
 export type MediasoupEventName = Pick<MediasoupEvent, "name">["name"];
 

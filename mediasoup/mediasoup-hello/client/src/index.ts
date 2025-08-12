@@ -11,75 +11,33 @@ async function main() {
 
    const webSocket = await MediasoupWebSocket.initialize(webSocketUrl);
 
-   const mediasoup = await MediasoupClient.initialize(webSocket);
+   const mediasoupClient = await MediasoupClient.initialize(webSocket);
 
-   await mediasoup.loadDevice();
+   mediasoupClient.onNewTrack = (track, participantId) => {
+      const container = document.getElementById("videos");
+      const videoElement = document.createElement("video");
+      videoElement.id = participantId;
+      videoElement.muted = true;
+      // videoElement.pause();
+      videoElement.srcObject = new MediaStream([ track ]);
+      container?.appendChild(videoElement);
+      videoElement.autoplay = true;
+      // videoElement.play();
+      console.log(track);
+   }
 
-   const participants: Participant[] = [];
-
-   const sendTransport = await mediasoup.createWebRtcSendTransport();
-
-   console.log(`Send Transport Created: ${sendTransport.id}`);
-
-   sendTransport.on("connect", async ({ dtlsParameters }, callback, errback) => {
-      try {
-         await mediasoup.connectTransport(sendTransport.id, dtlsParameters);
-         console.log(`Send Transport Connected: ${sendTransport.id}`);
-         callback();
-      } catch (error: any) {
-         console.error(error);
-         errback(error);
-      }
-   });
-
-   sendTransport.on("produce", async (parameters, callback, errback) => {
-      try {
-         const routerTransportProducerId = await mediasoup.createRouterTransportProducer({
-            transportId: sendTransport.id,
-            kind: parameters.kind,
-            rtpParameters: parameters.rtpParameters
-         });
-         callback({ id: routerTransportProducerId })
-      } catch (error: any) {
-         errback(error);
-      }
-   });
-
-   webSocket.on("NEW_PARTICIPANT_JOINED", async (participantId: string) => {
-      const recvTransport = await mediasoup.createRecvTransport();
-
-      console.log(`Recv Transport Created: ${recvTransport.id}`);
-
-      recvTransport.on("connect", async ({ dtlsParameters }, callback, errback) => {
-         console.log(`Connecting Recv Transport: ${recvTransport.id}`);
-         try {
-            await mediasoup.connectTransport(recvTransport.id, dtlsParameters);
-            console.log(`Recv Transport Connected: ${recvTransport.id}`);
-            callback();
-         } catch (error: any) {
-            console.error(error);
-            errback(error);
-         }
-      });
-      
-      const participant: Participant = {
-         id: participantId,
-         transport: [recvTransport]
-      }
-      participants.push(participant);
-   });
-
-   webSocket.on("PARTICIPANT_LEFT", (participantId: string) => {
-      const participant = participants.find(participant => participant.id === participantId)!!;
-      participant.transport.forEach(transport => { transport.close() });
-      participants.slice(participants.indexOf(participant), 1);
-   });
+   mediasoupClient.onCleanUI = participantId => {
+      document.getElementById(participantId)?.remove();
+   }
 
    btnOpenCam?.addEventListener("click", async () => {
       console.log("clicked")
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       const videoTrack = stream.getVideoTracks()[0];
-      const producer = await sendTransport.produce({
+      const localVideo = document.getElementById("local") as HTMLVideoElement;
+      localVideo.srcObject = stream;
+      localVideo.play();
+      const producer = await mediasoupClient.sendTransport.produce({
          track       : videoTrack,
          encodings   :
          [

@@ -1,21 +1,4 @@
-export type MediasoupWebSocketEventType =
-   | "REQUEST_ROUTER_RTP_CAPABILITIES"
-   | "ROUTER_RTP_CAPABILITIES_RECEIVED"
-   | "UPDATE_DEVICE_RTP_CAPABILITIES"
-   | "DEVICE_RTP_CAPABILITIES_UPDATED"
-   | "CREATE_ROUTER_WEB_RTC_TRANSPORT"
-   | "ROUTER_WEB_RTC_TRANSPORT_CREATED"
-   | "CONNECT_TRANSPORT"
-   | "TRANSPORT_CONNECTED"
-   | "CREATE_ROUTER_TRANSPORT_PRODUCER"
-   | "ROUTER_TRANSPORT_PRODUCER_CREATED"
-   | "NEW_PARTICIPANT_JOINED"
-   | "PARTICIPANT_LEFT"
-
-export type MediasoupWebSocketEvent<T> = {
-   type: MediasoupWebSocketEventType,
-   data: T
-}
+import type { MediasoupEvent, MediasoupEventData, MediasoupEventName } from "./MediasoupEvent";
 
 export class MediasoupWebSocket {
    private webSocket: WebSocket;
@@ -26,40 +9,47 @@ export class MediasoupWebSocket {
 
    public static async initialize(url: string): Promise<MediasoupWebSocket> {
       return new Promise((resolve, reject) => {
-         const instance = new MediasoupWebSocket(url);
-         instance.webSocket.onopen = () => {
-            resolve(instance);
-            instance.webSocket.onopen = null;
-            instance.webSocket.onerror = null;
+         const mediasoupWebSocket = new MediasoupWebSocket(url);
+         const cleanUpListener = () => {
+            mediasoupWebSocket.webSocket.onopen = null;
+            mediasoupWebSocket.webSocket.onerror = null;
+         }
+         mediasoupWebSocket.webSocket.onopen = () => {
+            cleanUpListener();
+            resolve(mediasoupWebSocket);
          };
-         instance.webSocket.onerror = () => {
+         mediasoupWebSocket.webSocket.onerror = () => {
+            cleanUpListener()
             reject(new Error("Failed to initialize websocket connection"));
-            instance.webSocket.onopen = null;
-            instance.webSocket.onerror = null;
          };
       });
    }
 
-   public on<T>(eventType: MediasoupWebSocketEventType, callback: (data: T) => void) {
+   public on<K extends MediasoupEventName>(
+      eventName: K,
+      callback: (data: MediasoupEventData<K>) => void,
+      once: boolean = false
+   ) {
       this.webSocket.addEventListener("message", (messageEvent: MessageEvent) => {
-         const event = JSON.parse(messageEvent.data) as MediasoupWebSocketEvent<T>;
-            if (event.type === eventType) {
-            callback(event.data);
+         const event = JSON.parse(messageEvent.data) as MediasoupEvent;
+            if (event.name === eventName) {
+            callback(event.data as MediasoupEventData<K>);
          }
-      });
+      }, { once });
    }
 
-   public once<T>(eventType: MediasoupWebSocketEventType, callback: (data: T) => void) {
-      this.webSocket.addEventListener("message", (messageEvent: MessageEvent) => {
-         const event = JSON.parse(messageEvent.data) as MediasoupWebSocketEvent<T>;
-            if (event.type === eventType) {
-            callback(event.data);
-         }
-      }, { once: true });
+   public once<K extends MediasoupEventName>(
+      eventName: K,
+      callback: (data: MediasoupEventData<K>) => void
+   ) {
+      this.on(eventName, callback, true);
    }
 
-   public sendEvent<T>(eventType: MediasoupWebSocketEventType, data: T | null = null) {
-      const event: MediasoupWebSocketEvent<T | null> = { type: eventType, data: data };
+   public sendEvent<K extends MediasoupEventName>(
+      eventName: K,
+      data: MediasoupEventData<K>
+   ) {
+      const event = { name: eventName, data } as MediasoupEvent;
       this.webSocket.send(JSON.stringify(event));
    }
 }
